@@ -1,8 +1,8 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed">
   <div class="container-fluid">
     <a class="navbar-brand" href="#" style="width: 10%"
-      ><img src="{% static 'images/logo.PNG' %}" alt="" class="w-100"
+      ><img src="{% static 'images/logo.PNG' %}" alt="" class="w-75"
     /></a>
     <button
       class="navbar-toggler"
@@ -18,10 +18,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active text-primary" aria-current="page" href="#">Home</a>
+          <a class="nav-link active text-primary" aria-current="page" href="#"><i class="fas fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#"><i class="fas fa-globe"></i> Explore</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -32,26 +32,27 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Dropdown
+          <i class="far fa-clone"></i> Category
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Auto-Mobiles</a></li>
+            <li><a class="dropdown-item" href="#">Smartphone</a></li>
             <li>
               <hr class="dropdown-divider" />
             </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Men's Fashion</a></li>
           </ul>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link" href="#"><i class="fas fa-comments"></i> Public Chat</a>
         </li>
       </ul>
-      <a href="" class="btn rounded-pill sign-in" type="button">Sign in</a>
+      <a href="" class="btn rounded-pill sign-in" type="button"><i class="fas fa-sign-in-alt"></i> Sign in</a>
     </div>
   </div>
 
-  <span class="position-absolute toggle-icon me-md-3"
-    ><i class="fas fa-sun"></i
+  <span class="position-absolute toggle-icon me-md-2"
+    ><i class="fas fa-moon w-50"></i
   ></span>
 </nav>
