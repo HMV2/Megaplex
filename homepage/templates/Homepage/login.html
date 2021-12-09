@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}<title>Home</title>{% endblock title %}
+
+{% block main_content %}
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h2 class="display-5 fw-bold lh-1 mb-3">Login to</h2>
+          <h1 class="display-4 fw-bold lh-1 mb-3">Megaplex World! 👻</h1>
+        <p class="col-lg-10 fs-5">
+            MOST SECURE SYSTEM DESIGN
+        </p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+
+        <form class="p-4 p-md-5 border rounded-3  shadow">
+            <img src="{% static 'images/logo.PNG' %}" alt="" class="w-50 mb-3 text-center"/>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+              <a href="#">Forget your passcode?</a>
+          </div>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="w-100 btn btn-sm btn-primary" type="submit">Login</button>
+          <hr class="my-4">
+          <small class="text-muted">You are entering the most secure login syster ever build!</small>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock main_content %}
