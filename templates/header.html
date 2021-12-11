@@ -1,0 +1,51 @@
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+{% endblock css_files %}
+
+<header class="header">
+    <div class="menu">
+        <div class="nav-logo">
+            <img src="{% static 'images/logo.PNG' %}" alt="logo" />
+        </div>
+        <div class="menu-btn">
+            <span class="hamburger"></span>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <ul class="nav-options">
+            <li class="nav-list">
+                <a class="nav-link" href="">Menu</a><span></span>
+            </li>
+            <li class="nav-list flex">
+                <span class="nav-link dropdown-link">Women
+                    <ul class="dropdown open white-theme">
+                        <li>red</li>
+                        <li>blue</li>
+                        <li>green</li>
+                    </ul></span>
+                <span><i class="fas fa-caret-down"></i></span>
+            </li>
+            <li class="nav-list flex">
+                <span class="nav-link dropdown-link">Electronic
+                    <ul class="dropdown open white-theme">
+                        <li>red</li>
+                        <li>blue</li>
+                        <li>green</li>
+                    </ul></span>
+                <span><i class="fas fa-caret-down"></i></span>
+            </li>
+            <li class="nav-list"><a class="nav-link" href="">red</a></li>
+            <li class="nav-list"><a class="nav-link" href="">red</a></li>
+            <li class="nav-list"><a class="nav-link" href="">red</a></li>
+        </ul>
+
+        <button class="sign_in-btn">sign in</button>
+    </nav>
+</header>
+
+<script src="{% static 'javascript/header.js' %}"></script>
