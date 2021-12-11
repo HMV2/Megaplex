@@ -6,207 +6,165 @@
 
 {% block css_files %}
 
-<link rel="stylesheet" href="{% static '/css/main.css' %}" />
-<link rel="stylesheet" href="{% static '/css/register.css' %}">
+    <link rel="stylesheet" href="{% static '/css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/register.css' %}">
 
-<style>
-    .form-row{
-        justify-content:center;
-    }
-    #hint_id_password1, #hint_id_password2{
-        display:none
-    }
-</style>
+    <style>
+        .form-row {
+            justify-content: center;
+        }
 
-<script defer src="{% static '/javascript/register-login.js' %}"></script>
+        #hint_id_password1, #hint_id_password2 {
+            display: none
+        }
+    </style>
+
+    <script defer src="{% static '/javascript/register-login.js' %}"></script>
 
 {% endblock css_files %}
 
 {% block main_content %}
 
-{#    <div class="container   d-flex pt-5 gap-0  shadow-lg ">#}
-{##}
-{#        <div class="container-fluid d-none d-md-block  register-content position-relative ">#}
-{#      <pre class="display-4  ">Enter#}
-{#<strong class="bolder">Megaplex World</strong></pre>#}
-{#            <pre>You don't have account#}
-{#you can Register her ! #}
-{#    </pre>#}
-{##}
-{#            <div class="blur-circle position-absolute">#}
-{##}
-{#            </div>#}
-{##}
-{#            <div class="register-images">#}
-{##}
-{#                <div class="illustrationimage position-absolute end-0 bottom-0 illustration">#}
-{#                    <img src="{% static 'images/3d-illustration.png' %}" alt="" class="w-100 ">#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{##}
-{#        <form action="" class="p-5 p-md-0 pe-md-2">#}
-{#            <h5 class="text-center">Register</h5>#}
-{#            <div class="d-flex gap-3 gap-sm-2 gap-lg-3">#}
-{#                <input type="text" name="Fname" placeholder="FName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-{#                <input type="text" name="Lname" placeholder="LName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-{##}
-{#            </div>#}
-{#            <input type="text" name="username" placeholder="MegaplexId"#}
-{#                   class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-{##}
-{#            <input type="text" name="email" placeholder="email" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-{##}
-{#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex  justify-content-between d-flex align-items-center">#}
-{#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
-{##}
-{#                <input type="password" name="password" id="password" placeholder="password"#}
-{#                       class="  border-0  ps-2 password">#}
-{#            </div>#}
-{##}
-{#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex justify-content-between   align-items-center">#}
-{#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
-{##}
-{#                <input type="password" name="verify-password" id="verify-password" placeholder="verify-password"#}
-{#                       class="  border-0  ps-2 password">#}
-{#            </div>#}
-{#            <p class=" text-end">forget password ?</p>#}
-{##}
-{##}
-{#            <button class="btn w-100 bg-primary mt-2 rounded-3 font-weight-bold pt-2 pb-2 text-light shadow-lg"> Sign#}
-{#                up#}
-{#            </button>#}
-{#            <div class="d-flex align-items-center gap-1 mt-2">#}
-{#                <span class="line "></span>#}
-{#                <span class=" text-nowrap">or continue with</span>#}
-{#                <span class="line"></span>#}
-{#            </div>#}
-{##}
-{#            <div class="d-flex gap-5 justify-content-center mt-5">#}
-{##}
-{#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center "><img#}
-{#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-{#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
-{#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-{#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
-{#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-{##}
-{#            </div>#}
-{#        </form>#}
-{#    </div>#}
+    {#    <div class="container   d-flex pt-5 gap-0  shadow-lg ">#}
+    {##}
+    {#        <div class="container-fluid d-none d-md-block  register-content position-relative ">#}
+    {#      <pre class="display-4  ">Enter#}
+    {#<strong class="bolder">Megaplex World</strong></pre>#}
+    {#            <pre>You don't have account#}
+    {#you can Register her ! #}
+    {#    </pre>#}
+    {##}
+    {#            <div class="blur-circle position-absolute">#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#            <div class="register-images">#}
+    {##}
+    {#                <div class="illustrationimage position-absolute end-0 bottom-0 illustration">#}
+    {#                    <img src="{% static 'images/3d-illustration.png' %}" alt="" class="w-100 ">#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {##}
+    {##}
+    {#        <form action="" class="p-5 p-md-0 pe-md-2">#}
+    {#            <h5 class="text-center">Register</h5>#}
+    {#            <div class="d-flex gap-3 gap-sm-2 gap-lg-3">#}
+    {#                <input type="text" name="Fname" placeholder="FName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
+    {#                <input type="text" name="Lname" placeholder="LName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
+    {##}
+    {#            </div>#}
+    {#            <input type="text" name="username" placeholder="MegaplexId"#}
+    {#                   class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
+    {##}
+    {#            <input type="text" name="email" placeholder="email" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
+    {##}
+    {#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex  justify-content-between d-flex align-items-center">#}
+    {#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
+    {##}
+    {#                <input type="password" name="password" id="password" placeholder="password"#}
+    {#                       class="  border-0  ps-2 password">#}
+    {#            </div>#}
+    {##}
+    {#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex justify-content-between   align-items-center">#}
+    {#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
+    {##}
+    {#                <input type="password" name="verify-password" id="verify-password" placeholder="verify-password"#}
+    {#                       class="  border-0  ps-2 password">#}
+    {#            </div>#}
+    {#            <p class=" text-end">forget password ?</p>#}
+    {##}
+    {##}
+    {#            <button class="btn w-100 bg-primary mt-2 rounded-3 font-weight-bold pt-2 pb-2 text-light shadow-lg"> Sign#}
+    {#                up#}
+    {#            </button>#}
+    {#            <div class="d-flex align-items-center gap-1 mt-2">#}
+    {#                <span class="line "></span>#}
+    {#                <span class=" text-nowrap">or continue with</span>#}
+    {#                <span class="line"></span>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="d-flex gap-5 justify-content-center mt-5">#}
+    {##}
+    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center "><img#}
+    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
+    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
+    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
+    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
+    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
+    {##}
+    {#            </div>#}
+    {#        </form>#}
+    {#    </div>#}
 
-<header>
+    <header style="height: 100vh">
 
+        <div class="reg-container container col-xl-10 col-xxl-8 px-4 py-3">
+            <div class="row align-items-center g-lg-5 py-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h2 class="display-5 fw-bold lh-1 mb-3">Enter the</h2>
+                    <h1 class="display-4 fw-bold lh-1 mb-3">Megaplex World!</h1>
+                    <p class="col-lg-10 fs-5">Free Registration for you! C'mon let's enter!</p>
+                    <img src="{% static 'images/register_logo.png' %}" alt="" class="w-25 ">
+                </div>
+                <div class=" mx-auto col-lg-5 shadow p-5" style="border-radius: 20px">
+                    <h1 class="fs-3 text-center">Alien Registration</h1>
+                    <form action="" class="p-5 p-md-0 pe-md-2" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                            <div class="form-group col-md-6 me-1">
+                                {{ form.first_name | as_crispy_field }}
+                            </div>
+                            <div class="form-group  col-md-6">
+                                {{ form.last_name | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="form-group col-md-12">
+                                {{ form.email | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="form-group col-md-12">
+                                {{ form.username | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="form-group col-md-12">
+                                {{ form.plan | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                            <div class="form-group col-md-6 me-1">
+                                {{ form.password1 | as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form.password2 | as_crispy_field }}
+                            </div>
+                        </div>
+                        <button class="btn mt-3 w-100 btn-primary shadow">
+                            Sign up
+                        </button>
+                    </form>
+                    <div class="d-flex align-items-center gap-1 mt-3 text-danger">
+                        <span class="line "></span>
+                        <span class=" text-nowrap">or continue with</span>
+                        <span class="line"></span>
+                    </div>
 
-    <div class="reg-container container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h2 class="display-5 fw-bold lh-1 mb-3">Enter the</h2>
-                <h1 class="display-4 fw-bold lh-1 mb-3">Megaplex World!</h1>
-                <p class="col-lg-10 fs-5">Free Registration for you!</p>
+                    <div class="d-flex gap-3 justify-content-center mt-3">
 
-
+                        <a href="" class=" rounded-3 p-2 social-btn w-100  d-flex justify-content-center"><img
+                                src="{% static 'images/fb.png' %}" alt="not available" class="w-50"></a>
+                        <a href="" class=" rounded-3 p-2 social-btn w-100  d-flex justify-content-center"><img
+                                src="{% static 'images/google.png' %}" alt="not available" class="w-50"></a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-10 mx-auto col-lg-5">
 
-                <form action="" class="p-5 p-md-0 pe-md-2" method="POST">
-                    {% csrf_token %}
-                    <div class="form-row" style="display:flex; justify-content:space-between">
-                        <div class="form-group col-sm-6 col-md-6">
-                            {{form.first_name | as_crispy_field}}
-                        </div>
-                        <div class="form-group col-sm-6 col-md-5">
-                            {{form.last_name | as_crispy_field}}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{form.email | as_crispy_field}}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{form.username | as_crispy_field}}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{form.plan | as_crispy_field}}
-                        </div>
-                    </div>
-                    <div class="form-row" style="display:flex; justify-content:space-between">
-                        <div class="form-group col-sm-6 col-md-5">
-                            {{form.password1 | as_crispy_field}}
-                        </div>
-                        <div class="form-group col-sm-6 col-md-6">
-                            {{form.password2 | as_crispy_field}}
-                        </div>
-                    </div>
-                    <button class="btn mt-2 w-100 btn-primary">
-                        Sign up
-                    </button>
-                </form>
-                {% comment %} {% csrf_token %}
-                <h5 class="fs-3 text-center">Member registration</h5>
-                <div class="d-flex gap-3 gap-sm-2 gap-lg-3">
-                    <input type="text" name="first_name" placeholder="Firstname" class="form-control mt-2 p-3"
-                        id="fname">
-                    <input type="text" name="last_name" placeholder="Lastname" class="form-control mt-2  p-3 "
-                        id="lname">
-
-                </div>
-                <input type="text" name="username" placeholder="Megaplex Identity" class="form-control mt-2 p-3 "
-                    id="username">
-
-                <input type="text" name="email" placeholder="Email address" class="form-control mt-2 p-3" id="email">
-
-                <div
-                    class="password-toggle form-control  mt-2 ps-3 d-flex  justify-content-between d-flex align-items-center">
-                    <i class="fas fa-eye-slash eyeIcon btn p-0"></i>
-
-                    <input type="password" name="password" id="password" placeholder="Passcode"
-                        class="  border-0  p-2 password">
-                </div>
-
-                <div
-                    class="password-toggle form-control  mt-2 ps-3 d-flex justify-content-between   align-items-center">
-                    <i class="fas fa-eye-slash eyeIcon btn p-0"></i>
-
-                    <input type="password" name="verify-password" id="verify-password" placeholder="Confirm passcode"
-                        class="  border-0  p-2 password">
-                </div>
-                <select class="form-control mt-2 p-3" aria-label="Default select example" id="plan" , name="plan">
-                    <option selected>Choose the type of membership</option>
-                    <option value="per">Personal</option>
-                    <option value="org">Organization</option>
-                </select>
-
-                <button class="btn mt-2 w-100 btn-primary">
-                    Sign
-                    up
-                </button>
-                <div class="d-flex align-items-center gap-1 mt-3">
-                    <span class="line "></span>
-                    <span class=" text-nowrap">or continue with</span>
-                    <span class="line"></span>
-                </div>
-
-                <div class="d-flex gap-4 justify-content-center mt-5">
-
-                    <a href="" class=" rounded-3 p-2 social-btn  d-flex justify-content-center "><img
-                            src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>
-                    <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img
-                            src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>
-                    <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img
-                            src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>
-                </div>
-                </form> {% endcomment %}
-            </div>
         </div>
-    </div>
-    </div>
-</header>
+
+    </header>
 {% endblock main_content %}
 
 {% block js_files %}{% endblock js_files %}
