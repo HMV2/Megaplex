@@ -25,80 +25,7 @@
 
 {% block main_content %}
 
-    {#    <div class="container   d-flex pt-5 gap-0  shadow-lg ">#}
-    {##}
-    {#        <div class="container-fluid d-none d-md-block  register-content position-relative ">#}
-    {#      <pre class="display-4  ">Enter#}
-    {#<strong class="bolder">Megaplex World</strong></pre>#}
-    {#            <pre>You don't have account#}
-    {#you can Register her ! #}
-    {#    </pre>#}
-    {##}
-    {#            <div class="blur-circle position-absolute">#}
-    {##}
-    {#            </div>#}
-    {##}
-    {#            <div class="register-images">#}
-    {##}
-    {#                <div class="illustrationimage position-absolute end-0 bottom-0 illustration">#}
-    {#                    <img src="{% static 'images/3d-illustration.png' %}" alt="" class="w-100 ">#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {##}
-    {##}
-    {#        <form action="" class="p-5 p-md-0 pe-md-2">#}
-    {#            <h5 class="text-center">Register</h5>#}
-    {#            <div class="d-flex gap-3 gap-sm-2 gap-lg-3">#}
-    {#                <input type="text" name="Fname" placeholder="FName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-    {#                <input type="text" name="Lname" placeholder="LName" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-    {##}
-    {#            </div>#}
-    {#            <input type="text" name="username" placeholder="MegaplexId"#}
-    {#                   class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-    {##}
-    {#            <input type="text" name="email" placeholder="email" class="form-control mt-2 rounded-pill ps-3 ps-5 ">#}
-    {##}
-    {#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex  justify-content-between d-flex align-items-center">#}
-    {#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
-    {##}
-    {#                <input type="password" name="password" id="password" placeholder="password"#}
-    {#                       class="  border-0  ps-2 password">#}
-    {#            </div>#}
-    {##}
-    {#            <div class="password-toggle form-control  rounded-pill mt-2 ps-3 d-flex justify-content-between   align-items-center">#}
-    {#                <i class="fas fa-eye-slash eyeIcon btn p-0"></i>#}
-    {##}
-    {#                <input type="password" name="verify-password" id="verify-password" placeholder="verify-password"#}
-    {#                       class="  border-0  ps-2 password">#}
-    {#            </div>#}
-    {#            <p class=" text-end">forget password ?</p>#}
-    {##}
-    {##}
-    {#            <button class="btn w-100 bg-primary mt-2 rounded-3 font-weight-bold pt-2 pb-2 text-light shadow-lg"> Sign#}
-    {#                up#}
-    {#            </button>#}
-    {#            <div class="d-flex align-items-center gap-1 mt-2">#}
-    {#                <span class="line "></span>#}
-    {#                <span class=" text-nowrap">or continue with</span>#}
-    {#                <span class="line"></span>#}
-    {#            </div>#}
-    {##}
-    {#            <div class="d-flex gap-5 justify-content-center mt-5">#}
-    {##}
-    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center "><img#}
-    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
-    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-    {#                <a href="" class=" rounded-3 p-2 social-btn   d-flex justify-content-center"><img#}
-    {#                        src="{% static 'images/google-icon.png' %}" alt="not available" class="w-100"></a>#}
-    {##}
-    {#            </div>#}
-    {#        </form>#}
-    {#    </div>#}
-
     <header style="height: 100vh">
-
         <div class="reg-container container col-xl-10 col-xxl-8 px-4 py-3">
             <div class="row align-items-center g-lg-5 py-5">
                 <div class="col-lg-7 text-center text-lg-start">
@@ -107,7 +34,7 @@
                     <p class="col-lg-10 fs-5">Free Registration for you! C'mon let's enter!</p>
                     <img src="{% static 'images/register_logo.png' %}" alt="" class="w-25 ">
                 </div>
-                <div class=" mx-auto col-lg-5 shadow p-5" style="border-radius: 20px">
+                <div class=" mx-auto col-lg-5 shadow p-5" style="border-radius: 15px">
                     <h1 class="fs-3 text-center">Alien Registration</h1>
                     <form action="" class="p-5 p-md-0 pe-md-2" method="POST">
                         {% csrf_token %}

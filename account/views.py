@@ -7,7 +7,7 @@ from .models import Profile
 
 
 def login(request):
-    pass
+    return render(request,'account/login.html')
 
 def register(request):
     form = UserForm()
