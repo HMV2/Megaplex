@@ -60,8 +60,8 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center mt-2">
-            <div class="w-50 shadow m-4 border-15 ">
+        <div class="d-flex justify-content-center mt-2 flex-column flex-md-row">
+            <div class="w-100 shadow m-4 border-15 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h5 class="card-title display-6 f-bold m-3">I want to buy</h5>
@@ -71,7 +71,7 @@
 
                 </div>
             </div>
-            <div class="card w-50 shadow m-4 border-15">
+            <div class="card w-100 shadow m-4 border-15">
                 <div class="card-body">
                      <div class="d-flex justify-content-between">
                         <h5 class="card-title display-6 f-bold m-3">I want to sell</h5>
@@ -86,10 +86,9 @@
 
     <section class="container-fluid theme-color">
         <div class="ps-md-5 pe-md-5 theme-bg card-section rounded-4 m-4">
-            <div class="section-title d-flex justify-content-between">
-                <h4>Trending</h4>
-                <a href="" class="text-decoration-none d-flex gap-2 align-items-center">view more<i
-                        class="fas fa-ellipsis-h"></i></a>
+            <div class="section-title mb-5">
+                <p class="text-center display-3 fw-bold text-danger">Trending products</p>
+
             </div>
             <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5">
                 <div class="box col">
@@ -99,7 +98,7 @@
 
                             <div class="card-head position-absolute w-100 h-100 top-0">
                                 <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                                <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
+                                <a class="btn position-absolute btn-primary rounded-pill w-100 buyNow-btn r-paragraph">
                                     Buy Now
                                 </a>
                             </div>
@@ -381,242 +380,13 @@
                         </div>
 
                     </div>
+
                 </div>
-
-
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/Darth.jpg' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/gift.gif' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/gift.gif' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">#}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/Darth.jpg' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/gift.gif' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="box col">#}
-{#                    <div class="card">#}
-{#                        <div class="card-img-top position-relative">#}
-{#                            <img src="{% static 'images/gift.gif' %}" alt="" class="card-image rounded-3"/>#}
-{##}
-{#                            <div class="card-head position-absolute w-100 h-100 top-0">#}
-{#                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>#}
-{#                                <a class="#}
-{#                  btn#}
-{#                  position-absolute#}
-{#                  btn-primary#}
-{#                  rounded-pill#}
-{#                  buyNow-btn#}
-{#                  r-paragraph#}
-{#                ">#}
-{#                                    Buy Now#}
-{#                                </a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="d-flex flex-column">#}
-{#                            <div class="d-flex justify-content-between">#}
-{#                                <strong class="r-paragraph text-nowrap">Amazing card design</strong>#}
-{#                                <span class="r-paragraph">123 <span>views</span></span>#}
-{#                            </div>#}
-{#                            <a class="text-nowrap r-paragraph">$233</a>#}
-{#                        </div>#}
-{#                        <div class="d-flex justify-content-between align-items-center">#}
-{#                            <span class="text-nowrap r-paragraph">from john</span>#}
-{#                            <span class="text-nowrap r-paragraph">November 12,2021</span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+            </div>
+            <p class="text-center">
+                <a class="text-decoration-none fs-4" href="/">Show more <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
+            </p>
+        </div>
     </section>
 
     <section class="container-fluid rounded-4 mt-5 pt-5 theme-color">
