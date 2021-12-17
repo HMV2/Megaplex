@@ -99,3 +99,16 @@ img {
 .mt-6{
   padding-top: 90px;
 }
+=======
+.M-logo {
+  background-image: linear-gradient(
+    to right,
+    #6a11cb 0%,
+    #2575fc 100%
+  ) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text;
+  background-size: cover !important;
+  color: transparent;
+}
+
