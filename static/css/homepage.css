@@ -1,13 +1,181 @@
-.header{
-    height: 100vh;
-    background-color: skyblue;
+/* ====================trending-and-collection section padding ========================= */
+.card-section {
+  padding: 5vw 7vw;
+}
+/* ====================trending-and-collection section padding ========================= */
+.rounded-4 {
+  border-radius: 35px !important;
 }
 
-h1{
-    font-weight: 300;
+/* ===============responsive-text================ */
+.r-paragraph {
+  font-size: min(2.2vw, 26px);
+}
+/* ==============responsive-text================ */
+
+/* ================first-section================== */
+.search-section {
+  padding: 13vw 13vw;
 }
 
+.form-control {
+  z-index: 50;
+}
 
+.content-search {
+  width: min(90%, 700px);
+}
 
+.smallcard-img {
+  width: calc(55px + 2vw);
+}
+
+.small-box-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+/* ============================first-section======================= */
+
+/* =================================== blur circle bg ========================================= */
+
+.circle-one {
+  width: 150px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(100px);
+  background-color: #eb00ff;
+
+  z-index: -2;
+}
+
+.circle-two {
+  width: 150px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(150px);
+  background-color: red;
+  z-index: -2;
+}
+
+.circle-three {
+  width: 150px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(100px);
+  background-color: #553afc;
+
+  z-index: -2;
+}
+
+.circle-four {
+  width: 150px;
+  height: 550px;
+  border-radius: 50%;
+
+  border-radius: 50%;
+  filter: blur(100px);
+  background-color: #7be7ff;
+
+  z-index: -2;
+}
+
+/* ============card=============== */
+
+.card-image {
+  aspect-ratio: 1/1.1;
+  object-fit: cover;
+  border-radius: 7% !important;
+}
+.card {
+  border-radius: 7%;
+  background-color: transparent;
+  border: none;
+}
+.box {
+  padding: 1vw 1vw;
+}
+
+.love-icon {
+  top: 5%;
+  right: 7%;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 5px solid white;
+  background-color: white;
+  padding: 1% 2% 0 2%;
+}
+.buyNow-btn {
+  bottom: 2%;
+  left: calc(33% + 0.8vw);
+}
+.card-head {
+  opacity: 0;
+}
+
+.card-head:hover {
+  opacity: 100;
+}
+/* ==============card=============== */
+
+/* ================collection====================== */
+.img-circle {
+  width: calc(15px + 2vw);
+  height: calc(15px + 2vw);
+  border-radius: 50%;
+  background: blue;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.collection-lg-img {
+  aspect-ratio: 1/0.6;
+  object-fit: cover;
+}
+
+.collection-sm-img {
+  object-fit: cover !important;
+  aspect-ratio: 1/0.5;
+}
+
+.collection-love-icon {
+  top: 5%;
+  right: 8%;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 5px solid white;
+  background-color: white;
+  padding: 1% 1% 0.2% 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.collection-buyNow-btn {
+  bottom: 2%;
+  left: calc(37% + 0.8vw);
+}
+/* =======================collection========================= */
+
+@media screen and (min-width: 768px) {
+  .circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .r-paragraph {
+    font-size: calc(7px + 0.5vw);
+  }
+
+  .img-circle {
+    width: calc(7px + 2vw);
+    height: calc(7px + 2vw);
+    border-radius: 50%;
+    background: blue;
+  }
+
+  .relative {
+    position: relative;
+  }
+}
 
 
