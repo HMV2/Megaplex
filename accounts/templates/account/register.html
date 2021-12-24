@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 
 {% block title %}<title>Register</title>{% endblock title %}
 
@@ -83,7 +84,7 @@
 
                         <a href="" class=" rounded-3 p-2 social-btn w-100  d-flex justify-content-center"><img
                                 src="{% static 'images/fb.png' %}" alt="not available" class="w-50"></a>
-                        <a href="" class=" rounded-3 p-2 social-btn w-100  d-flex justify-content-center"><img
+                        <a href="{% provider_login_url 'google' %}" class=" rounded-3 p-2 social-btn w-100  d-flex justify-content-center"><img
                                 src="{% static 'images/google.png' %}" alt="not available" class="w-50"></a>
                     </div>
                 </div>

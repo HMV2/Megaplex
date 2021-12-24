@@ -18,7 +18,7 @@ def login(request):
             if not user.is_staff:
                 auth.login(request, user)
                 messages.success(request,"Welcome to Megaplex World")
-                return redirect("/account/login")
+                return redirect("/accounts/login")
 
             elif user.is_staff:
                 auth.login(request, user)
@@ -54,4 +54,4 @@ def register(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('/account/login')
+    return redirect('/accounts/login')
