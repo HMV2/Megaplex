@@ -93,6 +93,9 @@ img {
 .border-15{
   border-radius: 15px;
 }
+.border-10{
+  border-radius: 10px;
+}
 .w-40{
   width:45%;
 }
@@ -111,4 +114,5 @@ img {
   background-size: cover !important;
   color: transparent;
 }
+
 
