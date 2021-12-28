@@ -8,3 +8,6 @@ def index_page(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def category(request):
+    return render(request, 'homepage/category.html')
