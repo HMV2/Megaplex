@@ -1,8 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 
-from admins.models import Category
-
 
 def index_page(request):
     return render(request, 'homepage/homepage.html')
@@ -14,11 +12,7 @@ def logout_view(request):
 
 
 def category(request):
-    data = Category.objects.all().order_by('-id')
-    context = {
-        'data': data
-    }
-    return render(request, 'homepage/category.html', context)
+    return render(request, 'homepage/category.html')
 
 # data = Country.objects.all().order_by('-id')
 #     # country_filter = CountryFilter(request.GET, queryset=data)
