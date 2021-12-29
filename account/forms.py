@@ -12,12 +12,12 @@ USER_CHOICES = [
 
 class UserForm(UserCreationForm):
     """Form for creating Users"""
-    first_name =  forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
     email = forms.EmailField()
-    username = forms.CharField()
     plan = forms.CharField(label="Choose the type of membership", widget=forms.Select(choices=USER_CHOICES)) 
-    fields = ['first_name', 'last_name','email','username', "plan"]
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name','email','username', "plan",'password1','password2']
+
 
 class LoginForm(forms.Form):
     """Form to allow users to log in"""

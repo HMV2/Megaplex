@@ -40,7 +40,8 @@ def register(request):
         if form.is_valid():
             first_name, last_name, email, username,password = form.cleaned_data['first_name'],form.cleaned_data['last_name'],form.cleaned_data['email'],form.cleaned_data['username'],form.cleaned_data['password1']
             plan = form.cleaned_data['plan']
-            user = User.objects.create(first_name = first_name, last_name = last_name, username = username, email = email, password = password)
+            user = form.save()
+            print(first_name)
             Profile.objects.create(user=user,email = user.email, firstname = user.first_name, lastname = user.last_name, plan=plan)
             messages.success(request,"Megaplex user created, You can enjoy the features!")
             return redirect('/')
