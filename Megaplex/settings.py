@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'homepage.apps.HomepageConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'directChat'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
