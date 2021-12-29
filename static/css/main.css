@@ -112,3 +112,71 @@ img {
   color: transparent;
 }
 
+/*#featured-box {*/
+/*    background: #FBFAFB;*/
+/*}*/
+
+.country-card {
+    max-width: 400px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.country-card img {
+    transition: all linear 0.25s;
+}
+
+.country-card .country-name {
+    position: absolute;
+    left: 30px;
+    bottom: 70px;
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transition: all linear 0.25s;
+}
+
+.country-card .profile-icons {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    color: #FFF;
+    transition: all linear 0.25s;
+}
+
+.country-card .desc {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+    color: #FFF;
+    font-size: 13px;
+    transition: all linear 0.25s;
+}
+
+.country-card .profile-icons .fa {
+    margin: 5px;
+}
+
+.country-card:hover img {
+    filter: grayscale(100%);
+}
+
+.country-card:hover .country-name {
+    bottom: 80px;
+    ;
+}
+
+.country-card:hover .desc {
+    bottom: 60px;
+}
+
+.country-card:hover .profile-icons {
+    right: 40px;
+}
