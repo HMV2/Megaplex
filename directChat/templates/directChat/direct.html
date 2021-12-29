@@ -1,8 +1,8 @@
-{% extends 'layout-message.html' %}
+{% extends 'layout.html' %}
 {% load static %}
 
 {% block main_content %}
-
+{% comment %}
 <div class="columns is-mobile">
 
 
@@ -14,8 +14,9 @@
       <ul style="overflow-y: scroll; height: 500px" class="menu-list">
 
         {% for message in messages %}
-        
-        <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'directs' message.user.id %}">
+
+        <a class="{% if active_direct == message.user.username %}is-active{% endif %}"
+          href="{% url 'directs' message.user.id %}">
           <div class="box">
             <article class="media">
               <div class="media-left">
@@ -112,5 +113,148 @@
 
   </div>
 </div>
+{% comment %} ----------------------------------- {% endcomment %}
+<section>
+  <div class="container py-5">
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="card border-15 border">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            
+            <div class="container overflow-hidden">
+              <div class="row">
+                <div class="col-4">
+                 <div class="p-3"><h5 class="mb-0 fs-3 fw-bold">Megaplex Messenger</h5></div>
+                </div>
+                <div class="col-8">
+                  <div class="alert alert-primary mb-0" role="alert">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="mb-0 me-3">Admin Limbu</h5>
+                    <div class="d-flex">
+                      <i class="fa fa-phone me-3" aria-hidden="true"></i>
+                      <i class="fa fa-video me-3" aria-hidden="true"></i>
+                      <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+
+                <div class="p-3">
+
+                  <div class="input-group rounded mb-3">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                      aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </div>
+
+                  <div data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+                    <ul class="list-unstyled mb-0">
+
+                      {% for message in messages %}
+                      
+                      <li class="p-2 border-bottom">
+                        <a class="{% if active_direct == message.user.username %}is-active{% endif %}"
+                          href="{% url 'directs' message.user.id %}">
+                          <div class="d-flex flex-row">
+                            <div class="pt-1">
+                              <p class="fw-bold mb-0">{{message.user.username}}</p>
+                              <p class="small text-muted">Hello, Are you there?</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      {% endfor %}
+
+
+                    </ul>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-md-6 col-lg-7 col-xl-8">
+
+                <div class="pt-3 pe-3 overflow-auto"
+                  style="position: relative; height: 400px">
+
+                  <div class="flex-row justify-content-start">
+                    {% for direct in directs %}
+                    
+                    {% if direct.sender.username == "mic" %}
+
+                    <div class="d-flex flex-row justify-content-start">
+                      <img src="https://cdn-icons-png.flaticon.com/512/185/185852.png"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                      <div>
+                        <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">{{direct.sender.username}}: {{direct.body}}</p>
+                        <p class="small ms-3 mb-3 rounded-3 text-muted">{{direct.date}}</p>
+                      </div>
+                    </div>
+
+                    {% elif direct.sender.username == "admin"  %}
+                      <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                      <div>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-danger">{{direct.body}}</p>
+                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
+                      </div>
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+
+                  
+
+                  </div>
+
+                </div>
+                <hr>
+
+                <form role="form" method="POST" action="{% url 'send_direct' %}">
+                  {% csrf_token %}
+                  <div class="d-flex justify-content-between">
+                    <input type="hidden" name="to_user" value="{{ active_direct }}">
+                    <div class="w-75">
+                      <input type="text" name="body" id="formControlLg" class="form-control form-control"
+                        placeholder="Enter your message" />
+                    </div>
+
+                    <nav class="level">
+                      <div class="level-left">
+                        <div class="level-item">
+                          <button type="submit" name="action" class="btn btn-primary ">Send</buttom>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
 {% endblock %}
