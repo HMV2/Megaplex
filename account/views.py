@@ -18,7 +18,7 @@ def login(request):
             if not user.is_staff:
                 auth.login(request, user)
                 messages.success(request,"Welcome to Megaplex World")
-                return redirect("/account/login")
+                return redirect("/")
 
             elif user.is_staff:
                 auth.login(request, user)
