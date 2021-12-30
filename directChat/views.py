@@ -43,12 +43,13 @@ def Directs(request, username):
     for message in messages:
         if message['user'].username == username:
             message['unread'] = 0
-
+        chat_user = message["user"].first_name + " "+ message["user"].last_name
         context = {
             'directs': directs,
             'messages': messages,
             'active_direct': active_direct,
-            'current_user': current_user
+            'current_user': current_user,
+            'chat_user' : chat_user
         }
 
     template = loader.get_template('directChat/direct.html')
@@ -60,7 +61,6 @@ def Directs(request, username):
 def SendDirect(request):
     from_user = request.user
     to_user_username = request.POST.get('to_user')
-    print("User Name: " + to_user_username)
     body = request.POST.get('body')
 
     if request.method == 'POST':
