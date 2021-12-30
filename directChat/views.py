@@ -4,6 +4,7 @@ from directChat.models import Chat_Message
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # @login_required
@@ -74,6 +75,9 @@ def SendDirect(request):
         except:
             to_user = User.objects.get(id=request.POST.get('to_user'))
         Chat_Message.send_message(from_user, to_user, body)
-        return redirect('inbox')
+        context={}
+        context['user_full'] = get_name(to_user_username)
+        return redirect(reverse('directs', kwargs={ 'username':to_user_username}))
+        # return redirect('inbox')
     else:
         HttpResponseBadRequest()
