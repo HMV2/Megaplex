@@ -79,6 +79,7 @@ body {
 img {
   display: block;
   width: 100%;
+  object-fit: cover;
 }
 .bolder {
   font-weight: 800;
