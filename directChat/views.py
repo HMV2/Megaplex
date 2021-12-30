@@ -19,8 +19,7 @@ def Inbox(request):
         for message in messages:
             if message['user'].username == active_direct:
                 message['unread'] = 0
-            # print(message['user'].first_name+" "+message['user'].first_name)
-            print(directs)
+
 
     context = {
         'directs': directs,
@@ -51,7 +50,6 @@ def Directs(request, username):
         if message['user'].username == username:
             message['unread'] = 0
         name = get_name(username)
-        print(name)
         context = {
             'directs': directs,
             'messages': messages,
