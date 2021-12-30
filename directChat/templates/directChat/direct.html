@@ -1,8 +1,5 @@
 {% extends 'layout.html' %}
 {% load static %}
-{% block title %}
-    <title>Messages</title>
-{% endblock title %}
 
 {% block main_content %}
 {% comment %}
@@ -135,9 +132,10 @@
                   </div>
                 </div>
                 <div class="col-8">
+                  {% if chat_user != None %}
                   <div class="alert alert-primary mb-0" role="alert">
                     <div class="d-flex justify-content-between">
-                      <h5 class="mb-0 me-3">{{user_full}}</h5>
+                      <h5 class="mb-0 me-3">{{chat_user}}</h5>
                       <div class="d-flex">
                         <i class="fa fa-phone me-3" aria-hidden="true"></i>
                         <i class="fa fa-video me-3" aria-hidden="true"></i>
@@ -145,6 +143,7 @@
                       </div>
                     </div>
                   </div>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -203,6 +202,17 @@
                     {% for direct in directs %}
 
                     {% if direct.sender.username == user.username %}
+
+                    <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                      <div>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-danger">{{direct.body}}</p>
+                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
+                      </div>
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
+                    </div>
+
+                    {% else  %}
                     <div class="d-flex flex-row justify-content-start">
                       <img src="https://cdn-icons-png.flaticon.com/512/185/185852.png" alt="avatar 1"
                         style="width: 45px; height: 100%;">
@@ -211,16 +221,6 @@
                           {{direct.sender.username}}: {{direct.body}}</p>
                         <p class="small ms-3 mb-3 rounded-3 text-muted">{{direct.date}}</p>
                       </div>
-                    </div>
-
-                    {% else  %}
-                    <div class="d-flex flex-row justify-content-end mb-4 pt-1">
-                      <div>
-                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-danger">{{direct.body}}</p>
-                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
-                      </div>
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                        alt="avatar 1" style="width: 45px; height: 100%;">
                     </div>
                     {% endif %}
 
