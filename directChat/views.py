@@ -19,6 +19,8 @@ def Inbox(request):
         for message in messages:
             if message['user'].username == active_direct:
                 message['unread'] = 0
+            # print(message['user'].first_name+" "+message['user'].first_name)
+            print(directs)
 
     context = {
         'directs': directs,
@@ -30,6 +32,11 @@ def Inbox(request):
 
     return HttpResponse(template.render(context, request))
 
+
+def get_name(username):
+    user =  User.objects.get(id=username)
+    full_name = user.first_name + " "+ user.last_name
+    return full_name
 
 @login_required
 def Directs(request, username):
@@ -43,17 +50,17 @@ def Directs(request, username):
     for message in messages:
         if message['user'].username == username:
             message['unread'] = 0
-        chat_user = message["user"].first_name + " "+ message["user"].last_name
+        name = get_name(username)
+        print(name)
         context = {
             'directs': directs,
             'messages': messages,
             'active_direct': active_direct,
             'current_user': current_user,
-            'chat_user' : chat_user
+            'user_full':name
         }
 
     template = loader.get_template('directChat/direct.html')
-
     return HttpResponse(template.render(context, request))
 
 
