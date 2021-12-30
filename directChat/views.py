@@ -78,6 +78,5 @@ def SendDirect(request):
         context={}
         context['user_full'] = get_name(to_user_username)
         return redirect(reverse('directs', kwargs={ 'username':to_user_username}))
-        # return redirect('inbox')
     else:
         HttpResponseBadRequest()
