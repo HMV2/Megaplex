@@ -14,6 +14,9 @@ def logout_view(request):
 def category(request):
     return render(request, 'homepage/category.html')
 
+def notification(request):
+    return render(request, 'homepage/notification.html')
+
 # data = Country.objects.all().order_by('-id')
 #     # country_filter = CountryFilter(request.GET, queryset=data)
 #     context = {

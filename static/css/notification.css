@@ -1,0 +1,13 @@
+.module{
+    height: 1.7rem;
+    overflow: hidden;
+    font-size: 20px;
+}
+.module.show{
+    height: max-content;
+}
+
+.container-l{
+    margin-inline:5vw;
+
+}
