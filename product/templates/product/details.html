@@ -91,7 +91,7 @@
                         <p class="fs-6"><i class="fa fa-map-marker-check" aria-hidden="true"></i> <strong>
                                 Category:</strong> {{product.category}}</p>
                         <p class="fs-5"><i class="fa fa-map-marker-check" aria-hidden="true"></i> <strong>
-                                Qunatity:</strong> {{product.quantity}}</p>
+                                Quantity:</strong> {{product.quantity}}</p>
 
                     </div>
 
@@ -244,14 +244,17 @@
                             <div class="d-flex flex-column text-center">
                                 <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> Kathmandu</h6>
+                                <input type="hidden" name="to_user" id="to_user" value="{{product.seller}}">
                                 <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">
                                     🟢 AVAILABLE NOW
                                 </button>
 
                             </div>
                         </div>
-                        <form class="form-outline mt-md-4">
-                            <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                        <form role="form" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="to_user" id="to_user" value="{{product.seller}}">
+                            <textarea class="form-control" id="body" rows="4", name="body"></textarea>
                             <label class="form-label" for="textAreaExample">Message</label>
                             <button type="submit" class="btn btn-success w-100 mt-2">Send free message</button>
                         </form>
