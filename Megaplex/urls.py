@@ -9,4 +9,5 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('chat/',include('directChat.urls')),
     path('dashboard/',include('dashboard.urls')),
+    path('products/',include('products.urls')),
 ]
