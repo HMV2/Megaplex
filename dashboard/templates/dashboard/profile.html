@@ -1,0 +1,215 @@
+{% extends 'layout.html' %} {% load static %} {% block title %}
+<title>profile</title>
+{% endblock title %} {% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/homepage.css' %}" />
+<link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+
+{% endblock css_files %} {% block main_content %}
+
+<div class="profile-page position-relative">
+    <div class="cover position-relative">
+        <img src="{% static 'images/cover.jpg' %}" alt="" class="cover-img" />
+        <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
+            <a href="" class="btn border border-2 rounded-pill text-white">
+                edit cover page
+            </a>
+            <a href="" class="btn border border-2 rounded-pill text-white">edit profile</a>
+        </div>
+    </div>
+
+    <div class="profile container-sm row m-auto fixed">
+        <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg-white ">
+            <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  " src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            <h4 class="pt-4 theme-color">Chirag Simkhada</h4>
+            <p class="text-danger">243 Followers</p>
+            <div class=" mt-3">
+                <a href="" class="btn btn-primary rounded rounded-pill">follow</a>
+
+                <a href="https://github.com/hmv2/megaplex" class="btn btn-outline-dark btn-floating" class=""
+                    role="button"><i class="fa fa-share-alt pt-2"></i></a>
+
+            </div>
+            <p class="text-center mt-4 inactive-color">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, amet? Error, ea. Numquam libero porro
+                asperiores commodi excepturi, </p>
+            <a href="#" class="text-decoration-underline">Change password</a>
+            <span class="f-1 mt-4">Member since mar 15 ,2021</span>
+
+
+        </div>
+
+        <div class="col m-4">
+            <!-- Tabs navs -->
+            <div class="d-flex justify-content-between">
+                <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                        aria-controls="ex1-tabs-1" aria-selected="true">Active Products</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+                        aria-controls="ex1-tabs-2" aria-selected="false">Inactive Products</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+                        aria-controls="ex1-tabs-3" aria-selected="false">Activity Log</a>
+                </li>
+                
+            </ul>
+            <ul>
+                <li>
+                    <button class="btn btn-outline-danger">Add New product</button>
+                </li>
+            </ul>
+            </div>
+            
+            <!-- Tabs navs -->
+
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content">
+                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{% static 'images/animated-art-3.jpg' %}" alt="" height="280px"/>
+            
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">Amazing card design</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    Tab 2 content
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                    Tab 3 content
+                </div>
+            </div>
+            <!-- Tabs content -->
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock main_content %} {% block js_files %}
+<script src="{% static 'javascript/profile.js' %}"></script>
+{% endblock js_files %}
