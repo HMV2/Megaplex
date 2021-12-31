@@ -55,6 +55,7 @@ class Product(models.Model):
     specifications = models.TextField()
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    is_active = models.BooleanField(default=True)
 
 
     def __str__(self) -> str:
