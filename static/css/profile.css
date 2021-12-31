@@ -1,0 +1,44 @@
+.cover-img {
+    width: 100%;
+    height: calc(120px + 6vw);
+    object-fit: cover;
+  }
+  .edit-profile-cover {
+    right: 0;
+    bottom: 0;
+    margin-bottom: 35px;
+    margin-right: 10px;
+  }
+  
+  .profile-info {
+    position: relative;
+  
+    transform: translateY(-150px);
+    height: 660px !important;
+  }
+  /* 
+  .products{
+    height: 600px;
+    overflow: hidden;
+    overflow-y: scroll;
+  } */
+  
+  .toggle-btn {
+    cursor: pointer;
+  }
+  
+  .btn-dark {
+    background-color: var(--theme-color) !important;
+    color: var(--theme-bg) !important;
+  }
+  @media screen and (min-width: 992px) {
+    .profile-info {
+      width: 20%;
+    }
+    .profile-info-fixed {
+      position: fixed;
+      width: 18%;
+      top: 50px;
+    }
+  }
+  
