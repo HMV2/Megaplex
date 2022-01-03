@@ -5,4 +5,11 @@ from . import views
 
 urlpatterns = [
     path('profile/', views.profile, name='profile'),
+    path('profile/<int:profile_id>',views.User_Profile,name='user_profile'),
+    path('follow_user/<int:profile_id>',views.AddFollowers,name ='follow'),
+    path('unfollow_user/<int:profile_id>',views.RemoveFollowers,name='unfollow'),
+    path('follower_list/<int:profile_id>',views.follower_list,name='following_list'),
+    path('remove_follower/<int:follower_id>',views.Delete_Follower,name='Remove_following_user'),
+    path('toggle_following/<int:following_id>',views.togglefollowing,name='toggle_following_user'),
+
 ]
