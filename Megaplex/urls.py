@@ -12,6 +12,7 @@ urlpatterns = [
     path('chat/',include('directChat.urls')),
     path('dashboard/',include('dashboard.urls')),
     path('product/',include('product.urls')),
+    path('profile/', include('dashboard.urls'))
 ]
 
 if settings.DEBUG:

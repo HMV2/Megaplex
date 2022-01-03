@@ -28,6 +28,9 @@
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
             <a href="/dashboard/follower_list/{{profile.id}}"  class="text-danger">{{profile.followers.all.count}} followers</a>
             
+            <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  " src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
+            <p class="text-danger">243 Followers</p>
             <div class=" mt-3">
                 {% if request.user == user %}
                 <a href="/profile/{{profile.id}}" class="text-decoration-none"><button
