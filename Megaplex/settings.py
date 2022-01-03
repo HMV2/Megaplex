@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'crispy_forms',
     'dashboard',
-    'directChat'
+    'directChat',
+    'admins'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

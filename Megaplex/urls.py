@@ -9,5 +9,6 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('chat/',include('directChat.urls')),
     path('dashboard/',include('dashboard.urls')),
-    path('profile/', include('dashboard.urls'))
+    path('profile/', include('dashboard.urls')),
+    path('admins/', include('admins.urls'))
 ]
