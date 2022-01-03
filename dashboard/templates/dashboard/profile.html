@@ -21,17 +21,39 @@
 
     <div class="profile container-sm row m-auto fixed">
         <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg-white ">
+            
             <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  "
                     src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
-            <p class="text-danger">243 Followers</p>
+            <a href="/dashboard/follower_list/{{profile.id}}"  class="text-danger">{{profile.followers.all.count}} followers</a>
+            
             <div class=" mt-3">
-                <a href="" class="btn btn-primary rounded rounded-pill">follow</a>
+                {% if request.user == user %}
+                <a href="/profile/{{profile.id}}" class="text-decoration-none"><button
+                        class="btn btn-outline-primary btn-rounded text-center m-auto  d-flex  justify-content-center">edit
+                        profile</button></a>
+                        
+                {% else %}
+                {% if is_following %}
+                <form action="/dashboard/unfollow_user/{{profile.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Unfollow">
 
-                <a href="https://github.com/hmv2/megaplex" class="btn btn-outline-dark btn-floating" class=""
-                    role="button"><i class="fa fa-share-alt pt-2"></i></a>
+                </form>
+
+                {% else %}
+                <form action="/dashboard/follow_user/{{profile.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="follow">
+                </form>
+
+                {% endif %}
+                {% endif %}
+                
 
             </div>
+            
             <p class="text-center mt-4 inactive-color">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, amet? Error, ea. Numquam libero porro
                 asperiores commodi excepturi, </p>
@@ -43,7 +65,8 @@
 
         <!-- Tabs navs -->
         <div class="col m-4">
-            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <div class="d-flex justify-content-between">
+                <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
                         aria-controls="ex1-tabs-1" aria-selected="true">Active</a>
@@ -57,6 +80,14 @@
                         aria-controls="ex1-tabs-3" aria-selected="false">Activity</a>
                 </li>
             </ul>
+            <ul>
+                <li>
+                    <button class="btn btn-outline-danger">Add New product</button>
+                </li>
+            </ul>
+            </div>
+            
+            
             <!-- Tabs navs -->
 
             <!-- Tabs content -->
