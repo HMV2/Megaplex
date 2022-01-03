@@ -34,3 +34,5 @@ def product_details(request,product_id):
 
     return render(request, 'product/details.html',context)
 
+def filter_page(request):
+    return render(request,'product/filter.html')
