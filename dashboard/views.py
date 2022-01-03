@@ -1,20 +1,16 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
 from product.models import Product
 from django.http import JsonResponse
-=======
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
->>>>>>> master
 # Create your views here.
 
 @login_required
 def profile(request):
     user = Profile.objects.get(user=request.user)
-<<<<<<< HEAD
     try:
         active_products = Product.objects.filter(seller=request.user, is_active=True)
     except:
@@ -159,9 +155,7 @@ def togglefollowing(request,following_id):
             user_profile.followers.remove(profile_id)
 
         return JsonResponse({"is_remove":is_remove})
-=======
     context={
         'profile':user
     }
     return render(request, 'dashboard/profile.html',context)
->>>>>>> master
