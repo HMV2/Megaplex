@@ -11,5 +11,4 @@ urlpatterns = [
     path('follower_list/<int:profile_id>',views.follower_list,name='following_list'),
     path('remove_follower/<int:follower_id>',views.Delete_Follower,name='Remove_following_user'),
     path('toggle_following/<int:following_id>',views.togglefollowing,name='toggle_following_user'),
-
 ]
