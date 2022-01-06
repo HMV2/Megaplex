@@ -87,11 +87,7 @@
   object-fit: cover;
   /* border-radius: 7% !important; */
 }
-.card {
-  border-radius: 7%;
-  background-color: transparent;
-  border: none;
-}
+/
 .box {
   padding: 1vw 1vw;
 }
@@ -119,7 +115,9 @@
   opacity: 100;
 }
 /* ==============card=============== */
-
+.blur{
+  filter: blur(60px);
+}
 /* ================collection====================== */
 .img-circle {
   width: calc(15px + 2vw);
