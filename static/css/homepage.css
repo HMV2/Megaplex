@@ -2,6 +2,7 @@
 .card-section {
   padding: 5vw 7vw;
 }
+
 /* ====================trending-and-collection section padding ========================= */
 .rounded-4 {
   border-radius: 35px !important;
@@ -11,6 +12,7 @@
 .r-paragraph {
   font-size: min(2.2vw, 26px);
 }
+
 /* ==============responsive-text================ */
 
 /* ================first-section================== */
@@ -35,6 +37,7 @@
   flex-direction: column;
   gap: 0;
 }
+
 /* ============================first-section======================= */
 
 /* =================================== blur circle bg ========================================= */
@@ -87,7 +90,7 @@
   object-fit: cover;
   /* border-radius: 7% !important; */
 }
-/
+
 .box {
   padding: 1vw 1vw;
 }
@@ -101,12 +104,14 @@
   background-color: white;
   padding: 1% 2% 0 2%;
 }
+
 .buyNow-btn {
   border-radius: 0%;
   bottom: 0%;
   /* left: calc(33% + 0.8vw); */
   backdrop-filter: blur(10rem);
 }
+
 .card-head {
   opacity: 0;
 }
@@ -114,10 +119,12 @@
 .card-head:hover {
   opacity: 100;
 }
+
 /* ==============card=============== */
-.blur{
+.blur {
   filter: blur(60px);
 }
+
 /* ================collection====================== */
 .img-circle {
   width: calc(15px + 2vw);
@@ -150,10 +157,12 @@
   justify-content: center;
   align-items: center;
 }
+
 .collection-buyNow-btn {
   bottom: 2%;
   left: calc(37% + 0.8vw);
 }
+
 /* =======================collection========================= */
 
 @media screen and (min-width: 768px) {
@@ -177,5 +186,3 @@
     position: relative;
   }
 }
-
-

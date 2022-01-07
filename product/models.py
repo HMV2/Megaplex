@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 WARRANTY_CHOICES = (
     ("None", "None"),
@@ -63,3 +64,10 @@ class Product(models.Model):
 
 
 
+class Comment(models.Model):
+    sno = models.AutoField(primary_key=True)
+    comment_text = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    timestamp = models.DateTimeField(default=now)

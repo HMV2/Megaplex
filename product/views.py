@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Category, Color, Product, Brand
+from django.http import request
+from django.shortcuts import render, redirect
+from .models import Category, Color, Product, Brand, Comment
 from django.contrib.auth.models import User
 from directChat.models import Chat_Message
 from django.contrib.auth.decorators import login_required
@@ -7,27 +8,54 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+@login_required
 def product_details(request,product_id):
     product = Product.objects.get(id=product_id)
+    comments = Comment.objects.filter(product = product)
+    comment_count = comments.count()
     context={
-        'product':product
+        'product':product,
+        'comments':comments,
+        'count':comment_count
     }
-    if request.method == 'POST' and request.POST.get('body')!="":
-        from_user = request.user
-        to_user_username = request.POST.get('to_user')
-        body = request.POST.get('body')
-        print("body "+body)
-        try:
-            to_user = User.objects.get(username=to_user_username)
-        except:
-            to_user = User.objects.get(id=request.POST.get('to_user'))
-        Chat_Message.send_message(from_user, to_user, body)
-        messages.success(request,"Message Sent Successfully!")
-        return render(request, 'product/details.html',context)
-    elif request.method == 'POST' and request.POST.get('body')=="":
-        messages.error(request,"Please insert message to send!")
-        return render(request, 'product/details.html',context)
+    if request.method == 'POST':
+        formType = request.POST.get('formType')
+        if formType == "message" and request.POST.get('body')!="":
+            from_user = request.user
+            to_user_username = request.POST.get('to_user')
+            body = request.POST.get('body')
+            print("body "+body)
+            try:
+                to_user = User.objects.get(username=to_user_username)
+            except:
+                to_user = User.objects.get(id=request.POST.get('to_user'))
+            Chat_Message.send_message(from_user, to_user, body)
+            messages.success(request,"Message Sent Successfully!")
+            return render(request, 'product/details.html',context)
+        elif formType == "message" and request.POST.get('body')=="":
+            messages.error(request,"Please insert message to send!")
+            return render(request, 'product/details.html',context)
 
+        elif formType=="comment" and request.POST.get('comment')!="":
+            comment = request.POST.get('comment')
+            user = request.user
+            product = Product.objects.get(id = product_id)
+            # parentSno = Product.objects.get(sno = commentSno)
+            commentSno = request.POST.get('commentSno')
+            if commentSno == "":
+                comment = Comment(comment_text=comment, user = user, product = product)
+                comment.save()
+                messages.success(request, "Comment added successfully")
+
+            else:
+                parent = Comment.objects.get(sno = commentSno)
+                comment = Comment(comment_text=comment, user = user, product = product, parent = parent)
+                comment.save()
+                messages.success(request, "Reply added successfully")
+            
+        elif formType == "comment" and request.POST.get('comment')=="":
+            messages.error(request,"Please insert comment to post!")
+            return render(request, 'product/details.html',context)
 
     return render(request, 'product/details.html',context)
 

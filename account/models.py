@@ -13,7 +13,7 @@ class Profile(models.Model): #Model to create profile for users
     plan = models.CharField(max_length=20)
     district = models.CharField(max_length=30, default="Kathmandu")
     city = models.CharField(max_length=30, default="Baghbazar")
-    profile_pic = models.FileField(upload_to='profiles', default='sample_user.jpg')
+    profile_pic = models.FileField(upload_to='profiles', default='default.png')
     created_date = models.DateTimeField(auto_now_add=True)
     followers = models.ManyToManyField(User,blank=True,related_name='followers',default=[0])
     following = models.ManyToManyField(User,blank=True ,related_name ='following',default=[0])
