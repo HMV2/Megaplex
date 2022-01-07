@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}<title>Edit Product</title>{% endblock title %}
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/register.css' %}">
+
+<style>
+    .form-row {
+        justify-content: center;
+    }
+
+    #hint_id_password1,
+    #hint_id_password2 {
+        display: none
+    }
+</style>
+{% endblock css_files %}
+
+{% block main_content %}
+<div class=" mx-auto col-lg-5 shadow p-5" style="border-radius: 15px">
+    <h1 class="fs-3 text-center">Add Product</h1>
+    <form action="" class="p-5 p-md-0 pe-md-2" method="POST">
+        {% csrf_token %}
+        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+            <div class="form-group col-md-6 me-1">
+                {{ form.name | as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.brand | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+            <div class="form-group col-md-6 me-1">
+                {{ form.category | as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.sub_category | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+            <div class="form-group col-md-6 me-1">
+                {{ form.price | as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.color | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="form-group col-md-12">
+                {{ form.picture | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="form-group col-md-12">
+                {{ form.warranty | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+            <div class="form-group col-md-6 me-1">
+                {{ form.image1 | as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.image2 | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="form-group col-md-12">
+                {{ form.image3 | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="form-group col-md-12">
+                {{ form.description | as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="form-group col-md-12">
+                {{ form.specifications | as_crispy_field }}
+            </div>
+        </div>
+        <button class="btn mt-3 w-100 btn-primary shadow">
+            Add Product
+        </button>
+    </form>
+</div>
+</div>
+
+</div>
+
+</header>
+
+{% endblock main_content %}

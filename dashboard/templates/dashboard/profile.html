@@ -82,7 +82,7 @@
             </ul>
             <ul>
                 <li>
-                    <button class="btn btn-outline-danger">Add New product</button>
+                    <a href="/dashboard/addProduct"><button class="btn btn-outline-danger">Add New product</button></a>
                 </li>
             </ul>
             </div>
@@ -110,8 +110,8 @@
                                     </div>
                                     <hr class="dropdown-divider" />
                                     <div class="d-flex gap-2 align-items-center">
-                                        <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
-                                        <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a class="text-nowrap btn btn-primary" href="/dashboard/editProduct/{{pro.id}}"><i class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger" href="/dashboard/removeProduct/{{pro.id}}"><i class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -142,10 +142,6 @@
                                                 {{pro.price}}</strong>
                                         </div>
                                         <hr class="dropdown-divider" />
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
-                                            <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
