@@ -159,3 +159,7 @@ def togglefollowing(request,following_id):
         'profile':user
     }
     return render(request, 'dashboard/profile.html',context)
+
+
+def wishlist(request):
+    return render(request,'dashboard/wishlist.html')

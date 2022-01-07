@@ -85,13 +85,9 @@
 .card-image {
   aspect-ratio: 1/1.1;
   object-fit: cover;
-  border-radius: 7% !important;
+  /* border-radius: 7% !important; */
 }
-.card {
-  border-radius: 7%;
-  background-color: transparent;
-  border: none;
-}
+/
 .box {
   padding: 1vw 1vw;
 }
@@ -106,8 +102,10 @@
   padding: 1% 2% 0 2%;
 }
 .buyNow-btn {
-  bottom: 2%;
-  left: calc(33% + 0.8vw);
+  border-radius: 0%;
+  bottom: 0%;
+  /* left: calc(33% + 0.8vw); */
+  backdrop-filter: blur(10rem);
 }
 .card-head {
   opacity: 0;
@@ -117,7 +115,9 @@
   opacity: 100;
 }
 /* ==============card=============== */
-
+.blur{
+  filter: blur(60px);
+}
 /* ================collection====================== */
 .img-circle {
   width: calc(15px + 2vw);
