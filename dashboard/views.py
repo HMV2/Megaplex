@@ -166,15 +166,16 @@ def togglefollowing(request,following_id):
 
 @login_required
 def addProduct(request):
-    form = ProductForm()
     if request.method == "POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
+        print(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,"Successfully added product!")
             return redirect('/dashboard/profile')
         else:
             messages.success(request,"Failed to add product!")
+    form = ProductForm()
     context = {
         'form':form
     }

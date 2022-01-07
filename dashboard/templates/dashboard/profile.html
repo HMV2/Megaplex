@@ -21,19 +21,20 @@
 
     <div class="profile container-sm row m-auto fixed">
         <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg-white ">
-            
+
             <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  "
                     src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
             <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
-            <a href="/dashboard/follower_list/{{profile.id}}"  class="text-danger">{{profile.followers.all.count}} followers</a>
-            
+            <a href="/dashboard/follower_list/{{profile.id}}" class="text-danger">{{profile.followers.all.count}}
+                followers</a>
+
             <div class=" mt-3">
                 {% if request.user == user %}
                 <a href="/profile/{{profile.id}}" class="text-decoration-none"><button
                         class="btn btn-outline-primary btn-rounded text-center m-auto  d-flex  justify-content-center">edit
                         profile</button></a>
-                        
+
                 {% else %}
                 {% if is_following %}
                 <form action="/dashboard/unfollow_user/{{profile.id}}" method="POST">
@@ -50,10 +51,10 @@
 
                 {% endif %}
                 {% endif %}
-                
+
 
             </div>
-            
+
             <p class="text-center mt-4 inactive-color">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, amet? Error, ea. Numquam libero porro
                 asperiores commodi excepturi, </p>
@@ -67,131 +68,106 @@
         <div class="col m-4">
             <div class="d-flex justify-content-between">
                 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
-                        aria-controls="ex1-tabs-1" aria-selected="true">Active</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                        aria-controls="ex1-tabs-2" aria-selected="false">Inactive</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false">Activity</a>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <a href="/dashboard/addProduct"><button class="btn btn-outline-danger">Add New product</button></a>
-                </li>
-            </ul>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                            aria-controls="ex1-tabs-1" aria-selected="true">Active</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+                            aria-controls="ex1-tabs-2" aria-selected="false">Inactive</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+                            aria-controls="ex1-tabs-3" aria-selected="false">Activity</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="/dashboard/addProduct"><button class="btn btn-outline-danger">Add New
+                                product</button></a>
+                    </li>
+                </ul>
             </div>
-            
-            
+
+
             <!-- Tabs navs -->
 
             <!-- Tabs content -->
             <div class="tab-content" id="ex1-content">
-                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                    {% if active_products != None %}
-                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                        {% for pro in active_products %}
-                        <div class=" col">
-                            <div class="card border overflow-hidden border-15 mb-3">
-                                <div class="">
-                                    <img src="{{ pro.picture.url }}" alt="" height="280px" />
+                {% if inactive_products != None %}
+                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                    {% for pro in inactive_products %}
+                    <div class=" col">
+                        <div class="card border overflow-hidden border-15 mb-3">
+                            <div class="">
+                                <img src="{{ pro.picture.url }}" alt="" height="280px" />
 
+                            </div>
+                            <div class="m-3">
+                                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                    <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                        {{pro.price}}</strong>
                                 </div>
-                                <div class="m-3">
-                                    <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                                    <div class="d-flex justify-content-between">
-                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                                        <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
-                                    </div>
-                                    <hr class="dropdown-divider" />
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <a class="text-nowrap btn btn-primary" href="/dashboard/editProduct/{{pro.id}}"><i class="fas fa-pen-square"></i></a>
-                                        <a class="text-nowrap btn btn-danger" href="/dashboard/removeProduct/{{pro.id}}"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
+                                <hr class="dropdown-divider" />
+                                <div class="d-flex gap-2 align-items-center">
+                                    <a class="text-nowrap btn btn-primary" href="/dashboard/editProduct/{{pro.id}}"><i
+                                            class="fas fa-pen-square"></i></a>
+                                    <a class="text-nowrap btn btn-danger" href="/dashboard/removeProduct/{{pro.id}}"><i
+                                            class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
-                        {% else %}
-                        You have no active products
-                        {% endif %}
                     </div>
-                </div>
-                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                    Tab 2 content
-
-                    {% if inactive_products != None %}
-                        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                            {% for pro in inactive_products %}
-                            <div class=" col">
-                                <div class="card border overflow-hidden border-15 mb-3">
-                                    <div class="">
-                                        <img src="{{ pro.picture.url }}" alt="" height="280px" />
-
-                                    </div>
-                                    <div class="m-3">
-                                        <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                                        <div class="d-flex justify-content-between">
-                                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                                            <strong class="text-nowrap r-paragraph text-danger">NPR.
-                                                {{pro.price}}</strong>
-                                        </div>
-                                        <hr class="dropdown-divider" />
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            {% else %}
-                            You have no inactive products
-                            {% endif %}
-                        </div>
-
-                </div>
-                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                    Tab 3 content
-                    {% if inactive_products != None %}
-                        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                            {% for pro in inactive_products %}
-                            <div class=" col">
-                                <div class="card border overflow-hidden border-15 mb-3">
-                                    <div class="">
-                                        <img src="{{ pro.picture.url }}" alt="" height="280px" />
-
-                                    </div>
-                                    <div class="m-3">
-                                        <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                                        <div class="d-flex justify-content-between">
-                                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                                            <strong class="text-nowrap r-paragraph text-danger">NPR.
-                                                {{pro.price}}</strong>
-                                        </div>
-                                        <hr class="dropdown-divider" />
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
-                                            <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            {% else %}
-                            You have no inactive products
-                            {% endif %}
-                        </div>
+                    {% endfor %}
+                    {% else %}
+                    You have no inactive products
+                    {% endif %}
                 </div>
             </div>
-            <!-- Tabs content -->
+            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                Tab 2 content
 
+                {% if inactive_products != None %}
+                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                    {% for pro in inactive_products %}
+                    <div class=" col">
+                        <div class="card border overflow-hidden border-15 mb-3">
+                            <div class="">
+                                <img src="{{ pro.picture.url }}" alt="" height="280px" />
 
+                            </div>
+                            <div class="m-3">
+                                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                    <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                        {{pro.price}}</strong>
+                                </div>
+                                <hr class="dropdown-divider" />
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    You have no inactive products
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                Tab 3 content
+
+            </div>
         </div>
+        <!-- Tabs content -->
+
 
     </div>
 
-    {% endblock main_content %} {% block js_files %}
-    <script src="{% static 'javascript/profile.js' %}"></script>
-    {% endblock js_files %}
+</div>
+
+{% endblock main_content %} {% block js_files %}
+<script src="{% static 'javascript/profile.js' %}"></script>
+{% endblock js_files %}

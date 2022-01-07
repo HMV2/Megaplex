@@ -40,7 +40,7 @@
     
     
     
-        <form action="" class=" p-md-0 pe-md-2" method="POST" >
+        <form action="" class="p-md-0 pe-md-2" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
     
             <!-- Tabs navs -->
@@ -91,7 +91,17 @@
                         <div class="form-group ">
                             {{ form.warranty | as_crispy_field }}
                         </div>
+                        {% if user.profile.plan != "Individual" %}
+                        <div class="form-group ">
+                            {{ form.quantity | as_crispy_field }}
+                        </div>
+                        {% else %}
+                            <input type="hidden" name="quantity" value="1">
+                        {% endif %}
+                        
                     </div>
+                    <input type="hidden" name="seller" value={{user.id}}>
+                    <input type="hidden" name="isActive" value="1">
                 </div>
                 <div class="tab-pane fade pb-5 mt-4 mb-5" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
                     <div class="row-cols-2 mt-2 d-flex justify-content-between">
