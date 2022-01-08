@@ -1,8 +1,12 @@
+import channels
 from django.core import validators
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import *
 from django.db.models.signals import post_save
+from channels.layers import ChannelLayerManager, get_channel_layer
+from asgiref.sync import async_to_sync
+import json
 
 class Profile(models.Model): #Model to create profile for users
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE,related_name='profile')
@@ -20,3 +24,4 @@ class Profile(models.Model): #Model to create profile for users
 
     def __str__(self):
         return self.firstname + " "+ self.lastname
+

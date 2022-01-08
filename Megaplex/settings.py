@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dashboard',
     'product',
-    'directChat'
+    'directChat',
+    'channels',
+    'notification'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -77,18 +79,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Megaplex.wsgi.application'
+# WSGI_APPLICATION = 'Megaplex.wsgi.application'
+ASGI_APPLICATION = 'Megaplex.asgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
+}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

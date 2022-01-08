@@ -1,9 +1,13 @@
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 def index_page(request):
-    return render(request, 'homepage/homepage.html')
+    return render(request, 'homepage/homepage.html',{
+        'room_name':"broadcast"
+    })
 
 
 def logout_view(request):
@@ -14,11 +18,12 @@ def logout_view(request):
 def category(request):
     return render(request, 'homepage/category.html')
 
-# data = Country.objects.all().order_by('-id')
-#     # country_filter = CountryFilter(request.GET, queryset=data)
-#     context = {
-#         'data': data,
-#         'activate_explore': 'active border-bottom active-class',
-#         # 'country_filter': country_filter
-#     }
-#     return render(request, 'dashboard/country.html', context)
+def test(request):
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        "notification_broadcast",{
+            'type':'send_notification',
+            'message':'Notification'
+        }
+    )
+    return HttpResponse('Done')
