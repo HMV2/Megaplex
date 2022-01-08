@@ -102,10 +102,13 @@
                 <a class="nav-link notification dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">12</span>
+                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="notifications-dropdown">
-
+                    {% for i in notifications %}
+                        <li class="dropdown-item">{{i.message}}</li>
+                        <hr class="dropdown-divider">
+                    {% endfor %}
 
                 </ul>
 
@@ -143,28 +146,3 @@
         <i class="fas fa-sun pointer-event" id="theme-toggle"></i>
     </span> -->
 </nav>
-
-<script>
-    const roomName = JSON.parse(document.getElementById('room_name').textContent);
-
-    const notificationSocket = new WebSocket(
-        'ws://' +
-        window.location.host +
-        '/ws/notification/' +
-        roomName +
-        '/'
-    );
-
-    notificationSocket.onmessage = function (e) {
-        const data = JSON.parse(e.data);
-        console.log(data)
-        document.getElementById("notifications-dropdown").innerHTML = "<li class='dropdown-item'>" + data +
-            "</li><hr class='dropdown-divider'>" + document.getElementById('notifications-dropdown').innerHTML;
-        document.getElementById('notification-badge').innerHTML = parseInt(document.getElementById(
-            'document-badge')) + 1;
-    };
-
-    notificationSocket.onclose = function (e) {
-        console.error('Notification socket closed unexpectedly');
-    };
-</script>

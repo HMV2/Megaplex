@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'product',
     'directChat',
     'channels',
-    'notification'
+    'notification',
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -74,12 +76,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'homepage.custom_context_processors.notifications'
             ],
         },
     },
 ]
 
-# WSGI_APPLICATION = 'Megaplex.wsgi.application'
+WSGI_APPLICATION = 'Megaplex.wsgi.application'
 ASGI_APPLICATION = 'Megaplex.asgi.application'
 
 
@@ -91,6 +94,17 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# Celery Settings
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SELERLIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kathmandu'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
