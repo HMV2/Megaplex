@@ -59,6 +59,8 @@ body {
   font-size: min(2.4vw, 30px);
 }
 
+
+
 .text-primary {
   color: var(--primary-color) !important;
 }

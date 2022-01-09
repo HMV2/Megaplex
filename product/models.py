@@ -71,3 +71,4 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(default=now)
+    likes = models.ManyToManyField(User,blank = True , related_name = 'likes')
