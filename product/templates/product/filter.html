@@ -1,0 +1,156 @@
+{% extends 'layout.html' %} {% load static %} {% block title %}
+<title>Filter</title>{% endblock title %}
+
+{% block main_content %}
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-md-8 order-md-2 col-lg-9">
+      <div class="container-fluid">
+        <div class=" d-flex justify-content-between">
+          <li class="m-2">
+            {% if search_item or min_tag %}
+            <h5>Search result for:</h5>
+            {% endif %}
+            <div class="d-flex">
+              {% if search_item %}
+            <p><span class="badge bg-light text-black">{{search_item}}</span></p>
+            {% endif %}
+            {% if min_tag %}
+            <p><span class="badge bg-light text-black">Minimum Price: {{min_price1}}</span></p>
+            <p><span class="badge bg-light text-black">Maximum Price: {{max_price1}}</span></p>
+            {% endif %}
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-filter" aria-hidden="true"></i> Sort by
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="?sort=high">Price High to Low</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="?sort=low">Price Low to High</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+              <form method="POST" class="d-flex">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="search">
+                <input type="search" id="form1" class="form-control" name="key" placeholder="Search..." aria-label="Search"/>
+                <button type="Submit" class="btn btn-md btn-primary">Search</button>
+              </form>
+          </li>
+        </div>
+        <div class="row">
+          {% for pro in products %}
+          <div class="col-6 col-md-6 col-lg-4 mb-3">
+            <div class="card border overflow-hidden border-15 mb-3">
+              <div class="">
+                <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
+
+              </div>
+              <div class="m-3">
+                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                <div class="d-flex justify-content-between">
+                  <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                  <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
+                </div>
+                <hr class="dropdown-divider" />
+                <div class="d-flex gap-2 align-items-center">
+                  <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                  <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            {% if found_count != all_count %}
+            <p>{{found_count}} found out of {{all_count}} products</p>
+            {% else %}
+            <p>{{all_count}} products</p>
+            {% endif %}
+          </div>
+          <div>
+            <nav aria-label="...">
+              <ul class="pagination">
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+                {% if products.has_previous %}
+                <li class="page-item"><a class="page-link" href="?products.previous_page_number">{{products.prevoius_page_number}}</a></li>
+                {% endif %}
+                <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="#">{{products.number}} <span class="visually-hidden">(current)</span></a>
+                </li>
+                {% if products.has_next %}
+                <li class="page-item"><a class="page-link" href="?products.next_page_number">{{products.next_page_number}}</a></li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
+      <h3 class="mt-0 mb-3">Advance Filter</h3>
+      <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
+      <div class="mt-2 mb-2 pl-2">
+        <a class="custom-control-label" href="/product/filter">All Categories</a>
+      </div>
+      {% for cat in category %}
+      <div class="mt-2 mb-2 pl-2">
+        <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
+      </div>
+      {% endfor %}
+
+
+      <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
+      <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Brands</h6>
+      {% for bat in brand %}
+      <div class="mt-2 mb-2 pl-2">
+        <a class="custom-control-label" href="?brand={{bat.id}}">{{bat.name}}</a>
+      </div>
+      {% endfor %}
+      <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
+      <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Colors</h6>
+      {% for col in colors %}
+      <div class="mt-2 mb-2 pl-2">
+        <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
+      </div>
+      {% endfor %}
+
+      <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="price">
+        <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
+        <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Price</h6>
+        <div class="price-filter-control d-flex flex-column">
+          <div>
+            <label for="price-min-control"> Min Price </label>
+            <input type="number" class="form-control mb-2 me-2" id="price-min-control" name="minPrice" value="{{min_price1}}"> <br>
+          </div>
+          <div>
+            <label for="price-max-control"> Max Price </label>
+            <input type="number" class="form-control mb-2" id="price-min-control" name="maxPrice" value="{{max_price1}}">
+          </div>
+          <button type="Submit" class="btn btn-lg btn-primary w-100 mb-4">Update Results</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock main_content %}
