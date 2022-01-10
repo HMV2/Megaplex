@@ -205,3 +205,7 @@ def remove_product(request,product_id):
     product.delete()
     messages.success(request, 'Successfully Deleted the product!')
     return redirect('/dashboard/profile')
+
+def wishlist(request):
+    return render(request,'dashboard/wishlist.html')
+
