@@ -22,6 +22,7 @@ def login(request):
 
             elif user.is_staff:
                 auth.login(request, user)
+                return redirect('/adminss')
                 return redirect('/admin')
 
         else:

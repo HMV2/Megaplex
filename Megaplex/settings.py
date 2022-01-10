@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'crispy_forms',
     'dashboard',
+    'directChat',
+    'admins'
     'product',
     'directChat',
     'channels',
