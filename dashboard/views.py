@@ -6,6 +6,9 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
+from .forms import ProductForm
+from django.contrib import messages
+
 # Create your views here.
 
 @login_required
@@ -161,5 +164,48 @@ def togglefollowing(request,following_id):
     return render(request, 'dashboard/profile.html',context)
 
 
+@login_required
+def addProduct(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Successfully added product!")
+            return redirect('/dashboard/profile')
+        else:
+            messages.success(request,"Failed to add product!")
+    form = ProductForm()
+    context = {
+        'form':form
+    }
+    return render(request, 'dashboard/addProduct.html',context)
+
+@login_required
+def editProduct(request, product_id):
+    product = Product.objects.get(id=product_id)
+    form = ProductForm(instance=product)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance = product)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Successfully updated the product!")
+            return redirect('/dashboard/profile')
+        else:
+            messages.success(request,"Failed to update product!")
+    context = {
+        'form':form
+    }
+    return render(request, 'dashboard/addProduct.html',context)
+
+
+@login_required
+def remove_product(request,product_id):
+    product = Product.objects.get(id=product_id)
+    product.delete()
+    messages.success(request, 'Successfully Deleted the product!')
+    return redirect('/dashboard/profile')
+
 def wishlist(request):
     return render(request,'dashboard/wishlist.html')
+
