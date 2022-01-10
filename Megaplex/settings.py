@@ -44,9 +44,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dashboard',
     'directChat',
-    'admins'
+    'admins',
     'product',
-    'directChat',
     'channels',
     'notification',
     'django_celery_results',
