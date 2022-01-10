@@ -1,33 +1,72 @@
-from django.shortcuts import render
-from .models import Category, Color, Product, Brand
+from django.http import request
+from django.shortcuts import render, redirect
+from .models import Category, Color, Product, Brand, Comment
 from django.contrib.auth.models import User
 from directChat.models import Chat_Message
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .templatetags import extras
 
+@login_required
 def product_details(request,product_id):
     product = Product.objects.get(id=product_id)
+    comments = Comment.objects.filter(product = product, parent=None)
+    replies = Comment.objects.filter(product = product).exclude(parent=None)
+    comment_count = comments.count()
+    repDict = {}
+    for reply in replies:
+        if reply.sno not in repDict.keys():
+            repDict[reply.parent.sno] = [reply]
+        else:
+            repDict[reply.parent.sno].append(reply)
+    print(repDict)
     context={
-        'product':product
+        'product':product,
+        'comments':comments,
+        'count':comment_count,
+        'reply':repDict
     }
-    if request.method == 'POST' and request.POST.get('body')!="":
-        from_user = request.user
-        to_user_username = request.POST.get('to_user')
-        body = request.POST.get('body')
-        print("body "+body)
-        try:
-            to_user = User.objects.get(username=to_user_username)
-        except:
-            to_user = User.objects.get(id=request.POST.get('to_user'))
-        Chat_Message.send_message(from_user, to_user, body)
-        messages.success(request,"Message Sent Successfully!")
-        return render(request, 'product/details.html',context)
-    elif request.method == 'POST' and request.POST.get('body')=="":
-        messages.error(request,"Please insert message to send!")
-        return render(request, 'product/details.html',context)
+    if request.method == 'POST':
+        formType = request.POST.get('formType')
+        if formType == "message" and request.POST.get('body')!="":
+            from_user = request.user
+            to_user_username = request.POST.get('to_user')
+            body = request.POST.get('body')
+            print("body "+body)
+            try:
+                to_user = User.objects.get(username=to_user_username)
+            except:
+                to_user = User.objects.get(id=request.POST.get('to_user'))
+            Chat_Message.send_message(from_user, to_user, body)
+            messages.success(request,"Message Sent Successfully!")
+            return render(request, 'product/details.html',context)
+        elif formType == "message" and request.POST.get('body')=="":
+            messages.error(request,"Please insert message to send!")
+            return render(request, 'product/details.html',context)
 
+        elif formType=="comment" and request.POST.get('comment')!="":
+            comment = request.POST.get('comment')
+            user = request.user
+            product = Product.objects.get(id = product_id)
+            commentSno = request.POST.get('commentSno')
+            if commentSno == "":
+                comment = Comment(comment_text=comment, user = user, product = product)
+                comment.save()
+                messages.success(request, "Comment added successfully")
+                return redirect('/product/details/'+str(product_id))
+
+            else:
+                parent = Comment.objects.get(sno = commentSno)
+                comment = Comment(comment_text=comment, user = user, product = product, parent = parent)
+                comment.save()
+                messages.success(request, "Reply added successfully")
+                return redirect('/product/details/'+str(product_id))
+            
+        elif formType == "comment" and request.POST.get('comment')=="":
+            messages.error(request,"Please insert comment to post!")
+            return redirect('/product/details/'+str(product_id))
 
     return render(request, 'product/details.html',context)
 

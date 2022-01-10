@@ -92,17 +92,26 @@
                 </li>
 
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link" role="button"  aria-expanded="false" href="/chat">
+                    <a class="nav-link" role="button" aria-expanded="false" href="/chat">
                         <i class="fas fa-comments fa-lg"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">6</span>
                     </a>
 
                 </li>
-                <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link" href="#" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell fa-lg"></i>
-                        <span class="badge rounded-pill badge-notification bg-danger">12</span>
-                    </a>
+
+                <a class="nav-link notification dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-mdb-toggle="dropdown" aria-expanded="true">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="notifications-dropdown">
+                    {% for i in notifications %}
+                        <li class="dropdown-item">{{i.message}}</li>
+                        <hr class="dropdown-divider">
+                    {% endfor %}
+
+                </ul>
+
 
                 </li>
                 <li class="nav-item dropdown me-3 me-lg-1">
