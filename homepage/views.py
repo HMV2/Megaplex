@@ -16,7 +16,7 @@ def logout_view(request):
 
 
 def category(request):
-    return render(request, 'homepage/category.html')
+    return render(request, 'homepage/category.html', {'room_name':"broadcast"})
 
 def test(request):
     channel_layer = get_channel_layer()

@@ -23,6 +23,7 @@ def Inbox(request):
 
 
     context = {
+        'room_name':"broadcast",
         'directs': directs,
         'messages': messages,
         'active_direct': active_direct,
@@ -52,6 +53,7 @@ def Directs(request, username):
             message['unread'] = 0
         name = get_name(username)
         context = {
+            'room_name':"broadcast",
             'directs': directs,
             'messages': messages,
             'active_direct': active_direct,

@@ -21,6 +21,10 @@ class Profile(models.Model): #Model to create profile for users
     created_date = models.DateTimeField(auto_now_add=True)
     followers = models.ManyToManyField(User,blank=True,related_name='followers',default=[0])
     following = models.ManyToManyField(User,blank=True ,related_name ='following',default=[0])
+    cover_pic = models.FileField(upload_to='covers', default='cover.jpg', blank=True, null=True)
+    verified = models.BooleanField(default=False)
+    desc = models.TextField(max_length=10000, blank=True, null=True)
+
 
     def __str__(self):
         return self.firstname + " "+ self.lastname
