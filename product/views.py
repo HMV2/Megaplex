@@ -15,6 +15,7 @@ def product_details(request,product_id):
     comments = Comment.objects.filter(product = product, parent=None)
     replies = Comment.objects.filter(product = product).exclude(parent=None)
     comment_count = comments.count()
+    product.view_count += 1
     repDict = {}
     for reply in replies:
         if reply.sno not in repDict.keys():
