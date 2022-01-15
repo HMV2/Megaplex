@@ -3,11 +3,15 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from product.models import Product
 
 def index_page(request):
-    return render(request, 'homepage/homepage.html',{
-        'room_name':"broadcast"
-    })
+    products = Product.objects.all()[:10]
+    context={
+        'room_name':"broadcast",
+        'products':products
+    }
+    return render(request, 'homepage/homepage.html',context)
 
 
 def logout_view(request):
