@@ -213,6 +213,7 @@ def togglefollowing(request,following_id):
     return render(request, 'dashboard/profile.html',context)
 
 
+
 @login_required
 def addProduct(request):
     if request.method == "POST":
@@ -258,5 +259,7 @@ def remove_product(request,product_id):
     return redirect('/dashboard/profile')
 
 def wishlist(request):
-    return render(request,'dashboard/wishlist.html')
+    
+    products = Product.objects.filter(likes = request.user)
+    return render(request,'dashboard/wishlist.html',{"products":products })
 

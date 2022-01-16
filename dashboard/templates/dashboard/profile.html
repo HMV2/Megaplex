@@ -96,77 +96,109 @@
 
             <!-- Tabs navs -->
 
+
+            <!-- Tabs navs -->
+
             <!-- Tabs content -->
             <div class="tab-content" id="ex1-content">
                 {% if inactive_products != None %}
-                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                    {% for pro in inactive_products %}
-                    <div class=" col">
-                        <div class="card border overflow-hidden border-15 mb-3">
-                            <div class="">
-                                <img src="{{ pro.picture.url }}" alt="" height="280px" />
 
-                            </div>
-                            <div class="m-3">
-                                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                                    <strong class="text-nowrap r-paragraph text-danger">NPR.
-                                        {{pro.price}}</strong>
+                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                        {% for pro in active_products %}
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class=" position-relative">
+                                    <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
+                                            style="aspect-ratio: 1/1.1; " /></a>
+
+                                    <div class="card-head position-absolute w-100 h-100 top-0">
+                                        {% if request.user in pro.likes.all %}
+
+                                        <form action="/product/{{pro.id}}/like" method="POST">
+                                            {% csrf_token %}
+
+                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger" data-new="{{pro.id}}" ><i
+                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                        </form>
+                                        {% else %}
+                                        <form action="/product/{{pro.id}}/like" method="POST">
+                                            {% csrf_token %}
+
+                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute" data-new="{{pro.id}}"><i
+                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                        </form>
+                                        {% endif %}
+                                        <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph"
+                                            href="/product/details/{{pro.id}}">
+                                            View More
+                                        </a>
+                                    </div>
                                 </div>
-                                <hr class="dropdown-divider" />
-                                <div class="d-flex gap-2 align-items-center">
-                                    <a class="text-nowrap btn btn-primary" href="/dashboard/editProduct/{{pro.id}}"><i
-                                            class="fas fa-pen-square"></i></a>
-                                    <a class="text-nowrap btn btn-danger" href="/dashboard/removeProduct/{{pro.id}}"><i
-                                            class="fas fa-trash-alt"></i></a>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                            {{pro.price}}</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a class="text-nowrap btn btn-primary"
+                                            href="/dashboard/editProduct/{{pro.id}}"><i
+                                                class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"
+                                            href="/dashboard/removeProduct/{{pro.id}}"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
+                        {% else %}
+                        You have no inactive products
+                        {% endif %}
                     </div>
-                    {% endfor %}
-                    {% else %}
-                    You have no inactive products
-                    {% endif %}
                 </div>
-            </div>
-            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                Tab 2 content
 
-                {% if inactive_products != None %}
-                <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
-                    {% for pro in inactive_products %}
-                    <div class=" col">
-                        <div class="card border overflow-hidden border-15 mb-3">
-                            <div class="">
-                                <img src="{{ pro.picture.url }}" alt="" height="280px" />
+                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    Tab 2 content
 
-                            </div>
-                            <div class="m-3">
-                                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                                    <strong class="text-nowrap r-paragraph text-danger">NPR.
-                                        {{pro.price}}</strong>
+                    {% if inactive_products != None %}
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                        {% for pro in inactive_products %}
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{{ pro.picture.url }}" alt="" height="280px" />
+
                                 </div>
-                                <hr class="dropdown-divider" />
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                            {{pro.price}}</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
+                        {% else %}
+                        You have no inactive products
+                        {% endif %}
                     </div>
-                    {% endfor %}
-                    {% else %}
-                    You have no inactive products
-                    {% endif %}
-                </div>
 
-            </div>
-            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                Tab 3 content
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                    Tab 3 content
+
+                </div>
 
             </div>
         </div>
         <!-- Tabs content -->
-
 
     </div>
 
@@ -257,6 +289,71 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade bg-black bg-opacity-10" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-white position-relative " style="backdrop-filter: blur(50px);">
+            <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur"
+                style="z-index: -1;"></span>
+            <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur"
+                style="z-index: -1;"></span>
+            <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur"
+                style="z-index: -1;"></span>
+            <span class=" position-absolute rounded-circle top-0  start-0  "
+                style="z-index: -1; width: 90px; height: 90px; "> <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png"
+                    alt=""></span>
+
+            <div class=" pt-3 ">
+                <h3 class=" text-white text-center mt-2" id="exampleModalLabel">Edit Profile</h3>
+                <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-2" data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <form>
+                    <div class="d-flex justify-content-lg-between gap-1 gap-md-2 ">
+                        <!-- Email input -->
+                        <div class="form-outline mb-3 w-50">
+                            <input type="email" id="form1Example1" class="form-control" />
+                            <label class="form-label" for="form1Example1">FirstName</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="form-outline mb-3 w-50">
+                            <input type="password" id="form1Example2" class="form-control" />
+                            <label class="form-label" for="form1Example2">LastName</label>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-3 w-50">
+                        <input type="password" id="form1Example3" class="form-control" />
+                        <label class="form-label" for="form1Example3">Username</label>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <input type="file">
+                    </div>
+
+                    <div class="form-outline mb-2 w-50">
+                        <input type="text " id="form1Example4" class="form-control " style="height: 100px;" />
+                        <label class="form-label" for="form1Example4">descriptions</label>
+                    </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit"
+                class="btn bg-white btn-outline-primary rounded-pill mb-4 btn-block w-50 m-auto theme-bg">Sign
+                in</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
 {% endblock main_content %} {% block js_files %}
 <script src="{% static 'javascript/profile.js' %}"></script>
+<script src="{% static 'javascript/product_like.js' %}"></script>
 {% endblock js_files %}

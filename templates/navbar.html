@@ -42,9 +42,9 @@
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/dashboard/wishlist/">
                             <span><i class="fas fa-heart fa-lg"></i></span>
-                            <span class="badge rounded-pill badge-notification bg-danger">2</span>
+                            <span class="badge rounded-pill badge-notification bg-danger " id="like-badge">{{ request.user.likes.all.count }}</span>
                         </a>
                     </li>
                 </ul>
