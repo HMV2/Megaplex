@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% load static %} {% block title %}
+{% extends 'layout.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %}
 <title>{{user.first_name}}'s Profile</title>
 {% endblock title %} {% block css_files %}
 
@@ -10,13 +10,13 @@
 
 <div class="profile-page position-relative">
     <div class="cover position-relative">
-        <img src="{% static 'images/cover.jpg' %}" alt="" class="cover-img" />
+        <img src="{{user.profile.cover_pic.url}}" alt="" class="cover-img" />
         <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
-            <a href="" class="btn border border-2 rounded-pill text-white">
+            <a class="btn border border-2 rounded-pill text-white" data-toggle="modal" data-target="#exampleModal">
                 edit cover page
             </a>
-            <button type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"
-                class="btn border border-2 rounded-pill text-white">edit profile</button>
+            <a data-toggle="modal" data-target="#exampleModal" class="btn border border-2 rounded-pill text-white">edit
+                profile</a>
         </div>
     </div>
 
@@ -25,14 +25,18 @@
 
             <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  "
                     src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            {% if user.profile.verified %}
             <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
+            {% else %}
+            <h4><span class="badge bg-danger">Unverified <i class="fa fa-badge-cross"></i></span></h4>
+            {% endif %}
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
             <a href="/dashboard/follower_list/{{profile.id}}" class="text-danger">{{profile.followers.all.count}}
                 followers</a>
 
             <div class=" mt-3">
                 {% if request.user == user %}
-                <a href="/profile/{{profile.id}}" class="text-decoration-none"><button
+                <a data-toggle="modal" data-target="#exampleModal" class="text-decoration-none"><button
                         class="btn btn-outline-primary btn-rounded text-center m-auto  d-flex  justify-content-center">edit
                         profile</button></a>
 
@@ -57,9 +61,8 @@
             </div>
 
             <p class="text-center mt-4 inactive-color">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, amet? Error, ea. Numquam libero porro
-                asperiores commodi excepturi, </p>
-            <a href="#" class="text-decoration-underline">Change password</a>
+                {{user.profile.desc}} </p>
+            <a data-toggle="modal" data-target="#exampleModal2" class="text-decoration-underline">Change password</a>
             <span class="f-1 mt-4">Member Since: {{user.date_joined}}</span>
 
 
@@ -199,6 +202,91 @@
 
     </div>
 
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="tp" value="profile">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.firstname | as_crispy_field }}
+                        </div>
+                        <div class="form-group  col-md-6">
+                            {{ form.lastname | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.phone | as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.plan | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.district | as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.city | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-12 me-1">
+                            {{ form.cover_pic | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-12 me-1">
+                            {{ form.desc | as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="tp" value="password">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% crispy pform %}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal2">Close</button>
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 

@@ -24,8 +24,8 @@ def product_details(request,product_id):
             repDict[reply.parent.sno] = [reply]
         else:
             repDict[reply.parent.sno].append(reply)
-    print(repDict)
     context={
+        'room_name':"broadcast",
         'product':product,
         'comments':comments,
         'count':comment_count,
@@ -126,6 +126,7 @@ def filter_page(request):
     except:
         page = pag.page(1)
     context = {
+        'room_name':"broadcast",
         'category':categories,
         'products':page,
         'all_count':all_count,

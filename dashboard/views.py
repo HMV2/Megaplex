@@ -1,5 +1,7 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from account.forms import ProfileForm
 from account.models import Profile
 from product.models import Product
 from django.http import JsonResponse
@@ -8,12 +10,15 @@ from django.contrib.auth.decorators import login_required
 from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
 @login_required
 def profile(request):
     user = Profile.objects.get(user=request.user)
+    form = ProfileForm(instance=user)
+    pform = PasswordChangeForm(user=request.user)
     try:
         active_products = Product.objects.filter(seller=request.user, is_active=True)
     except:
@@ -22,15 +27,55 @@ def profile(request):
         inactive_products = Product.objects.filter(seller=request.user, is_active=False)
     except:
         inactive_products = None
-
-    print(active_products)
-    print(inactive_products)
     context={
+        'room_name':"broadcast",
         'profile':user,
         'active_products':active_products,
-        'inactive_products':inactive_products
+        'inactive_products':inactive_products,
+        'form':form,
+        'pform':pform
     }
+    if request.method == "POST":
+        tp = request.POST.get("tp")
+        print('TP:' +tp)
+        if tp == "profile":
+            form = ProfileForm(request.POST, request.FILES, instance = user)
+            if form.is_valid():
+                form.save()
+                messages.success(request,"Successfully updated the profile!")
+                return redirect('/dashboard/profile')
+            else:
+                messages.error(request,"Failed to update profile!")
+        elif tp =="password":
+            pform = PasswordChangeForm(data=request.POST, user = request.user)
+            if pform.is_valid():
+                pform.save()
+                update_session_auth_hash(request, pform.user)
+                messages.success(request,"Successfully updated the password!")
+                return redirect('/dashboard/profile')
+            else:
+                messages.error(request,"Something went wrong!")
+                return render(request, 'dashboard/profile.html', {'form':form})
+
     return render(request, 'dashboard/profile.html',context)
+
+@login_required
+def change_password(request):
+    """Function for changing user's password!"""
+    if request.method == "POST":
+        pform = PasswordChangeForm(data=request.POST, user = request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/accounts/profile')
+        else:
+            messages.add_message(request, messages.ERROR,"Something Went Wrong!")
+            return render(request, 'accounts/profile.html', {'form':form})
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context = {'form':form}
+        return render(request, 'accounts/change_password.html', context)
 
 
 @login_required
@@ -49,10 +94,12 @@ def User_Profile(request,profile_id):
             is_following = False 
 
     context = {
+        'room_name':"broadcast",
         'user':user,
         'profile':profile,
         'is_following': is_following,
-        'profile_active':'is-active'
+        'profile_active':'is-active',
+        'form':form
         }
     return render (request,'dashboard/profile.html',context)
 
@@ -100,6 +147,7 @@ def follower_list(request,profile_id):
         'user_profiles':user_profile,
         'followings':followings,
         'followers':followers,
+        'room_name':"broadcast"
 
     } 
     return render (request,'dashboard/follower_list.html',context)
@@ -158,7 +206,12 @@ def togglefollowing(request,following_id):
             user_profile.followers.remove(profile_id)
 
         return JsonResponse({"is_remove":is_remove})
-   
+    context={
+        'profile':user,
+        'room_name':"broadcast"
+    }
+    return render(request, 'dashboard/profile.html',context)
+
 
 
 @login_required
@@ -174,7 +227,8 @@ def addProduct(request):
             messages.success(request,"Failed to add product!")
     form = ProductForm()
     context = {
-        'form':form
+        'form':form,
+        'room_name':"broadcast"
     }
     return render(request, 'dashboard/addProduct.html',context)
 
@@ -191,7 +245,8 @@ def editProduct(request, product_id):
         else:
             messages.success(request,"Failed to update product!")
     context = {
-        'form':form
+        'form':form,
+        'room_name':"broadcast"
     }
     return render(request, 'dashboard/addProduct.html',context)
 
