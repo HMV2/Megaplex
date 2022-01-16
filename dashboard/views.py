@@ -158,10 +158,7 @@ def togglefollowing(request,following_id):
             user_profile.followers.remove(profile_id)
 
         return JsonResponse({"is_remove":is_remove})
-    context={
-        'profile':user
-    }
-    return render(request, 'dashboard/profile.html',context)
+   
 
 
 @login_required
@@ -207,5 +204,7 @@ def remove_product(request,product_id):
     return redirect('/dashboard/profile')
 
 def wishlist(request):
-    return render(request,'dashboard/wishlist.html')
+    
+    products = Product.objects.filter(likes = request.user)
+    return render(request,'dashboard/wishlist.html',{"products":products })
 

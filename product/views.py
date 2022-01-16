@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .templatetags import extras
+from django.http import JsonResponse
 
 @login_required
 def product_details(request,product_id):
@@ -137,3 +138,52 @@ def filter_page(request):
         'search_item': search_item
     }
     return render(request,'product/filter.html',context)
+
+
+
+# when user like a ajax call is made using this function to get no of like in post and if the postis like or not
+@login_required
+
+def ToggleProductlike(request,product_id):
+    # an ajax call is made using this function
+    product = Product.objects.get(id = product_id)
+    like_count = Product.objects.filter(likes = request.user).count()
+    is_like = False
+    if request.method =='POST':
+        for like in product.likes.all():
+            if like == request.user:
+                is_like =True
+                like_count = Product.objects.filter(likes = request.user).count()
+                
+                break
+        if not is_like:
+            product.likes.add(request.user)
+            like_count = Product.objects.filter(likes = request.user).count()
+            
+                
+            
+        if is_like:
+            product.likes.remove(request.user)
+            like_count = Product.objects.filter(likes = request.user).count() 
+            
+
+    return JsonResponse({"is_like":is_like,"like_count":like_count})
+
+
+def RemoveFromLikedList(request,product_id):
+    product = Product.objects.get(id = product_id)
+    
+    for like in product.likes.all():
+        if like == request.user :
+            product.likes.remove(request.user)
+            break
+
+    return redirect('/dashboard/wishlist')
+            
+           
+
+        
+
+
+    
+    

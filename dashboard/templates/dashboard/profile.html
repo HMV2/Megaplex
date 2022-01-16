@@ -106,14 +106,31 @@
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class=" position-relative">
-                                    <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt="" style="aspect-ratio: 1/1.1; " /></a>
+                                    <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
+                                            style="aspect-ratio: 1/1.1; " /></a>
 
                                     <div class="card-head position-absolute w-100 h-100 top-0">
-                                <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                                <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph" href="/product/details/{{pro.id}}">
-                                    View More
-                                </a>
-                            </div>
+                                        {% if request.user in pro.likes.all %}
+
+                                        <form action="/product/{{pro.id}}/like" method="POST">
+                                            {% csrf_token %}
+
+                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger" data-new="{{pro.id}}" ><i
+                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                        </form>
+                                        {% else %}
+                                        <form action="/product/{{pro.id}}/like" method="POST">
+                                            {% csrf_token %}
+
+                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute" data-new="{{pro.id}}"><i
+                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                        </form>
+                                        {% endif %}
+                                        <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph"
+                                            href="/product/details/{{pro.id}}">
+                                            View More
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="m-3">
                                     <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
@@ -124,9 +141,11 @@
                                     </div>
                                     <hr class="dropdown-divider" />
                                     <div class="d-flex gap-2 align-items-center">
-                                        <a class="text-nowrap btn btn-primary" href="/dashboard/editProduct/{{pro.id}}"><i
+                                        <a class="text-nowrap btn btn-primary"
+                                            href="/dashboard/editProduct/{{pro.id}}"><i
                                                 class="fas fa-pen-square"></i></a>
-                                        <a class="text-nowrap btn btn-danger" href="/dashboard/removeProduct/{{pro.id}}"><i
+                                        <a class="text-nowrap btn btn-danger"
+                                            href="/dashboard/removeProduct/{{pro.id}}"><i
                                                 class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </div>
@@ -248,4 +267,5 @@
 
 {% endblock main_content %} {% block js_files %}
 <script src="{% static 'javascript/profile.js' %}"></script>
+<script src="{% static 'javascript/product_like.js' %}"></script>
 {% endblock js_files %}
