@@ -58,7 +58,7 @@ class Product(models.Model):
     quantity = models.IntegerField(default=1)
     is_active = models.BooleanField(default=True)
     view_count = models.IntegerField(default=0)
-    likes = models.ManyToManyField(User,blank = True , related_name = 'likes')
+    # likes = models.ManyToManyField(User,blank = True , related_name = 'likes', null = True)
 
 
     def __str__(self) -> str:
