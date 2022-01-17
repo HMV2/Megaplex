@@ -220,7 +220,7 @@ def addProduct(request):
         form = ProductForm(request.POST, request.FILES)
         print(request.POST)
         if form.is_valid():
-            form.save()
+            form.save() 
             messages.success(request,"Successfully added product!")
             return redirect('/dashboard/profile')
         else:
