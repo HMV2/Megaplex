@@ -8,5 +8,6 @@ urlpatterns = [
     path('details/<int:product_id>', views.product_details, name='Details_page'),
     path('filter/', views.filter_page),
     path('<int:product_id>/like',views.ToggleProductlike,name ='like'),
-    path('<int:product_id>/removeliked',views.RemoveFromLikedList,name='removefromlikelist')
+    path('<int:product_id>/removeliked',views.RemoveFromLikedList,name='removefromlikelist'),
+    path('<int:comment_id>/comment_like',views.like_toggle,name ='like'),
 ]

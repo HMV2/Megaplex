@@ -181,6 +181,29 @@ def RemoveFromLikedList(request,product_id):
 
     return redirect('/dashboard/wishlist')
             
+
+def like_toggle(request,comment_id):
+    comment = Comment.objects.get(sno = comment_id)
+    like_count = comment.likes.count()
+    is_like = False
+    if request.method =='POST':
+        for like in comment.likes.all():
+            if like == request.user:
+                is_like =True
+                like_count = comment.likes.count()
+                break
+        if not is_like:
+            comment.likes.add(request.user)
+            like_count = comment.likes.count()
+
+
+        if is_like:
+            comment.likes.remove(request.user) 
+            like_count = comment.likes.count()
+
+
+
+    return JsonResponse({"is_like":is_like,"like_count":like_count})
            
 
         
