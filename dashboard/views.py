@@ -260,6 +260,6 @@ def remove_product(request,product_id):
 
 def wishlist(request):
     
-    products = Product.objects.filter(likes = request.user)
+    products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products })
 

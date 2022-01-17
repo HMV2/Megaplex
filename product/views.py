@@ -148,24 +148,24 @@ def filter_page(request):
 def ToggleProductlike(request,product_id):
     # an ajax call is made using this function
     product = Product.objects.get(id = product_id)
-    like_count = Product.objects.filter(likes = request.user).count()
+    like_count = Product.objects.filter(product_likes = request.user).count()
     is_like = False
     if request.method =='POST':
-        for like in product.likes.all():
+        for like in product.product_likes.all():
             if like == request.user:
                 is_like =True
-                like_count = Product.objects.filter(likes = request.user).count()
+                like_count = Product.objects.filter(product_likes = request.user).count()
                 
                 break
         if not is_like:
-            product.likes.add(request.user)
-            like_count = Product.objects.filter(likes = request.user).count()
+            product.product_likes.add(request.user)
+            like_count = Product.objects.filter(product_likes = request.user).count()
             
                 
             
         if is_like:
-            product.likes.remove(request.user)
-            like_count = Product.objects.filter(likes = request.user).count() 
+            product.product_likes.remove(request.user)
+            like_count = Product.objects.filter(product_likes = request.user).count() 
             
 
     return JsonResponse({"is_like":is_like,"like_count":like_count})
@@ -174,9 +174,9 @@ def ToggleProductlike(request,product_id):
 def RemoveFromLikedList(request,product_id):
     product = Product.objects.get(id = product_id)
     
-    for like in product.likes.all():
+    for like in product.product_likes.all():
         if like == request.user :
-            product.likes.remove(request.user)
+            product.product_likes.remove(request.user)
             break
 
     return redirect('/dashboard/wishlist')
