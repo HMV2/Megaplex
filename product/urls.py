@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:product_id>/like',views.ToggleProductlike,name ='like'),
     path('<int:product_id>/removeliked',views.RemoveFromLikedList,name='removefromlikelist'),
     path('<int:comment_id>/comment_like',views.like_toggle,name ='like'),
+
+    path('explore',views.explorepage,name='explore')
 ]

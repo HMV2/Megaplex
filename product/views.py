@@ -204,6 +204,11 @@ def like_toggle(request,comment_id):
 
 
     return JsonResponse({"is_like":is_like,"like_count":like_count})
+
+
+def explorepage(request):
+    products = Product.objects.all()
+    return render(request,'product/explore.html',{"products":products})
            
 
         
