@@ -16,14 +16,16 @@ def product_details(request,product_id):
     comments = Comment.objects.filter(product = product, parent=None)
     replies = Comment.objects.filter(product = product).exclude(parent=None)
     comment_count = comments.count()
+    product.view_count += 1
+    product.save()
     repDict = {}
     for reply in replies:
         if reply.sno not in repDict.keys():
             repDict[reply.parent.sno] = [reply]
         else:
             repDict[reply.parent.sno].append(reply)
-    print(repDict)
     context={
+        'room_name':"broadcast",
         'product':product,
         'comments':comments,
         'count':comment_count,
@@ -124,6 +126,7 @@ def filter_page(request):
     except:
         page = pag.page(1)
     context = {
+        'room_name':"broadcast",
         'category':categories,
         'products':page,
         'all_count':all_count,
@@ -160,3 +163,50 @@ def like_toggle(request,comment_id):
      
 
     return JsonResponse({"is_like":is_like,"like_count":like_count})
+
+# when user like a ajax call is made using this function to get no of like in post and if the postis like or not
+@login_required
+
+def ToggleProductlike(request,product_id):
+    # an ajax call is made using this function
+    product = Product.objects.get(id = product_id)
+    like_count = Product.objects.filter(likes = request.user).count()
+    is_like = False
+    if request.method =='POST':
+        for like in product.likes.all():
+            if like == request.user:
+                is_like =True
+                like_count = Product.objects.filter(likes = request.user).count()
+                
+                break
+        if not is_like:
+            product.likes.add(request.user)
+            like_count = Product.objects.filter(likes = request.user).count()
+            
+                
+            
+        if is_like:
+            product.likes.remove(request.user)
+            like_count = Product.objects.filter(likes = request.user).count() 
+            
+
+    return JsonResponse({"is_like":is_like,"like_count":like_count})
+
+
+def RemoveFromLikedList(request,product_id):
+    product = Product.objects.get(id = product_id)
+    
+    for like in product.likes.all():
+        if like == request.user :
+            product.likes.remove(request.user)
+            break
+
+    return redirect('/dashboard/wishlist')
+            
+           
+
+        
+
+
+    
+    

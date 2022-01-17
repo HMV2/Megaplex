@@ -41,11 +41,11 @@ class Color(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    picture = models.ImageField(upload_to = 'product_images')
+    picture = models.ImageField(upload_to = 'product_images', blank=True, default="def.jpeg", null=True)
     price = models.FloatField()
-    image1 = models.ImageField(upload_to = 'product_images', null=True)
-    image2 = models.ImageField(upload_to = 'product_images', null=True)
-    image3 = models.ImageField(upload_to = 'product_images', null=True)
+    image1 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
+    image2 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
+    image3 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
     date = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(Sub_Category, on_delete = models.CASCADE) 
@@ -57,6 +57,8 @@ class Product(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     is_active = models.BooleanField(default=True)
+    view_count = models.IntegerField(default=0)
+    # likes = models.ManyToManyField(User,blank = True , related_name = 'likes', null = True)
 
 
     def __str__(self) -> str:

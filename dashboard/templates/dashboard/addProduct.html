@@ -1,0 +1,155 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}<title>Add Product</title>{% endblock title %}
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/register.css' %}">
+
+<style>
+    .form-row {
+        justify-content: center;
+    }
+
+    #hint_id_password1,
+    #hint_id_password2 {
+        display: none
+    }
+
+    .blur{
+        filter: blur(80px);
+    }
+    label{
+        color: black;
+    }
+</style>
+{% endblock css_files %}
+
+{% block main_content %}
+
+<section class="container-fluid bg-primary  bg-opacity-10 pt-5 pb-5">
+    <div class=" mx-auto col-sm-10 col-md-9  col col-lg-8 col-xl-6 col-xxl-5 theme-bg p-5 position-relative bg-opacity-50  rounded-9 overflow-hidden min-vh-75 "  >
+        <h1 class=" text-center display-6 fw-bolder text-white p-4">Add Product</h1>
+        <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur" style="z-index: -1;"></span>
+        <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur" style="z-index: -1;"></span>
+        <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur" style="z-index: -1;"></span>
+        <span class=" position-absolute rounded-circle top-0  end-0 w-25 h-25 " style="z-index: -1;"> <img src="https://cdn3d.iconscout.com/3d/premium/thumb/online-shopping-delivery-4049862-3363949.png" alt=""></span> 
+        
+    
+    
+    
+        <form action="" class="p-md-0 pe-md-2" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+                <li class="nav-item " role="presentation">
+                    <a class="nav-link active" id="ex2-tab-1" data-mdb-toggle="tab" href="#ex2-tabs-1" role="tab"
+                        aria-controls="ex2-tabs-1" aria-selected="true">Basic Info</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-2" data-mdb-toggle="tab" href="#ex2-tabs-2" role="tab"
+                        aria-controls="ex2-tabs-2" aria-selected="false">Images</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex2-tab-3" data-mdb-toggle="tab" href="#ex2-tabs-3" role="tab"
+                        aria-controls="ex2-tabs-3" aria-selected="false">Description</a>
+                </li>
+            </ul>
+            <!-- Tabs navs -->
+    
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex2-content">
+                <div class="tab-pane fade show active pb-4" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
+                    <div class="row row-cols-2 mt-1" >
+                        <div class="form-group ">
+                            {{ form.name | as_crispy_field }}
+                        </div>
+                        <div class="form-group  ">
+                            {{ form.brand | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 mt-1" >
+                        <div class="form-group ">
+                            {{ form.category | as_crispy_field }}
+                        </div>
+                        <div class="form-group  ">
+                            {{ form.sub_category | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 mt-1" >
+                        <div class="form-group ">
+                            {{ form.price | as_crispy_field }}
+                        </div>
+                        <div class="form-group  ">
+                            {{ form.color | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 mt-1">
+                        <div class="form-group ">
+                            {{ form.warranty | as_crispy_field }}
+                        </div>
+                        {% if user.profile.plan != "Individual" %}
+                        <div class="form-group ">
+                            {{ form.quantity | as_crispy_field }}
+                        </div>
+                        {% else %}
+                            <input type="hidden" name="quantity" value="1">
+                        {% endif %}
+                        
+                    </div>
+                    <input type="hidden" name="seller" value={{user.id}}>
+                    <input type="hidden" name="is_active" value="1">
+                    <input type="hidden" name="view_count" value="0">
+                </div>
+                <div class="tab-pane fade pb-5 mt-4 mb-5" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+                    <div class="row-cols-2 mt-2 d-flex justify-content-between">
+                        <div class=" ">
+                            {{ form.picture | as_crispy_field }}
+                        </div>
+                          <div class="  ">
+                            {{ form.image1 | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row-cols-2 mt-2 pb-5" style="display:flex; justify-content:space-around">
+    
+                        <div class=" ">
+                            {{ form.image2 | as_crispy_field }}
+                        </div>
+                        <div class="c">
+                            {{ form.image3 | as_crispy_field }}
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel" aria-labelledby="ex2-tab-3">
+    
+    
+    
+                    <div class="form-row mt-1">
+                        <div class="form-group col-md-12 h-25">
+                            {{ form.description | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1">
+                        <div class="form-group col-md-12 h-25">
+                            {{ form.specifications | as_crispy_field }}
+                        </div>
+                    </div>
+                    <button class="btn mt-3 w-100 btn-primary shadow">
+                        Add Product
+                    </button>
+                </div>
+            </div>
+            <!-- Tabs content -->
+    
+    
+    
+        </form>
+    </div>
+</section>
+
+
+{% endblock main_content %}
