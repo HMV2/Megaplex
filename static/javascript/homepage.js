@@ -1,5 +1,5 @@
 
-    var product_like_btn = document.querySelectorAll('.product-like-btn')
+    var product_like_btn = document.querySelectorAll('.product-like')
    
   
     // for each like button a ajax call is made

@@ -142,7 +142,7 @@
 
 .collection-sm-img {
   object-fit: cover !important;
-  aspect-ratio: 1/0.5;
+  aspect-ratio: 1/1;
 }
 
 .collection-love-icon {
