@@ -13,7 +13,7 @@
 
                 {% for cat in category %}
                 <div class="col-md-3">
-                    <a href='/product/filter/?brand={{cat.id}}'>
+                    <a href='/product/filter/?category={{cat.id}}'>
                     <div class="country-card"><img src="{{cat.picture.url}}"
                                                    class="img img-responsive">
                         <div class="country-name">{{cat.name}}</div>
