@@ -12,9 +12,10 @@
             <p class="display-6 bolder w-100 text-center">
                 Any Smartphones, Fashions, Auto-Mobiles For You! #MEGAPLEX
             </p>
-            <form class="d-flex w-100 m-auto flex-column flex-md-row">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-dark" type="submit">Search</button>
+            <form class="d-flex w-100 m-auto flex-column flex-md-row" method="POST">
+                {% csrf_token %}
+                <input class="form-control me-2" name="item" type="search" placeholder="Search" aria-label="Search"/>
+                <button type="submit" class="btn btn-dark" type="submit">Search</button>
             </form>
 
             <div class="circles position-absolute d-flex top-0">
@@ -67,7 +68,7 @@
                         <h5 class="card-title display-6 f-bold m-3">I want to buy</h5>
                         <h4 class="display-6 f-bold m-3">🛒</h4>
                     </div>
-                    <button class="btn btn-primary ms-3 w-40">Find an item</button>
+                    <button class="btn btn-primary ms-3 w-40"><a href="/product/explore" class="unlink">Find an item </a></button>
 
                 </div>
             </div>
@@ -77,7 +78,7 @@
                         <h5 class="card-title display-6 f-bold m-3">I want to sell</h5>
                         <h4 class="display-6 f-bold m-3">🏷️</h4>
                     </div>
-                    <button class="btn btn-danger ms-3 w-40">List my items</button>
+                    <button class="btn btn-danger ms-3 w-40"><a href="/dashboard/profile" class="unlink">List my items </a> </button>
                 </div>
             </div>
         </div>

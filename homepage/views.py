@@ -7,6 +7,10 @@ from product.models import Product
 
 def index_page(request):
     products = Product.objects.all()[:10]
+    if request.method == 'POST':
+        item = request.POST.get('item')
+        if item !="":
+            return redirect('/product/filter/'+item)
     context={
         'room_name':"broadcast",
         'products':products

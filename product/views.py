@@ -122,7 +122,75 @@ def filter_page(request):
 
     pag = Paginator(products,6)
     page_num = request.GET.get('page_num')
-    print(page_num)
+    try:
+        page = pag.page(page_num)
+    except:
+        page = pag.page(1)
+        page_num = 1
+    context = {
+        'room_name':"broadcast",
+        'category':categories,
+        'products':page,
+        'all_count':all_count,
+        'found_count':found_count,
+        'brand':brands,
+        'colors':colors,
+        'min_tag':min_tag,
+        'min_price1':min_pri,
+        'max_price1':max_pri,
+        'search_item': search_item,
+        'page_num': page_num
+    }
+    return render(request,'product/filter.html',context)
+
+def searchProduct(request, item):
+    products = Product.objects.filter(name__contains=item)
+    categories = Category.objects.all()
+    cat_id = request.GET.get('category')
+    brand_id = request.GET.get('brand')
+    color_id = request.GET.get('color')
+    sorting = request.GET.get('sort')
+
+    if cat_id and cat_id != "all":
+        products = Product.objects.filter(category=cat_id)
+    if brand_id:
+        products = Product.objects.filter(brand=brand_id)
+    if color_id:
+        products = Product.objects.filter(color=color_id)
+
+    all_count = Product.objects.all().count()
+    prices = Product.objects.values("price")
+    price_list=[]
+    
+    for i in prices:
+        price_list.append(i['price'])
+
+    brands = Brand.objects.all()
+    colors = Color.objects.all()
+    min_tag = False
+    min_pri = min(price_list)
+    max_pri = max(price_list)
+    search_item = item
+
+    if request.method == 'POST':
+        form_type = request.POST.get('form_type')
+        if(form_type=="price"):
+            min_pri = request.POST.get('minPrice')
+            max_pri = request.POST.get('maxPrice')
+            products = products.filter(price__gte=min_pri,price__lte=max_pri)
+            min_tag = True
+        elif form_type == 'search':
+            item = request.POST.get('key')
+            search_item = item
+            products = products.filter(name__contains=item)
+    found_count = products.count()
+    if sorting=="high":
+        products = products.order_by('-price')
+    if sorting=="low":
+        products = products.order_by('price')
+
+    pag = Paginator(products,6)
+    page_num = request.GET.get('page_num')
     try:
         page = pag.page(page_num)
     except:
@@ -148,7 +216,6 @@ def filter_page(request):
 
 # when user like a ajax call is made using this function to get no of like in post and if the postis like or not
 @login_required
-
 def ToggleProductlike(request,product_id):
     # an ajax call is made using this function
     product = Product.objects.get(id = product_id)
