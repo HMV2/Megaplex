@@ -93,7 +93,7 @@ img {
 
 .theme-bg {
   /*background-color: var(--theme-bg-secondary);*/
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  box-shadow: 0 20px 32px -20px rgba(31, 38, 135, 0.25);
 }
 
 .card-bg {

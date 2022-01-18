@@ -193,6 +193,54 @@
     </div>
 </section>
 
+<section class="contact-section container-fluid rounded-4 mt-5 py-5 theme-color px-5 ">
+    
+    <div class="container-section-content px-5 theme-bg position-relative">
+        <h2 class="fw-bolder text-center display-5 mb-5"> Contact Us</h2>
+        <div class="row mx-lg-5 mx-5 px-md-2  py-5">
+            <div class="col d-none d-md-block">
+             <h1 class="fw-bold text-dark">Lets talk about</h1>
+             <h2 class="fw-bold text-dark">Everything</h2>
+             <img src="{% static 'images/22.png' %}" alt="" style="object-fit: cover;">
+            </div>
+            <div class="col">
+                <form>
+          <!-- Email input -->
+          <div class="form-outline mb-4 mt-4">
+        <input type="email" id="form1Example1" class="form-control" />
+        <label class="form-label" for="form1Example1">Email address</label>
+          </div>
+        
+          <!-- Password input -->
+          <div class="form-outline mb-5">
+        <input type="password" id="form1Example2" class="form-control" />
+        <label class="form-label" for="form1Example2">Password</label>
+          </div>
+        
+          <div class="form-outline mb-5">
+        <input type="text" id="form1Example2" class="form-control "  style="height: 300px;"/>
+        <label class="form-label" for="form1Example2">Description</label>
+          </div>
+        
+          
+        
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block w-25 ms-auto">Send</button>
+        </form>
+            </div>
+        </div>
+        
+        <span class="position-absolute top-0  me-5 m-auto end-0"><i class="fas fa-circle text-primary ms-5"></i></span>
+        <span class="position-absolute bottom-0  fs-1 "><i class="far fa-heart text-primary"></i></span>
+        <span class="position-absolute bottom-0  end-0 mb-5 me-4 fs-3 "><i class="fas fa-times text-danger"></i></span>
+        <span class="position-absolute bottom-50  end-0 mb-5  me-4 fs-3 "><i class="fas fa-times text-primary"></i></span>
+        <span class="position-absolute bottom-50  end-0  me-4 fs-4 fa-rotate-270 " ><i class="far fa-square text-primary fa-flip-both"></i></span>
+        <span class="position-absolute bottom-0  ms-5 m-auto fs-6"><i class="fas fa-circle text-primary ms-5"></i></span>
+     
+      
+    </div>
+</section>
+
 {% endblock main_content %} {% block js_files %}
 <script src="javascript/homepage.js"></script>
 {% endblock js_files %}
