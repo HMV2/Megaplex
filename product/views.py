@@ -21,10 +21,11 @@ def product_details(request,product_id):
     product.save()
     repDict = {}
     for reply in replies:
-        if reply.sno not in repDict.keys():
+        if reply.parent.sno not in repDict.keys():
             repDict[reply.parent.sno] = [reply]
         else:
             repDict[reply.parent.sno].append(reply)
+    print(replies)
     context={
         'room_name':"broadcast",
         'product':product,
@@ -38,7 +39,6 @@ def product_details(request,product_id):
             from_user = request.user
             to_user_username = request.POST.get('to_user')
             body = request.POST.get('body')
-            print("body "+body)
             try:
                 to_user = User.objects.get(username=to_user_username)
             except:
@@ -214,7 +214,6 @@ def searchProduct(request, item):
 
 
 def searchUserProduct(request, user):
-    print(user)
     products = Product.objects.filter(seller__id = user)
     categories = Category.objects.all()
     cat_id = request.GET.get('category')

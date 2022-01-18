@@ -37,7 +37,6 @@ def profile(request):
     }
     if request.method == "POST":
         tp = request.POST.get("tp")
-        print('TP:' +tp)
         if tp == "profile":
             form = ProfileForm(request.POST, request.FILES, instance = user)
             if form.is_valid():
@@ -218,7 +217,6 @@ def togglefollowing(request,following_id):
 def addProduct(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
-        print(request.POST)
         if form.is_valid():
             form.save() 
             messages.success(request,"Successfully added product!")

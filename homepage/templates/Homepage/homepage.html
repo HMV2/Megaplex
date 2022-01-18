@@ -101,13 +101,11 @@
                         <img src="{{pro.picture.url}}" alt="" class="card-image" />
                         <div class="card-head position-absolute w-100 h-100 top-0">
                             <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph"
-                                href="/product/details/{{pro.id}}">
-                                View Detail
-                            </a>
+                            
                         </div>
 
                     </div>
+                    <a href="/product/details/{{pro.id}}" class="unlink">
                     <div class="m-3">
                         <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
                         <div class="d-flex justify-content-between">
@@ -120,6 +118,7 @@
                             <span class="text-nowrap r-paragraph">{{pro.date}}</span>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>
             {% endfor %}
