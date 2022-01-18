@@ -74,7 +74,7 @@ def change_password(request):
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form':form}
+        context = {'form':form, 'room_name':"broadcast",}
         return render(request, 'accounts/change_password.html', context)
 
 
@@ -261,5 +261,5 @@ def remove_product(request,product_id):
 def wishlist(request):
     
     products = Product.objects.filter(product_likes = request.user)
-    return render(request,'dashboard/wishlist.html',{"products":products })
+    return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
