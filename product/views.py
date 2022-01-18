@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.http import request
 from django.shortcuts import render, redirect
 from .models import Category, Color, Product, Brand, Comment
@@ -121,10 +122,12 @@ def filter_page(request):
 
     pag = Paginator(products,6)
     page_num = request.GET.get('page_num')
+    print(page_num)
     try:
         page = pag.page(page_num)
     except:
         page = pag.page(1)
+        page_num = 1
     context = {
         'room_name':"broadcast",
         'category':categories,
@@ -136,7 +139,8 @@ def filter_page(request):
         'min_tag':min_tag,
         'min_price1':min_pri,
         'max_price1':max_pri,
-        'search_item': search_item
+        'search_item': search_item,
+        'page_num': page_num
     }
     return render(request,'product/filter.html',context)
 
@@ -206,9 +210,28 @@ def like_toggle(request,comment_id):
     return JsonResponse({"is_like":is_like,"like_count":like_count})
 
 
+
 def explorepage(request):
-    products = Product.objects.all()
-    return render(request,'product/explore.html',{"products":products})
+    electro = Product.objects.filter(category__name="Electronics").order_by("-view_count")[:10]
+    electro_id = Category.objects.get(name="Electronics")
+    cloth = Product.objects.filter(category__name="Clothing").order_by("-view_count")[:10]
+    cloth_id = Category.objects.get(name="Clothing")
+    auto = Product.objects.filter(category__name="Automobiles").order_by("-view_count")[:10]
+    auto_id = Category.objects.get(name="Automobiles")
+    sports = Product.objects.filter(category__name="Sports").order_by("-view_count")[:10]
+    sports_id = Category.objects.get(name="Sports")
+    context={
+        'room_name':"broadcast",
+        'electro':electro,
+        'cloth':cloth,
+        'auto':auto,
+        'sports':sports,
+        'electro_id':electro_id,
+        'cloth_id':cloth_id,
+        'auto_id':auto_id,
+        'sports_id':sports_id
+    }
+    return render(request,'product/explore.html',context)
            
 
         
