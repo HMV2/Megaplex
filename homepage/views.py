@@ -3,10 +3,11 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from product.models import Category
 from product.models import Product
 
 def index_page(request):
-    products = Product.objects.all()[:10]
+    products = Product.objects.filter(is_active=True)[:10]
     context={
         'room_name':"broadcast",
         'products':products
@@ -20,7 +21,8 @@ def logout_view(request):
 
 
 def category(request):
-    return render(request, 'homepage/category.html', {'room_name':"broadcast"})
+    categories = Category.objects.all()
+    return render(request, 'homepage/category.html', {'room_name':"broadcast", 'category':categories})
 
 def test(request):
     channel_layer = get_channel_layer()

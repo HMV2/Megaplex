@@ -79,14 +79,14 @@ def filter_page(request):
     brand_id = request.GET.get('brand')
     color_id = request.GET.get('color')
     sorting = request.GET.get('sort')
-    products = Product.objects.all()
+    products = Product.objects.filter(is_active=True)
 
     if cat_id and cat_id != "all":
-        products = Product.objects.filter(category=cat_id)
+        products = Product.objects.filter(category=cat_id, is_active=True)
     if brand_id:
-        products = Product.objects.filter(brand=brand_id)
+        products = Product.objects.filter(brand=brand_id,is_active=True)
     if color_id:
-        products = Product.objects.filter(color=color_id)
+        products = Product.objects.filter(color=color_id,is_active=True)
 
     all_count = Product.objects.all().count()
     prices = Product.objects.values("price")
