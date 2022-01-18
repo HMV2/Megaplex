@@ -213,6 +213,76 @@ def searchProduct(request, item):
     return render(request,'product/filter.html',context)
 
 
+def searchUserProduct(request, user):
+    print(user)
+    products = Product.objects.filter(seller__id = user)
+    categories = Category.objects.all()
+    cat_id = request.GET.get('category')
+    brand_id = request.GET.get('brand')
+    color_id = request.GET.get('color')
+    sorting = request.GET.get('sort')
+
+    if cat_id and cat_id != "all":
+        products = Product.objects.filter(category=cat_id)
+    if brand_id:
+        products = Product.objects.filter(brand=brand_id)
+    if color_id:
+        products = Product.objects.filter(color=color_id)
+
+    all_count = Product.objects.all().count()
+    prices = Product.objects.values("price")
+    price_list=[]
+    
+    for i in prices:
+        price_list.append(i['price'])
+
+    brands = Brand.objects.all()
+    colors = Color.objects.all()
+    min_tag = False
+    min_pri = min(price_list)
+    max_pri = max(price_list)
+
+    if request.method == 'POST':
+        form_type = request.POST.get('form_type')
+        if(form_type=="price"):
+            min_pri = request.POST.get('minPrice')
+            max_pri = request.POST.get('maxPrice')
+            products = products.filter(price__gte=min_pri,price__lte=max_pri)
+            min_tag = True
+        elif form_type == 'search':
+            item = request.POST.get('key')
+            products = products.filter(name__contains=item)
+    found_count = products.count()
+    if sorting=="high":
+        products = products.order_by('-price')
+    if sorting=="low":
+        products = products.order_by('price')
+
+    pag = Paginator(products,6)
+    page_num = request.GET.get('page_num')
+    try:
+        page = pag.page(page_num)
+    except:
+        page = pag.page(1)
+        page_num = 1
+    context = {
+        'room_name':"broadcast",
+        'category':categories,
+        'products':page,
+        'all_count':all_count,
+        'found_count':found_count,
+        'brand':brands,
+        'colors':colors,
+        'min_tag':min_tag,
+        'min_price1':min_pri,
+        'max_price1':max_pri,
+        'page_num': page_num
+    }
+    return render(request,'product/filter.html',context)
+
+
+
+
 
 # when user like a ajax call is made using this function to get no of like in post and if the postis like or not
 @login_required

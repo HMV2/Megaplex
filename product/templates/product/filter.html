@@ -48,6 +48,7 @@
         <div class="row">
           {% for pro in products %}
           <div class="col-6 col-md-6 col-lg-4 mb-3">
+            <a href="/product/details/{{pro.id}}" class="unlink">
             <div class="card border overflow-hidden border-15 mb-3">
               <div class="">
                 <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
@@ -59,14 +60,10 @@
                   <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
                   <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
                 </div>
-                <hr class="dropdown-divider" />
-                <div class="d-flex gap-2 align-items-center">
-                  <a class="text-nowrap btn btn-primary"><i class="fas fa-pen-square"></i></a>
-                  <a class="text-nowrap btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                </div>
               </div>
 
             </div>
+          </a>
           </div>
           {% endfor %}
         </div>
