@@ -373,7 +373,16 @@
                             <input type="hidden" name="formType" value="message">
                             <textarea class="form-control" id="body" rows="4" , name="body"></textarea>
                             <label class="form-label" for="textAreaExample">Message</label>
+                            {% if user.is_authenticated and  user != product.seller %}
                             <button type="submit" class="btn btn-success w-100 mt-2">Send free message</button>
+                            {% else %}
+                            <button type="submit" class="btn btn-success w-100 mt-2" disabled>Send free message</button>
+                            {% if user == product.seller%}
+                            <p class="text-muted"> You cannot send message to self</p>
+                            {% else %}
+                            <p class="text-muted"> Please login to send message</p>
+                            {% endif %}
+                            {% endif %}
                         </form>
                     </div>
                 </div>
