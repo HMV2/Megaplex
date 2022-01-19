@@ -13,13 +13,9 @@ def index_page(request):
         pro_list = [0]*len(user_list)
         ln = 0
         for i in user_list:
-            pro_list[ln] = [Product.objects.filter(seller__id = i)[:3]]
+            pro_list[ln] = [Product.objects.filter(seller__id = i)[:4]]
             ln +=1
-        
-    # collection = Product.objects.filter(seller__id = user_list[0])
-    # for i in range(1,len(user_list)):
-    #     data =  Product.objects.filter(seller__id = user_list[i])
-    #     collection |= data
+
     if request.method == 'POST':
         item = request.POST.get('item')
         if item !="":
@@ -61,7 +57,7 @@ def getUserCount():
             users[i.seller.id] = 1
     users_with_valid_numbers = []
     for key in users:
-        if users[key]>2:
+        if users[key]>3:
             users_with_valid_numbers.append(key)
 
     return users_with_valid_numbers
