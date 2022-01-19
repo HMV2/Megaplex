@@ -110,7 +110,7 @@
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class=" position-relative">
                                     <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
-                                            style="aspect-ratio: 1/1.1; " /></a>
+                                            style="aspect-ratio: 1/1.1; object-fit: cover;" /></a>
 
                                     <div class="card-head position-absolute w-100 h-100 top-0">
                                         {% if request.user in pro.product_likes.all %}
@@ -170,7 +170,7 @@
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class="">
-                                    <img src="{{ pro.picture.url }}" alt="" height="280px" />
+                                    <img src="{{ pro.picture.url }}" alt="" style="aspect-ratio: 1/1.1; object-fit: cover;" />
 
                                 </div>
                                 <div class="m-3">
