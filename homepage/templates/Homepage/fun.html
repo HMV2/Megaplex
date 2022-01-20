@@ -1,0 +1,18 @@
+{% extends 'layout.html' %} {% load static %} {% block title %}
+    <title>GAME</title>
+{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static '/css/fun.css' %}" />
+{% endblock css_files %}
+
+
+{% block fun %}
+
+<body onresize='_pexresize()' style="margin: 0px;">
+	<canvas id='canvas'></canvas>
+{% endblock fun %}
+
+{% block js_files %}
+<script src="{% static 'javascript/fun.js' %}"></script>
+{% endblock js_files %}

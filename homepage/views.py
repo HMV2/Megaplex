@@ -87,3 +87,7 @@ def getUserCount():
             users_with_valid_numbers.append(key)
 
     return users_with_valid_numbers
+
+
+def fun(request):
+    return render(request,'homepage/fun.html')
