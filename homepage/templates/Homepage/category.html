@@ -11,93 +11,21 @@
             </div>
             <div class="row">
 
-
                 <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
+                    <div class="country-card"><img src="{{i.picture.url}}"
                                                    class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
-                    </div>
-                </div>
-                <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{% static 'images/smartphone.jpg' %}"
-                                                   class="img img-responsive">
-                        <div class="country-name">Smartphones</div>
-                        <div class="desc">Apple to samsung all</div>
+                        <div class="country-name">name</div>
                     </div>
                 </div>
 
-
+                {% for i in products %}
+                <div class="col-md-3" onclick="location.href='#'">
+                    <div class="country-card"><img src="{{i.picture.url}}"
+                                                   class="img img-responsive">
+                        <div class="country-name">{{i.name}}</div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
