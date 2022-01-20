@@ -101,11 +101,12 @@
                         
                     </div>
                     <input type="hidden" name="seller" value={{user.id}}>
-                    <input type="hidden" name="isActive" value="1">
+                    <input type="hidden" name="is_active" value="1">
+                    <input type="hidden" name="view_count" value="0">
                 </div>
                 <div class="tab-pane fade pb-5 mt-4 mb-5" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
                     <div class="row-cols-2 mt-2 d-flex justify-content-between">
-                        <div class="  ">
+                        <div class=" ">
                             {{ form.picture | as_crispy_field }}
                         </div>
                           <div class="  ">
@@ -138,7 +139,7 @@
                         </div>
                     </div>
                     <button class="btn mt-3 w-100 btn-primary shadow">
-                        Update
+                        Update Product
                     </button>
                 </div>
             </div>
