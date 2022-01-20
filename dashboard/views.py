@@ -37,7 +37,6 @@ def profile(request):
     }
     if request.method == "POST":
         tp = request.POST.get("tp")
-        print('TP:' +tp)
         if tp == "profile":
             form = ProfileForm(request.POST, request.FILES, instance = user)
             if form.is_valid():
@@ -74,7 +73,7 @@ def change_password(request):
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form':form}
+        context = {'form':form, 'room_name':"broadcast",}
         return render(request, 'accounts/change_password.html', context)
 
 
@@ -218,7 +217,6 @@ def togglefollowing(request,following_id):
 def addProduct(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
-        print(request.POST)
         if form.is_valid():
             form.save() 
             messages.success(request,"Successfully added product!")
@@ -261,5 +259,5 @@ def remove_product(request,product_id):
 def wishlist(request):
     
     products = Product.objects.filter(product_likes = request.user)
-    return render(request,'dashboard/wishlist.html',{"products":products })
+    return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 

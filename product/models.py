@@ -14,6 +14,7 @@ WARRANTY_CHOICES = (
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    picture = models.ImageField(upload_to = 'category_images', default="def.jpeg")
 
     def __str__(self) -> str:
         return self.name
