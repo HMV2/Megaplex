@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .templatetags import extras
 from django.http import JsonResponse
+import random
 
 @login_required
 def product_details(request,product_id):
@@ -17,6 +18,15 @@ def product_details(request,product_id):
     comments = Comment.objects.filter(product = product, parent=None)
     replies = Comment.objects.filter(product = product).exclude(parent=None)
     comment_count = comments.count()
+    product_category = product.category
+    no_of_random_items = 5
+    recommendations = Product.objects.filter(category=product_category)
+    possible_ids = list(recommendations.values_list('id', flat=True))  
+    possible_ids = random.choices(possible_ids, k=no_of_random_items)
+    recommended_products = recommendations.filter(pk__in=possible_ids)
+    
+
+
     product.view_count += 1
     product.save()
     repDict = {}
@@ -25,13 +35,14 @@ def product_details(request,product_id):
             repDict[reply.parent.sno] = [reply]
         else:
             repDict[reply.parent.sno].append(reply)
-    print(replies)
+
     context={
         'room_name':"broadcast",
         'product':product,
         'comments':comments,
         'count':comment_count,
-        'reply':repDict
+        'reply':repDict,
+        'recommended_products':recommended_products
     }
     if request.method == 'POST':
         formType = request.POST.get('formType')

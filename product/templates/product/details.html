@@ -397,8 +397,40 @@
             <p class="text-center fs-3 fw-bold text-danger">You may like</p>
 
         </div>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
+            {% for i in recommended_products %}
             <div class="box col">
+                <div class="card border ">
+                    <div class="card-img-top position-relative">
+                        <img src="{{i.picture.url}}" alt="" class="card-image rounded-3" />
+
+                        <div class="card-head position-absolute w-100 h-100 top-0">
+                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
+                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph" href="/product/details/{{i.id}}" class="unlink">
+                                View 
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m-3">
+                        <strong class=" fs-5 text-centre">{{i.name}}</strong>
+
+                        <div class="d-flex justify-content-between">
+                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                            <strong class="text-nowrap r-paragraph text-danger">NPR. {{i.price}}</strong>
+
+                        </div>
+                        <hr class="dropdown-divider">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-nowrap r-paragraph">Seller: {{i.seller}}</span>
+                            <span class="text-nowrap r-paragraph">{{i.date}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+            {% comment %} <div class="box col">
                 <div class="card border ">
                     <div class="card-img-top position-relative">
                         <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
@@ -513,36 +545,7 @@
                     </div>
 
                 </div>
-            </div>
-            <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </div>
