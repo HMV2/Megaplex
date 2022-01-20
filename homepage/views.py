@@ -42,15 +42,6 @@ def category(request):
     }
     return render(request, 'homepage/category.html', context)
 
-def test(request):
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-        "notification_broadcast",{
-            'type':'send_notification',
-            'message':'Notification'
-        }
-    )
-    return HttpResponse('Done')
 
 
 def getUserCount():
