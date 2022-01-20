@@ -17,8 +17,13 @@ def index_page(request):
         pro_list = [0]*len(user_list)
         ln = 0
         for i in user_list:
-            pro_list[ln] = [Product.objects.filter(seller__id = i)[:3]]
+            pro_list[ln] = [Product.objects.filter(seller__id = i)[:4]]
             ln +=1
+
+    if request.method == 'POST':
+        item = request.POST.get('item')
+        if item !="":
+            return redirect('/product/filter/'+item)
         
     # collection = Product.objects.filter(seller__id = user_list[0])
     # for i in range(1,len(user_list)):
@@ -61,19 +66,11 @@ def category(request):
     category = Category.objects.all()
     context={
         'room_name':"broadcast",
+        'products':category,
         'category':category
     }
     return render(request, 'homepage/category.html', context)
 
-def test(request):
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-        "notification_broadcast",{
-            'type':'send_notification',
-            'message':'Notification'
-        }
-    )
-    return HttpResponse('Done')
 
 
 def getUserCount():
@@ -86,7 +83,7 @@ def getUserCount():
             users[i.seller.id] = 1
     users_with_valid_numbers = []
     for key in users:
-        if users[key]>2:
+        if users[key]>3:
             users_with_valid_numbers.append(key)
 
     return users_with_valid_numbers

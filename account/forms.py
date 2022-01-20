@@ -27,6 +27,13 @@ class LoginForm(forms.Form):
 
 class ProfileForm(ModelForm):
     """Form for creating User profile"""
+    desc = forms.CharField(
+        label='desc',
+        widget=forms.Textarea(attrs={
+            'rows':'3',
+            'placeholder':''
+        })
+    )
     class Meta:
         model = Profile
         fields = "__all__"

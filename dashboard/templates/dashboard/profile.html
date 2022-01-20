@@ -110,7 +110,7 @@
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class=" position-relative">
                                     <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
-                                            style="aspect-ratio: 1/1.1; " /></a>
+                                            style="aspect-ratio: 1/1.1; object-fit: cover;" /></a>
 
                                     <div class="card-head position-absolute w-100 h-100 top-0">
                                         {% if request.user in pro.product_likes.all %}
@@ -170,7 +170,7 @@
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class="">
-                                    <img src="{{ pro.picture.url }}" alt="" height="280px" />
+                                    <img src="{{ pro.picture.url }}" alt="" style="aspect-ratio: 1/1.1; object-fit: cover;" />
 
                                 </div>
                                 <div class="m-3">
@@ -206,14 +206,21 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
+        
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur" ></span>
+        <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur" ></span>
+        <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur" ></span>
+        <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 " > <img src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png" alt=""></span> 
+            <div class=" pt-4  pb-2">
+                   
+                <h5 class="modal-title text-center m-auto fs-2 " id="exampleModalLabel ">Edit Profile</h5>
+            
+                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
+            <form method="POST" >
                 <input type="hidden" name="tp" value="profile">
                 <div class="modal-body">
                     {% csrf_token %}

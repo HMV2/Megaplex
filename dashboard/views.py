@@ -246,7 +246,7 @@ def editProduct(request, product_id):
         'form':form,
         'room_name':"broadcast"
     }
-    return render(request, 'dashboard/addProduct.html',context)
+    return render(request, 'dashboard/editProduct.html',context)
 
 
 @login_required

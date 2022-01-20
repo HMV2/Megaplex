@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block title %}<title>Login page</title>{% endblock title %}
-{#{% block css_files %}#}
-{#    <link rel="stylesheet" href="{% static 'css/login.css' %}">#}
-{#{% endblock css_files %}#}
 
 
 {% block main_content %}
@@ -15,9 +12,6 @@
             <div class="col-lg-7 text-center text-lg-start">
                 <h2 class="fs-1 lh-1 mb-3">Login to</h2>
                 <h1 class="display-4 fw-bold lh-1 mb-3 "><span class="M-logo">Megaplex World!</span> 👻</h1>
-                {#        <p class="col-lg-10 fs-5">#}
-                {#            MOST SECURE SYSTEM DESIGN#}
-                {#        </p>#}
                 <img class="w-50" src="{% static 'images/login_sec.png' %}" alt="">
             </div>
             <div class="col-md-10 mx-auto col-lg-5" >
@@ -32,7 +26,7 @@
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                         <label for="floatingPassword">Password</label>
-                        <a href="#">Forget your passcode?</a>
+                        <a href="/account/password_reset/">Forget your passcode?</a>
                     </div>
                     <div class="checkbox mb-3">
                         <label>

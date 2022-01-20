@@ -16,7 +16,7 @@
             $.ajax({
                 type: "POST",
                 url: "/product/" + productId + "/like",
-                enctype: 'multipart/form-data',
+              
                 data: {
                     csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
                 },

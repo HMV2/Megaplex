@@ -19,13 +19,16 @@
             </div>
             <div class="carousel-inner border-15">
                 <div class="carousel-item active">
-                    <img src="{{product.image1.url}}" class="d-block w-100" alt="Product Image 1" style="object-fit: cover; aspect-ratio: 1/0.44;" />
+                    <img src="{{product.image1.url}}" class="d-block w-100" alt="Product Image 1"
+                        style="object-fit: cover; aspect-ratio: 1/0.44;" />
                 </div>
                 <div class="carousel-item">
-                    <img src="{{product.image2.url}}" class="d-block w-100" alt="Product Image 2" style="object-fit: cover; aspect-ratio: 1/0.44;"/>
+                    <img src="{{product.image2.url}}" class="d-block w-100" alt="Product Image 2"
+                        style="object-fit: cover; aspect-ratio: 1/0.44;" />
                 </div>
                 <div class="carousel-item">
-                    <img src="{{product.image3.url}}" class="d-block w-100" alt="Product Image 3"  style="object-fit: cover; aspect-ratio: 1/0.44;"/>
+                    <img src="{{product.image3.url}}" class="d-block w-100" alt="Product Image 3"
+                        style="object-fit: cover; aspect-ratio: 1/0.44;" />
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators"
@@ -53,6 +56,8 @@
                             to message</a>
                         <h6 class="mt-2 ms-3">Listed on {{product.date}}</h6>
                     </div>
+
+                    <p class="mt-2"><i class="fas fa-grin-squint"></i> {{product.view_count}} views</p>
                     <hr>
                     <div>
                         <h4 class="mb-3">Our Commitment</h4>
@@ -147,8 +152,8 @@
                                         <div class="col-md-12 col-lg-10 col-xl-8 w-100">
                                             <div class="card border-15 ">
                                                 <div class="card-body">
-                                                    <div class="d-flex flex-start align-items-center mb-3">
-                                                        <div>
+                                                    <div class="d-flex flex-start flex-column align-items-center mb-3  justify-content-between">
+                                                        <div class="d-flex justify-content-between w-100 align-items-center mb-1">
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <img src="{{c.user.profile.profile_pic.url}}" alt="User"
                                                                     style="vertical-align: middle; width: 35px;height: 35px;border-radius: 50%;">
@@ -156,10 +161,36 @@
                                                                     class="d-flex align-items-center gap-2 fw-bold text-primary mb-1">
                                                                     {{c.user.first_name}} {{c.user.last_name}}</h6>
                                                             </div>
-                                                            <p class="text-muted small mb-0">
-                                                                Shared publicly - {{c.timestamp}}
-                                                            </p>
+
+                                                            {% if request.user == c.user %}
+
+                                                            <div class="dropdown">
+                                                                <button class="border-0 bg-transparent" type="button"
+                                                                    id="dropdownMenuButton1" data-mdb-toggle="dropdown"
+                                                                    aria-expanded="false">
+                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton1">
+                                                                    <li><a class="dropdown-item " href="#"><i
+                                                                                class="fas fa-edit me-2"></i>
+                                                                            Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="fas fa-trash me-2"></i>
+                                                                            Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="fas fa-flag me-2"></i>Report</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                          
+                                                            {% endif %}
+
                                                         </div>
+                                                        <p class="text-muted small mb-0 me-auto">
+                                                            Shared publicly - {{c.timestamp}}
+                                                        </p>
                                                     </div>
 
                                                     <p class="mt-3 mb-2 pb-2 text-start">
@@ -172,8 +203,9 @@
                                                         {% if request.user in c.likes.all %}
                                                         <form action="/product/{{c.sno}}/comment_like" method="POST">
                                                             {% csrf_token %}
-                                                            <button class=" btn-thumb   border-0 bg-transparent text-primary" type=" submit"
-                                                                data-new="{{c.sno}}" id="new"><i
+                                                            <button
+                                                                class=" btn-thumb   border-0 bg-transparent text-primary"
+                                                                type=" submit" data-new="{{c.sno}}" id="new"><i
                                                                     class="fas fa-thumbs-up   fs-6 me-2"></i>
                                                             </button>
 
@@ -183,7 +215,8 @@
                                                         {% else %}
                                                         <form action="/product/{{c.sno}}/comment_like" method="POST">
                                                             {% csrf_token %}
-                                                            <button type=" submit" id="new" class=" btn-thumb border-0 bg-transparent "
+                                                            <button type=" submit" id="new"
+                                                                class=" btn-thumb border-0 bg-transparent "
                                                                 data-new="{{c.sno}}"><i
                                                                     class="fas fa-thumbs-up fs-6 me-2 "></i></button>
 
@@ -226,8 +259,8 @@
                                         <div>
                                             {% for c in reply|get_val:c.sno %}
                                             <div class="card-body ms-5 ">
-                                                <div class="d-flex flex-start align-items-center mb-3">
-                                                    <div>
+                                                <div class="d-flex flex-start flex-column align-items-center mb-3">
+                                                    <div class="d-flex w-100 justify-content-between">
                                                         <div class="d-flex gap-2">
                                                             <img src="{{c.user.profile.profile_pic.url}}" alt="User"
                                                                 style="vertical-align: middle; width: 30px;height: 30px;border-radius: 50%;">
@@ -235,10 +268,36 @@
                                                                 class="d-flex align-items-center gap-2 fw-bold text-primary mb-1">
                                                                 {{c.user.first_name}} {{c.user.last_name}}</h6>
                                                         </div>
-                                                        <p class="text-muted small mb-0">
-                                                            Shared publicly - {{c.timestamp}}
-                                                        </p>
+
+                                                        {% if request.user == c.user %}
+
+                                                            <div class="dropdown">
+                                                                <button class="border-0 bg-transparent" type="button"
+                                                                    id="dropdownMenuButton1" data-mdb-toggle="dropdown"
+                                                                    aria-expanded="false">
+                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton1">
+                                                                    <li><a class="dropdown-item " href="#"><i
+                                                                                class="fas fa-edit me-2"></i>
+                                                                            Edit</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="fas fa-trash me-2"></i>
+                                                                            Delete</a></li>
+                                                                    <li><a class="dropdown-item" href="#"><i
+                                                                                class="fas fa-flag me-2"></i>Report</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                          
+                                                            {% endif %}
+                                                       
                                                     </div>
+                                                    <p class="text-muted small mb-0 me-auto mt-1">
+                                                            Shared publicly - {{c.timestamp}}
+                                                    </p>
 
 
                                                 </div>
@@ -253,8 +312,8 @@
                                                     {% if request.user in c.likes.all %}
                                                     <form action="/product/{{c.sno}}/comment_like" method="POST">
                                                         {% csrf_token %}
-                                                        <button class=" btn-thumb   border-0 bg-transparent" type=" submit"
-                                                            data-new="{{c.sno}}" id="new"><i
+                                                        <button class=" btn-thumb   border-0 bg-transparent"
+                                                            type=" submit" data-new="{{c.sno}}" id="new"><i
                                                                 class="fas fa-thumbs-up text-primary  fs-6 me-2"></i>
                                                         </button>
 
@@ -264,7 +323,8 @@
                                                     {% else %}
                                                     <form action="/product/{{c.sno}}/comment_like" method="POST">
                                                         {% csrf_token %}
-                                                        <button type=" submit" id="new" class=" btn-thumb border-0 bg-transparent"
+                                                        <button type=" submit" id="new"
+                                                            class=" btn-thumb border-0 bg-transparent"
                                                             data-new="{{c.sno}}"><i
                                                                 class="fas fa-thumbs-up fs-6 me-2 "></i></button>
 
@@ -315,7 +375,16 @@
                             <input type="hidden" name="formType" value="message">
                             <textarea class="form-control" id="body" rows="4" , name="body"></textarea>
                             <label class="form-label" for="textAreaExample">Message</label>
+                            {% if user.is_authenticated and  user != product.seller %}
                             <button type="submit" class="btn btn-success w-100 mt-2">Send free message</button>
+                            {% else %}
+                            <button type="submit" class="btn btn-success w-100 mt-2" disabled>Send free message</button>
+                            {% if user == product.seller%}
+                            <p class="text-muted"> You cannot send message to self</p>
+                            {% else %}
+                            <p class="text-muted"> Please login to send message</p>
+                            {% endif %}
+                            {% endif %}
                         </form>
                     </div>
                 </div>
@@ -330,8 +399,40 @@
             <p class="text-center fs-3 fw-bold text-danger">You may like</p>
 
         </div>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
+            {% for i in recommended_products %}
             <div class="box col">
+                <div class="card border ">
+                    <div class="card-img-top position-relative">
+                        <img src="{{i.picture.url}}" alt="" class="card-image rounded-3" />
+
+                        <div class="card-head position-absolute w-100 h-100 top-0">
+                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
+                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph" href="/product/details/{{i.id}}" class="unlink">
+                                View 
+                            </a>
+                        </div>
+                    </div>
+                    <div class="m-3">
+                        <strong class=" fs-5 text-centre">{{i.name}}</strong>
+
+                        <div class="d-flex justify-content-between">
+                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                            <strong class="text-nowrap r-paragraph text-danger">NPR. {{i.price}}</strong>
+
+                        </div>
+                        <hr class="dropdown-divider">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-nowrap r-paragraph">Seller: {{i.seller}}</span>
+                            <span class="text-nowrap r-paragraph">{{i.date}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+            {% comment %} <div class="box col">
                 <div class="card border ">
                     <div class="card-img-top position-relative">
                         <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
@@ -446,36 +547,7 @@
                     </div>
 
                 </div>
-            </div>
-            <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </div>
