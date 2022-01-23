@@ -1,81 +1,11 @@
 {% extends 'layout.html' %} {% load static %} {% block title %}
-    <title>Room Chat</title>
+    <title>{{room_name1}} Room</title>
 {% endblock title %}
 
 
 {% block main_content %}
-<<<<<<< HEAD
-    {{ request.user.username|json_script:"user_id" }}
-    <div class="col-md-6 col-lg-7 col-xl-8">
-
-                <div class="pt-3 pe-3 overflow-auto" style="position: relative; height: 400px">
-
-                  <div id="chat-log" class="flex-row justify-content-start">
-                  </div>
-                </div>
-            </div>
-
-    </div><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name1|json_script:"room-name" }}
-    <script>
-        const loggedUser = JSON.parse(document.getElementById('user_id').textContent);
-
-        const room = JSON.parse(document.getElementById('room-name').textContent);
-
-        const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/room/'
-            + room
-            + '/'
-        );
-
-        chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-
-            if (loggedUser != data.username){
-            document.querySelector('#chat-log').innerHTML += "<div class='d-flex flex-row justify-content-end mb-4 pt-1'>"+
-                       "<img src="+ data.profile_pic + " class = 'rounded-circle' alt='avatar 1' style='width: 45px; height: 100%;'>"+
-                        "<p class="+ 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger'+">"+ data.username+": "+data.message+"</p>"+
-                      
-                    "</div>"
-
-
-                
-            }
-            else{
-                document.querySelector('#chat-log').innerHTML += "<div class='d-flex flex-row justify-content-start mb-4 pt-1'>"+
-                      "<img src="+ data.profile_pic + " class = 'rounded-circle'  alt='avatar 1' style='width: 45px; height: 100%;'>"+
-                        "<p class="+ 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger'+">"+ data.username+": "+data.message+"</p>"+
-                      
-                    "</div>"
-            }
-        };
-
-        chatSocket.onclose = function(e) {
-            console.error('Chat socket closed unexpectedly');
-        };
-
-        document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
-            }
-        };
-
-        document.querySelector('#chat-message-submit').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
-                'message': message
-            }));
-            messageInputDom.value = '';
-        };
-    </script>
-=======
 {{ request.user.username|json_script:"user_id" }}
+<h1 class="text-center mt-4">{{room_name1}} Chat Room </h1>
 <div class="col-md-9 col-lg-7 col-xl-8 shadow-5-soft my-5 m-auto px-4 py-5">
 
     <div class="pt-3 pe-3 overflow-auto d-flex flex-column" style="position: relative; height: 400px">
@@ -165,6 +95,5 @@
         messageInputDom.value = '';
     };
 </script>
->>>>>>> 796490e340981d5fce518af673abe679d73cdfbd
 
 {% endblock main_content %}

@@ -1,43 +1,47 @@
 {% extends 'layout.html' %} {% load static %} {% block title %}
-    <title>Room Selection </title>
+<title>Room Selection </title>
 {% endblock title %}
 
 
 {% block main_content %}
-    <div class="m-auto d-flex flex-column container col-lg-4 py-5 my-5 px-lg-5 shadow-5-soft position-relative overflow-hidden">
-        <span class="mt-5 text-black">What chat room would you like to enter?</span>
-    
-        <input id="room-name-input" class="my-2" type="text" size="100">
-        <input id="room-name-submit" class="btn btn-primary col-lg-3" type="button" value="Enter">
+<div
+    class="m-auto d-flex flex-column container col-lg-4 py-5 my-5 px-lg-5 shadow-5-soft position-relative overflow-hidden">
+    <span class="mt-5 text-black">What chat room would you like to enter?</span>
 
-        
-        <span class="position-absolute top-0  me-5 m-auto end-0 fs-6"><i
-                class="fas fa-circle text-primary ms-5"></i></span>
-        <span class="position-absolute bottom-0  me-5 mb-5  end-0 fs-6 " style="z-index: -1;"><i
-                class="fas fa-circle text-danger ms-5 mb-7  " ></i></span>
-        <span class="position-absolute bottom-0  fs-4 mb-2 "><i class="far fa-heart text-primary "
-                style="transform: rotate(335deg);"></i></span>
-        <span class="position-absolute bottom-0  end-0   me-4 fs-6 "><i class="fas fa-times text-danger "
-                style="transform: rotate(75deg);"></i></span>
-        <span class="position-absolute bottom-50  end-0 mb-5  me-4 fs-5 "><i class="fas fa-times text-primary mb-10"
-                style="transform: rotate(75deg);"></i></span>
-        <span class="position-absolute bottom-50  end-0  me-4 fs-4 fa-flip-vertical "><i
-                class="far fa-square text-primary fa-rotate-by" style="transform: rotate(75deg);"></i></span>
-        <span class="position-absolute bottom-0  ms-5 m-auto mb-3 "><i
-                class="fas fa-circle text-primary ms-5 "></i></span>
-    </div>
+    <select id="room-name-input" class="my-2">
+        <option value="General">General</option>
+        <option value="Q & A">Q & A</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Technical">Technical</option>
+    </select>
+    <input id="room-name-submit" class="btn btn-primary col-lg-3" type="button" value="Enter">
 
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
 
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/room/' + roomName + '/';
-        };
-    </script>
+    <span class="position-absolute top-0  me-5 m-auto end-0 fs-6"><i class="fas fa-circle text-primary ms-5"></i></span>
+    <span class="position-absolute bottom-0  me-5 mb-5  end-0 fs-6 " style="z-index: -1;"><i
+            class="fas fa-circle text-danger ms-5 mb-7  "></i></span>
+    <span class="position-absolute bottom-0  fs-4 mb-2 "><i class="far fa-heart text-primary "
+            style="transform: rotate(335deg);"></i></span>
+    <span class="position-absolute bottom-0  end-0   me-4 fs-6 "><i class="fas fa-times text-danger "
+            style="transform: rotate(75deg);"></i></span>
+    <span class="position-absolute bottom-50  end-0 mb-5  me-4 fs-5 "><i class="fas fa-times text-primary mb-10"
+            style="transform: rotate(75deg);"></i></span>
+    <span class="position-absolute bottom-50  end-0  me-4 fs-4 fa-flip-vertical "><i
+            class="far fa-square text-primary fa-rotate-by" style="transform: rotate(75deg);"></i></span>
+    <span class="position-absolute bottom-0  ms-5 m-auto mb-3 "><i class="fas fa-circle text-primary ms-5 "></i></span>
+</div>
+
+<script>
+    document.querySelector('#room-name-input').focus();
+    document.querySelector('#room-name-input').onkeyup = function (e) {
+        if (e.keyCode === 13) { // enter, return
+            document.querySelector('#room-name-submit').click();
+        }
+    };
+
+    document.querySelector('#room-name-submit').onclick = function (e) {
+        var roomName = document.querySelector('#room-name-input').value;
+        window.location.pathname = '/room/' + roomName + '/';
+    };
+</script>
 {% endblock main_content %}
