@@ -5,5 +5,6 @@ def index(request):
 
 def room(request, room_name):
     return render(request, 'roomChat/room.html', {
-        'room_name': room_name
+        'room_name1': room_name,
+        'room_name':"broadcast",
     })
