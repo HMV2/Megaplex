@@ -1,29 +1,58 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+{% extends 'layout.html' %} {% load static %} {% block title %}
+    <title>Room Chat</title>
+{% endblock title %}
+
+
+{% block main_content %}
+    {{ request.user.username|json_script:"user_id" }}
+    <div class="col-md-6 col-lg-7 col-xl-8">
+
+                <div class="pt-3 pe-3 overflow-auto" style="position: relative; height: 400px">
+
+                  <div id="chat-log" class="flex-row justify-content-start">
+                  </div>
+                </div>
+            </div>
+
+    </div><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const loggedUser = JSON.parse(document.getElementById('user_id').textContent);
+
+        const room = JSON.parse(document.getElementById('room-name').textContent);
 
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/room/'
-            + roomName
+            + room
             + '/'
         );
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+
+            if (loggedUser != data.username){
+            document.querySelector('#chat-log').innerHTML += "<div class='d-flex flex-row justify-content-end mb-4 pt-1'>"+
+                      "<div>"+ "<img src="+data.profile_pic + " alt='avatar 1' style='width: 45px; height: 100%;'>"+
+                        "<p class="+ 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger'+">"+ data.username+": "+data.message+"</p>"+
+                      "</div>" +
+                      
+                    "</div>"
+
+
+                
+            }
+            else{
+                document.querySelector('#chat-log').innerHTML += "<div class='d-flex flex-row justify-content-start mb-4 pt-1'>"+
+                      "<div>"+ "<img src="+data.profile_pic + " alt='avatar 1' style='width: 45px; height: 100%;'>"+
+                        "<p class="+ 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger'+">"+ data.username+": "+data.message+"</p>"+
+                      "</div>" +
+                      
+                    "</div>"
+            }
         };
 
         chatSocket.onclose = function(e) {
@@ -46,5 +75,5 @@
             messageInputDom.value = '';
         };
     </script>
-</body>
-</html>
+
+{% endblock main_content %}
