@@ -14,7 +14,8 @@ urlpatterns = [
     path('profile/', include('dashboard.urls')),
     path('admins/', include('admins.urls')),
     path('product/',include('product.urls')),
-    path('profile/', include('dashboard.urls'))
+    path('profile/', include('dashboard.urls')),
+    path('room/', include('roomChat.urls')),
 ]
 
 if settings.DEBUG:
