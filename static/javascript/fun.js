@@ -1,7 +1,7 @@
 "use strict"
 		var stage = {
-			w:1280,
-			h:720
+			w:1520,
+			h:700
 		}
 
 		var _pexcanvas = document.getElementById("canvas");
