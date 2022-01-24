@@ -12,7 +12,7 @@ from .templatetags import extras
 from django.http import JsonResponse
 import random
 
-@login_required
+
 def product_details(request,product_id):
     product = Product.objects.get(id=product_id)
     comments = Comment.objects.filter(product = product, parent=None)
