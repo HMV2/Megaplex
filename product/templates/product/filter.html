@@ -78,21 +78,25 @@
           <div>
             <nav aria-label="...">
               <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link">Previous</a>
-                </li>
                 {% if products.has_previous %}
-                <li class="page-item"><a class="page-link" href="?products.previous_page_number">{{products.prevoius_page_number}}</a></li>
+                <li class="page-item ">
+                  <a class="page-link" href="?page_num={{products.previous_page_number}}">Previous</a>
+                </li>
+                <li class="page-item ">
+                  <a class="page-link" href="?page_num={{products.previous_page_number}}">{{products.previous_page_number}}</a>
+                </li>
+                {% comment %} <li class="page-item"><a class="page-link" href="?page_num={{products.previous_page_number}}">{{products.prevoius_page_number}}</a></li> {% endcomment %}
                 {% endif %}
                 <li class="page-item active" aria-current="page">
                   <a class="page-link" href="#">{{products.number}} <span class="visually-hidden">(current)</span></a>
                 </li>
                 {% if products.has_next %}
-                <li class="page-item"><a class="page-link" href="?products.next_page_number">{{products.next_page_number}}</a></li>
+                <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">{{products.next_page_number}}</a></li>
+                <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">Next</a></li>
                 {% endif %}
-                <li class="page-item">
+                {% comment %} <li class="page-item">
                   <a class="page-link" href="#">Next</a>
-                </li>
+                </li> {% endcomment %}
               </ul>
             </nav>
           </div>
