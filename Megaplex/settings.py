@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'product',
     'channels',
     'notification',
+    'roomChat',
     'django_celery_results',
     'django_celery_beat',
 ]

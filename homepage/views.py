@@ -91,3 +91,9 @@ def getUserCount():
 
 def fun(request):
     return render(request,'homepage/fun.html')
+
+def fun2(request):
+    return render(request,'homepage/fun2.html')
+
+def games(request):
+    return render(request,'homepage/games.html')

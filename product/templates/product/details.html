@@ -137,9 +137,18 @@
 
                                             <div class="d-flex justify-content-between mt-3 gap-1">
                                                 <p class=" text-nowrap">Comment can be viewed below!</p>
+                                                {% if user.is_authenticated %}
                                                 <button type="submit" class="btn btn-danger text-nowrap">Send<i
                                                         class="fas fa-long-arrow-alt-right ms-1"></i></button>
+                                                {% else %}
+                                                <button type="submit" class="btn btn-danger text-nowrap" disabled>Send<i
+                                                        class="fas fa-long-arrow-alt-right ms-1"></i></button>
+                                                
+                                                {% endif %}
                                             </div>
+                                            {% if not user.is_authenticated %}
+                                            <p class="text-muted" style="float:right"> Please login to post comment</p>
+                                            {% endif %}
                                         </form>
                                     </div>
                                 </div>
@@ -357,8 +366,8 @@
                 </div>
                 <div class="col-md-10 mx-auto col-lg-4 mt-md-0">
                     <div class="p-md-3 rounded-5 border">
-                        <div class="d-flex justify-content-between  mt-3 mb-3 ">
-                            <img class="img-fluid rounded-circle w-25" src="/static/images/animated-art-1.jpg" alt="">
+                        <div class="d-flex justify-content-around  mt-3 mb-3 ">
+                            <img class="img-fluid rounded-circle w-25" src="{{product.seller.profile.profile_pic.url}}" alt="">
                             <div class="d-flex flex-column text-center">
                                 <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> Kathmandu</h6>
@@ -432,122 +441,6 @@
             </div>
             {% endfor %}
 
-            {% comment %} <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="box col">
-                <div class="card border ">
-                    <div class="card-img-top position-relative">
-                        <img src="{% static 'images/circle-neon.jpg' %}" alt="" class="card-image rounded-3" />
-
-                        <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph">
-                                Buy Now
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">Amazing card design</strong>
-
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. 5000</strong>
-
-                        </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: Bimal</span>
-                            <span class="text-nowrap r-paragraph">12 Nov, 2021</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div> {% endcomment %}
         </div>
     </div>
 </div>
