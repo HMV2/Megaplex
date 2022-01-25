@@ -90,10 +90,10 @@ def getUserCount():
 
 
 def fun(request):
-    return render(request,'homepage/fun.html')
+    return render(request,'homepage/fun.html', {'room_name':"broadcast"})
 
 def fun2(request):
-    return render(request,'homepage/fun2.html')
+    return render(request,'homepage/fun2.html', {'room_name':"broadcast"})
 
 def games(request):
-    return render(request,'homepage/games.html')
+    return render(request,'homepage/games.html',{'room_name':"broadcast"})

@@ -14,7 +14,7 @@
 
             <div class='d-flex flex-row justify-content-end mb-4 pt-1  align-items-center '>
                 <img src="https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1nfGVufDB8fDB8fA%3D%3D&w=1000&q=80" class="rounded-circle" alt='avatar 1' style='width: 45px; height: 45px;'>
-                <p class="small p-2  mb-1 text-white rounded-3 bg-danger ms-1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente vitae repellendus saepe?</p>
+                <p class="small p-2  mb-1 text-white rounded-3 bg-danger ms-1">You are in {{room_name1}} room. All messages will be cleared when you refresh your screen!</p>
 
             </div>
 
@@ -57,7 +57,7 @@
             document.querySelector('#chat-log').innerHTML +=
                 "<div class='d-flex flex-row justify-content-end mb-4 pt-1'>" +
                 "<img src=" + data.profile_pic + " class = 'rounded-circle' alt='avatar 1' style='width: 45px; height: 45px;'>" +
-                "<p class=" + 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger' + ">" + data.username + ": " +
+                "<p class= 'small p-2 mb-1 text-white rounded-3 bg-danger ms-1' >" + data.username + ": " +
                 data.message + "</p>" +
                 "</div>"
 
@@ -67,7 +67,7 @@
             document.querySelector('#chat-log').innerHTML +=
                 "<div class='d-flex flex-row justify-content-start mb-4 pt-1'>" +
                  "<img src=" + data.profile_pic + " class = 'rounded-circle' alt='avatar 1'  style='width: 45px; height: 45px;'>" +
-                "<p class=" + 'small p-2 me-3 mb-1 text-white rounded-3 bg-danger' + ">" + data.username + ": " +
+                "<p class= 'small p-2 mb-1 text-white rounded-3 bg-secondary ms-1' >" + data.username + ": " +
                 data.message + "</p>" +
                
 

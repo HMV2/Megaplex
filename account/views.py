@@ -22,15 +22,14 @@ def login(request):
 
             elif user.is_staff:
                 auth.login(request, user)
-                return redirect('/adminss')
                 return redirect('/admin')
 
         else:
             messages.add_message(request, messages.ERROR, "Invalid Username and Password!")
-            return render(request, 'account/login.html')
+            return render(request, 'account/login.html',{'room_name':"broadcast"})
 
     else:
-        return render(request, 'account/login.html')
+        return render(request, 'account/login.html',{'room_name':"broadcast",})
 
 
 
@@ -47,9 +46,10 @@ def register(request):
             return redirect('/')
         else:
             messages.add_message(request, messages.ERROR,"User Registration Failed!")
-            return render(request, 'account/register.html', {'form':form})
+            return render(request, 'account/register.html', {'form':form,'room_name':"broadcast"})
         
     context={
+        'room_name':"broadcast",
         'form':form
     }
     return render(request, "account/register.html", context)
