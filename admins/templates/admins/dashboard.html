@@ -145,6 +145,9 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                {% for user in  user_info %}
+
+                {% if profile != 0 %}
                 <tbody class="">
                     <tr class="text-white">
                         <td>
@@ -152,85 +155,33 @@
                                 <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle" />
                                 <div class="ms-3">
-                                    <p class="fw-bold mb-1">John Doe</p>
-                                    <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                    <p class="fw-bold mb-1 text-black">{{user.firstname}} {{user.lastname}}</p>
+                                    <p class="text-muted mb-0">{{user.email}}</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p class="fw-bold mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
+                            <p class="fw-bold mb-1 text-black">{{profile.plan}}</p>
+                            <p class="text-muted mb-0">City: {{profile.city}}</p>
                         </td>
                         <td>
-                            <span class="badge badge-success rounded-pill">Active</span>
+                            <span class="badge badge-success rounded-pill">{{user.is_active}}</span>
                         </td>
                         <td>Senior</td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                                Inactive
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm btn-rounded">
-                                Verified
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="text-white">
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
-                                    style="width: 45px; height: 45px" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">Alex Ray</p>
-                                    <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                                </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" />
+                                <label class="form-check-label text-black" for="flexSwitchCheckDefault">Change the status</label>
                             </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Consultant</p>
-                            <p class="text-muted mb-0">Finance</p>
-                        </td>
-                        <td>
-                            <span class="badge badge-primary rounded-pill">Onboarding</span>
-                        </td>
-                        <td>Junior</td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                                Deactive
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm btn-rounded">
-                                Active
-                            </button>
+
                         </td>
                     </tr>
-                    <tr class="text-white">
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
-                                    style="width: 45px; height: 45px" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1">Kate Hunington</p>
-                                    <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Designer</p>
-                            <p class="text-muted mb-0">UI/UX</p>
-                        </td>
-                        <td>
-                            <span class="badge badge-warning rounded-pill">Awaiting</span>
-                        </td>
-                        <td>Senior</td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm btn-rounded">
-                                Deactive
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm btn-rounded">
-                                Active
-                            </button>
-                        </td>
-                    </tr>
+
+
                 </tbody>
+                {% endif %}
+                {%endfor%}
             </table>
         </div>
     </section>
