@@ -19,16 +19,8 @@ def index_page(request):
         for i in user_list:
             pro_list[ln] = [Product.objects.filter(seller__id = i)[:4]]
             ln +=1
-
-    if request.method == 'POST':
-        item = request.POST.get('item')
-        if item !="":
-            return redirect('/product/filter/'+item)
         
-    # collection = Product.objects.filter(seller__id = user_list[0])
-    # for i in range(1,len(user_list)):
-    #     data =  Product.objects.filter(seller__id = user_list[i])
-    #     collection |= data
+
     context={
         'room_name':"broadcast",
         'products':products,
@@ -45,7 +37,8 @@ def index_page(request):
             subject = request.POST.get('subject')
             email = request.POST.get('email')
             desc = request.POST.get('desc') + "\n" + "Reply Email: "+email
-            test = send_mail(subject, desc, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+            test = send_mail(subject, desc, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+
             if test==1:
                 messages.success(request,"Message Sent Successfully! '\n' Please check your mailbox for reply ")
                 return redirect("/")

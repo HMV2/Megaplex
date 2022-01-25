@@ -24,6 +24,8 @@ class Profile(models.Model): #Model to create profile for users
     cover_pic = models.FileField(upload_to='covers', default='cover.jpg', blank=True, null=True)
     verified = models.BooleanField(default=False)
     desc = models.TextField(max_length=10000, blank=True, null=True)
+    product_sold = models.IntegerField(default=0, blank=True, null=True)
+    active = models.BooleanField(default=True, blank=True, null=True)
 
 
     def __str__(self):
