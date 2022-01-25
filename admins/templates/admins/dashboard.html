@@ -33,8 +33,8 @@
                     <div class="ms-4">
                         <p class="text-muted mb-2">Users</p>
                         <p class="mb-0">
-                            <span class="h5 me-2">14 567 </span>
-                            <small class="text-success text-sm"><i class="fas fa-arrow-up fa-sm me-1"></i>13,48%</small>
+                            <span class="h5 me-2">{{users_count}}</span>
+                            <small class="text-success text-sm"><i class="fas fa-arrow-up fa-sm me-1"></i>13.48%</small>
                         </p>
                     </div>
                 </a>
@@ -58,10 +58,10 @@
                     </div>
 
                     <div class="ms-4">
-                        <p class="text-muted mb-2">Page views</p>
+                        <p class="text-muted mb-2">Product views</p>
                         <p class="mb-0">
-                            <span class="h5 me-2">51 354</span>
-                            <small class="text-success text-sm"><i class="fas fa-arrow-up fa-sm me-1"></i>23,58%</small>
+                            <span class="h5 me-2">{{view_count}}</span>
+                            <small class="text-success text-sm"><i class="fas fa-arrow-up fa-sm me-1"></i>23.58%</small>
                         </p>
                     </div>
                 </a>
@@ -145,7 +145,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                {% for user in  user_info %}
+                {% for user in  users %}
 
                
                 <tbody class="">
@@ -157,6 +157,12 @@
                                 <div class="ms-3">
                                     <p class="fw-bold mb-1 text-black">{{user.profile.firstname}} {{user.profile.lastname}}</p>
                                     <p class="text-muted mb-0">{{user.email}}</p>
+                                <img src="{{user.profile.profile_pic.url}}" alt="User" style="width: 45px; height: 45px"
+                                    class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1 text-black">{{user.profile.firstname}}
+                                        {{user.profile.lastname}}</p>
+                                    <p class="text-muted mb-0">{{user.profile.email}}</p>
                                 </div>
                             </div>
                         </td>
@@ -172,7 +178,8 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
-                                <label class="form-check-label text-black" for="flexSwitchCheckDefault">Change the status</label>
+                                <label class="form-check-label text-black" for="flexSwitchCheckDefault">Change the
+                                    status</label>
                             </div>
 
                         </td>
@@ -180,8 +187,8 @@
 
 
                 </tbody>
-   
-                {%endfor%}
+
+                {% endfor %}
             </table>
         </div>
     </section>
@@ -196,16 +203,41 @@
                     <!-- Card header -->
                     <div class="p-4 border-bottom">
                         <div class="row align-items-center">
-                            <div class="col-6 mb-4 mb-md-0">
-                                <p class="text-muted mb-2">Users</p>
-                                <p class="mb-0">
-                                    <span class="h5 me-2">14 567 </span>
-                                    <small class="text-success text-sm"><i
-                                            class="fas fa-arrow-up fa-sm me-1"></i>13,48%</small>
-                                </p>
+                            <div class="col-12 mb-8 mb-md-0">
+                                <h1 class="text-center mb-2">Top Sellers</h1>
+ 
+                                    <table class="
+                    table table-borderless table-hover
+                    align-middle
+                    mb-0
+                    ">
+                                        <thead class="">
+                                            <tr>
+                                                <th >Name</th>
+                                                <th style="text-align:center">Items Sold</th>
+                                            </tr>
+                                        </thead>
+                                        {% for user in  top_seller %}
+
+                                        <tbody class="">
+                                            <tr class="text-white">
+                                                <td >
+                                                    <p class="fw-bold mb-1 text-black">{{user.firstname}}
+                                                        {{user.lastname}}</p>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <span
+                                                        class="badge badge-success rounded-pill">{{user.product_sold}}</span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
                             </div>
 
-                            <div class="col-6 mb-4 mb-md-0 text-end">
+                            <div class="col-12 mb-8 mb-md-0 text-end">
                                 <a class="btn btn-outline-white btn-rounded" href="#" role="button">Details</a>
                             </div>
                         </div>
@@ -213,9 +245,6 @@
                     <!-- Card header -->
 
                     <!-- Card body -->
-                    <div class="p-4">
-                        <canvas id="line-chart" height="200px"></canvas>
-                    </div>
                     <!-- Card body -->
                 </div>
                 <!-- Card -->
@@ -227,16 +256,38 @@
                     <!-- Card header -->
                     <div class="p-4 border-bottom">
                         <div class="row align-items-center">
-                            <div class="col-6 mb-4 mb-md-0">
-                                <p class="text-muted mb-2">Location</p>
-                                <p class="mb-0">
-                                    <span class="h5 me-2">Top country: USA </span>
-                                </p>
+                            <div class="col-12 mb-8 mb-md-0">
+                                <h1 class="text-center mb-2">Top Products</h1>
+                                 <table class="
+                    table table-borderless table-hover
+                    align-middle
+                    mb-0
+                    ">
+                                        <thead class="">
+                                            <tr>
+                                                <th >Product Name</th>
+                                                <th style="text-align:center">Total Views</th>
+                                            </tr>
+                                        </thead>
+                                        {% for pro in  top_products %}
+
+                                        <tbody class="">
+                                            <tr class="text-white">
+                                                <td >
+                                                    <p class="fw-bold mb-1 text-black">{{pro.name}}</p>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <span
+                                                        class="badge badge-success rounded-pill">{{pro.view_count}}</span>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
                             </div>
 
-                            <div class="col-6 mb-4 mb-md-0 text-end">
-                                <a class="btn btn-outline-white btn-rounded" href="#" role="button">Details</a>
-                            </div>
                         </div>
                     </div>
                     <!-- Card header -->
