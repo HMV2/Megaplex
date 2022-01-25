@@ -141,33 +141,33 @@
                         <th>Name</th>
                         <th>Customer type</th>
                         <th>Status</th>
-                        <th>Position</th>
+                        <th>Last Access</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 {% for user in  user_info %}
 
-                {% if profile != 0 %}
+               
                 <tbody class="">
                     <tr class="text-white">
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                <img src="/{{user.profile.profile_pic}}" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle" />
                                 <div class="ms-3">
-                                    <p class="fw-bold mb-1 text-black">{{user.firstname}} {{user.lastname}}</p>
+                                    <p class="fw-bold mb-1 text-black">{{user.profile.firstname}} {{user.profile.lastname}}</p>
                                     <p class="text-muted mb-0">{{user.email}}</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p class="fw-bold mb-1 text-black">{{profile.plan}}</p>
-                            <p class="text-muted mb-0">City: {{profile.city}}</p>
+                            <p class="fw-bold mb-1 text-black">{{user.profile.plan}}</p>
+                            <p class="text-muted mb-0">City: {{user.profile.city}}</p>
                         </td>
                         <td>
                             <span class="badge badge-success rounded-pill">{{user.is_active}}</span>
                         </td>
-                        <td>Senior</td>
+                        <td class="text-black">{{user.last_login}}</td>
                         <td>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
@@ -180,7 +180,7 @@
 
 
                 </tbody>
-                {% endif %}
+   
                 {%endfor%}
             </table>
         </div>

@@ -7,13 +7,13 @@ from account.models import Profile
 # Create your views here.
 def dashboard(request):
     users = User.objects.all()
-    profile = Profile.objects.all()
+
     user_info = users.filter(is_staff=0)
     admin_info = users.filter(is_staff=1)
     context={
         'admin_info':admin_info,
         'user_info':user_info,
-        'profile': profile
+
         
     }
     return render(request, 'admins/dashboard.html',context)

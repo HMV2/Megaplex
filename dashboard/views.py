@@ -261,3 +261,6 @@ def wishlist(request):
     products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
+
+def wallet(request):
+    return render(request,'dashboard/wallet.html')

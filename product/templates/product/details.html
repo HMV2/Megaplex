@@ -143,7 +143,7 @@
                                                 {% else %}
                                                 <button type="submit" class="btn btn-danger text-nowrap" disabled>Send<i
                                                         class="fas fa-long-arrow-alt-right ms-1"></i></button>
-                                                
+
                                                 {% endif %}
                                             </div>
                                             {% if not user.is_authenticated %}
@@ -161,8 +161,10 @@
                                         <div class="col-md-12 col-lg-10 col-xl-8 w-100">
                                             <div class="card border-15 ">
                                                 <div class="card-body">
-                                                    <div class="d-flex flex-start flex-column align-items-center mb-3  justify-content-between">
-                                                        <div class="d-flex justify-content-between w-100 align-items-center mb-1">
+                                                    <div
+                                                        class="d-flex flex-start flex-column align-items-center mb-3  justify-content-between">
+                                                        <div
+                                                            class="d-flex justify-content-between w-100 align-items-center mb-1">
                                                             <div class="d-flex align-items-center gap-2">
                                                                 <img src="{{c.user.profile.profile_pic.url}}" alt="User"
                                                                     style="vertical-align: middle; width: 35px;height: 35px;border-radius: 50%;">
@@ -193,7 +195,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                          
+
                                                             {% endif %}
 
                                                         </div>
@@ -280,32 +282,32 @@
 
                                                         {% if request.user == c.user %}
 
-                                                            <div class="dropdown">
-                                                                <button class="border-0 bg-transparent" type="button"
-                                                                    id="dropdownMenuButton1" data-mdb-toggle="dropdown"
-                                                                    aria-expanded="false">
-                                                                    <i class="fas fa-ellipsis-v"></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu"
-                                                                    aria-labelledby="dropdownMenuButton1">
-                                                                    <li><a class="dropdown-item " href="#"><i
-                                                                                class="fas fa-edit me-2"></i>
-                                                                            Edit</a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item" href="#"><i
-                                                                                class="fas fa-trash me-2"></i>
-                                                                            Delete</a></li>
-                                                                    <li><a class="dropdown-item" href="#"><i
-                                                                                class="fas fa-flag me-2"></i>Report</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                          
-                                                            {% endif %}
-                                                       
+                                                        <div class="dropdown">
+                                                            <button class="border-0 bg-transparent" type="button"
+                                                                id="dropdownMenuButton1" data-mdb-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item " href="#"><i
+                                                                            class="fas fa-edit me-2"></i>
+                                                                        Edit</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="#"><i
+                                                                            class="fas fa-trash me-2"></i>
+                                                                        Delete</a></li>
+                                                                <li><a class="dropdown-item" href="#"><i
+                                                                            class="fas fa-flag me-2"></i>Report</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                        {% endif %}
+
                                                     </div>
                                                     <p class="text-muted small mb-0 me-auto mt-1">
-                                                            Shared publicly - {{c.timestamp}}
+                                                        Shared publicly - {{c.timestamp}}
                                                     </p>
 
 
@@ -367,7 +369,8 @@
                 <div class="col-md-10 mx-auto col-lg-4 mt-md-0">
                     <div class="p-md-3 rounded-5 border">
                         <div class="d-flex justify-content-around  mt-3 mb-3 ">
-                            <img class="img-fluid rounded-circle w-25" src="{{product.seller.profile.profile_pic.url}}" alt="">
+                            <img class="img-fluid rounded-circle w-25" src="{{product.seller.profile.profile_pic.url}}"
+                                alt="">
                             <div class="d-flex flex-column text-center">
                                 <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> Kathmandu</h6>
@@ -395,6 +398,39 @@
                             {% endif %}
                             {% endif %}
                         </form>
+
+                        <!-- <div class="shadow" style="border-radius: 7px;">
+                            <p>Pay in Advance</p>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input name="amountInput" type="number" id="amount" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                            </div>
+                            <label for="description">$  </label><input name="amountInput" type="number" id="amount" value="" placeholder="">
+
+                        </div> -->
+                        <div id="smart-button-container" class="shadow">
+                            <div>
+                                <p class="text-danger fw-bold">Pay in Advance</p>
+                                <div style="text-align: center"><input class="form-control p-3"
+                                        placeholder="Enter Payment Remark" type="text" name="descriptionInput"
+                                        id="description" maxlength="127" value=""></div>
+                                <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">
+                                    Please enter a description</p>
+
+                                <div style="text-align: center"><input placeholder="Enter Amount" class="form-control p-3"
+                                        name="amountInput" type="number" id="amount" value=""><span> USD</span></div>
+                                <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">
+                                    Please enter a price</p>
+                                <div id="invoiceidDiv" style="text-align: center; display: none;"><label
+                                        for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text"
+                                        id="invoiceid" value=""></div>
+                                <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please
+                                    enter an Invoice ID</p>
+                                <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -417,8 +453,9 @@
 
                         <div class="card-head position-absolute w-100 h-100 top-0">
                             <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph" href="/product/details/{{i.id}}" class="unlink">
-                                View 
+                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph"
+                                href="/product/details/{{i.id}}" class="unlink">
+                                View
                             </a>
                         </div>
                     </div>
@@ -453,4 +490,117 @@
 
 {% block js_files %}
 <script src="{% static 'javascript/like_toggle.js' %}"></script>
+
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AYdanYvatISjosyThdFiio_A3UpFBvkN_uOlp_XAVeUEF982LZB1DTVOs4gU85thOdWTF7Ae_3NudXVS&enable-funding=venmo&currency=USD"
+    data-sdk-integration-source="button-factory"></script>
+<script>
+    function initPayPalButton() {
+        var description = document.querySelector('#smart-button-container #description');
+        var amount = document.querySelector('#smart-button-container #amount');
+        var descriptionError = document.querySelector('#smart-button-container #descriptionError');
+        var priceError = document.querySelector('#smart-button-container #priceLabelError');
+        var invoiceid = document.querySelector('#smart-button-container #invoiceid');
+        var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
+        var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
+
+        var elArr = [description, amount];
+
+        if (invoiceidDiv.firstChild.innerHTML.length > 1) {
+            invoiceidDiv.style.display = "block";
+        }
+
+        var purchase_units = [];
+        purchase_units[0] = {};
+        purchase_units[0].amount = {};
+
+        function validate(event) {
+            return event.value.length > 0;
+        }
+
+        paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay',
+                layout: 'horizontal',
+                tagline: true
+            },
+
+            onInit: function (data, actions) {
+                actions.disable();
+
+                if (invoiceidDiv.style.display === "block") {
+                    elArr.push(invoiceid);
+                }
+
+                elArr.forEach(function (item) {
+                    item.addEventListener('keyup', function (event) {
+                        var result = elArr.every(validate);
+                        if (result) {
+                            actions.enable();
+                        } else {
+                            actions.disable();
+                        }
+                    });
+                });
+            },
+
+            onClick: function () {
+                if (description.value.length < 1) {
+                    descriptionError.style.visibility = "visible";
+                } else {
+                    descriptionError.style.visibility = "hidden";
+                }
+
+                if (amount.value.length < 1) {
+                    priceError.style.visibility = "visible";
+                } else {
+                    priceError.style.visibility = "hidden";
+                }
+
+                if (invoiceid.value.length < 1 && invoiceidDiv.style.display === "block") {
+                    invoiceidError.style.visibility = "visible";
+                } else {
+                    invoiceidError.style.visibility = "hidden";
+                }
+
+                purchase_units[0].description = description.value;
+                purchase_units[0].amount.value = amount.value;
+
+                if (invoiceid.value !== '') {
+                    purchase_units[0].invoice_id = invoiceid.value;
+                }
+            },
+
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: purchase_units,
+                });
+            },
+
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+
+                    // Full available details
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                    // Show a success message within this page, e.g.
+                    const element = document.getElementById('paypal-button-container');
+                    element.innerHTML = '';
+                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+
+                });
+            },
+
+            onError: function (err) {
+                console.log(err);
+            }
+        }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+</script>
+
 {% endblock js_files %}
