@@ -13,12 +13,12 @@
             {% endif %}
             <div class="d-flex">
               {% if search_item %}
-            <p><span class="badge bg-light text-black">{{search_item}}</span></p>
-            {% endif %}
-            {% if min_tag %}
-            <p><span class="badge bg-light text-black">Minimum Price: {{min_price1}}</span></p>
-            <p><span class="badge bg-light text-black">Maximum Price: {{max_price1}}</span></p>
-            {% endif %}
+              <p><span class="badge bg-light text-black">{{search_item}}</span></p>
+              {% endif %}
+              {% if min_tag %}
+              <p><span class="badge bg-light text-black">Minimum Price: {{min_price1}}</span></p>
+              <p><span class="badge bg-light text-black">Maximum Price: {{max_price1}}</span></p>
+              {% endif %}
             </div>
           </li>
 
@@ -37,33 +37,34 @@
             </ul>
           </li>
           <li>
-              <form method="POST" class="d-flex">
-                {% csrf_token %}
-                <input type="hidden" name="form_type" value="search">
-                <input type="search" id="form1" class="form-control" name="key" placeholder="Search..." aria-label="Search"/>
-                <button type="Submit" class="btn btn-md btn-primary">Search</button>
-              </form>
+            <form method="POST" class="d-flex">
+              {% csrf_token %}
+              <input type="hidden" name="form_type" value="search">
+              <input type="search" id="form1" class="form-control" name="key" placeholder="Search..."
+                aria-label="Search" />
+              <button type="Submit" class="btn btn-md btn-primary">Search</button>
+            </form>
           </li>
         </div>
         <div class="row">
           {% for pro in products %}
           <div class="col-6 col-md-6 col-lg-4 mb-3">
             <a href="/product/details/{{pro.id}}" class="unlink">
-            <div class="card border overflow-hidden border-15 mb-3">
-              <div class="">
-                <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
+              <div class="card border overflow-hidden border-15 mb-3">
+                <div class="">
+                  <img src="{{pro.picture.url}}" alt="{{pro.name}}" style="aspect-ratio: 1/1;" />
 
-              </div>
-              <div class="m-3">
-                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                <div class="d-flex justify-content-between">
-                  <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                  <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
                 </div>
-              </div>
+                <div class="m-3">
+                  <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                  <div class="d-flex justify-content-between">
+                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                    <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
+                  </div>
+                </div>
 
-            </div>
-          </a>
+              </div>
+            </a>
           </div>
           {% endfor %}
         </div>
@@ -82,13 +83,15 @@
                   <a class="page-link">Previous</a>
                 </li>
                 {% if products.has_previous %}
-                <li class="page-item"><a class="page-link" href="?products.previous_page_number">{{products.prevoius_page_number}}</a></li>
+                <li class="page-item"><a class="page-link"
+                    href="?products.previous_page_number">{{products.prevoius_page_number}}</a></li>
                 {% endif %}
                 <li class="page-item active" aria-current="page">
                   <a class="page-link" href="#">{{products.number}} <span class="visually-hidden">(current)</span></a>
                 </li>
                 {% if products.has_next %}
-                <li class="page-item"><a class="page-link" href="?products.next_page_number">{{products.next_page_number}}</a></li>
+                <li class="page-item"><a class="page-link"
+                    href="?products.next_page_number">{{products.next_page_number}}</a></li>
                 {% endif %}
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
@@ -101,7 +104,76 @@
     </div>
     <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
       <h3 class="mt-0 mb-3">Advance Filter</h3>
-      <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
+
+      <div class="accordion" id="accordionExample">
+
+        <div class="accordion-item">
+          <h2 class="text-uppercase font-weight-bold mb-3" id="headingOne">
+            <button class="accordion-button text-uppercase font-weight-bold mb-3" type="button"
+              data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">
+              Categories
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-mdb-parent="#accordionExample">
+            
+            <div class="accordion-body">
+              <div class="  pl-2">
+              <a class="custom-control-label" href="/product/filter">All Categories</a>
+            </div>
+              {% for cat in category %}
+              <div class="mt-2 mb-2 pl-2">
+                <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Brands
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              {% for bat in brand %}
+              <div class="mt-2 mb-2 ps-2">
+                <a class="custom-control-label" href="?brand={{bat.id}}">{{bat.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              colors
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              {% for col in colors %}
+              <div class="mt-2 mb-2 pl-2">
+                <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
       <div class="mt-2 mb-2 pl-2">
         <a class="custom-control-label" href="/product/filter">All Categories</a>
       </div>
@@ -125,7 +197,7 @@
       <div class="mt-2 mb-2 pl-2">
         <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
       </div>
-      {% endfor %}
+      {% endfor %} -->
 
       <form method="POST">
         {% csrf_token %}
@@ -135,11 +207,13 @@
         <div class="price-filter-control d-flex flex-column">
           <div>
             <label for="price-min-control"> Min Price </label>
-            <input type="number" class="form-control mb-2 me-2" id="price-min-control" name="minPrice" value="{{min_price1}}"> <br>
+            <input type="number" class="form-control mb-2 me-2" id="price-min-control" name="minPrice"
+              value="{{min_price1}}"> <br>
           </div>
           <div>
             <label for="price-max-control"> Max Price </label>
-            <input type="number" class="form-control mb-2" id="price-min-control" name="maxPrice" value="{{max_price1}}">
+            <input type="number" class="form-control mb-2" id="price-min-control" name="maxPrice"
+              value="{{max_price1}}">
           </div>
           <button type="Submit" class="btn btn-lg btn-primary w-100 mb-4">Update Results</button>
         </div>
