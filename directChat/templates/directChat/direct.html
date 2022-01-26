@@ -62,10 +62,14 @@
                           href="{% url 'directs' message.user.id %}">
                           <div class="d-flex flex-row">
                             <div class="pt-1 d-flex">
-                              <p class="fw-bold mb-0">{{message.user.first_name}} {{message.user.last_name}}</p>
+                              <p class="fw-bold mb-0">{{message.user.first_name}} {{message.user.last_name}}
+                              </p>
+                              
                               {% if message.unread > 0 %}
-                              <p class="badge rounded-pill bg-danger">{{message.unread}}</p>
-                              {% endif %}
+                                <p class="badge bg-danger ms-2">New {{message.unread}}</p>
+                                {% endif %}
+                              
+                              
 
                             </div>
                           </div>

@@ -12,11 +12,8 @@
     <div class="cover position-relative">
         <img src="{{user.profile.cover_pic.url}}" alt="" class="cover-img" />
         <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
-            <a class="btn border border-2 rounded-pill text-white" data-toggle="modal" data-target="#exampleModal">
-                edit cover page
-            </a>
-            <a data-toggle="modal" data-target="#exampleModal" class="btn border border-2 rounded-pill text-white">edit
-                profile</a>
+            <button type="button" class="btn btn-light text-success" data-mdb-ripple-color="dark">Available ✅</button>
+            <!-- <button type="button" class="btn btn-light text-black" data-mdb-ripple-color="dark">Offline</button> -->
         </div>
     </div>
 
@@ -74,11 +71,11 @@
                 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
-                            aria-controls="ex1-tabs-1" aria-selected="true">Active</a>
+                            aria-controls="ex1-tabs-1" aria-selected="true">Active Product</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                            aria-controls="ex1-tabs-2" aria-selected="false">Inactive</a>
+                            aria-controls="ex1-tabs-2" aria-selected="false">Sold Product</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
@@ -118,18 +115,22 @@
                                         <form action="/product/{{pro.id}}/like" method="POST">
                                             {% csrf_token %}
 
-                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger" data-new="{{pro.id}}" ><i
-                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                            <button type=" submit"
+                                                class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger"
+                                                data-new="{{pro.id}}"><i class="fas fa-heart my-2 mx-2"
+                                                    data-new="{{pro.id}}"></i></button>
                                         </form>
                                         {% else %}
                                         <form action="/product/{{pro.id}}/like" method="POST">
                                             {% csrf_token %}
 
-                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute" data-new="{{pro.id}}"><i
-                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
+                                            <button type=" submit"
+                                                class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute"
+                                                data-new="{{pro.id}}"><i class="fas fa-heart my-2 mx-2"
+                                                    data-new="{{pro.id}}"></i></button>
                                         </form>
                                         {% endif %}
-                                        <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph"
+                                        <a class="btn btn-danger position-absolute w-100 text-white buyNow-btn"
                                             href="/product/details/{{pro.id}}">
                                             View More
                                         </a>
@@ -143,13 +144,17 @@
                                             {{pro.price}}</strong>
                                     </div>
                                     <hr class="dropdown-divider" />
-                                    <div class="d-flex gap-2 align-items-center">
+                                    <div class="d-flex gap-2 justify-content-between">
                                         <a class="text-nowrap btn btn-primary"
-                                            href="/dashboard/editProduct/{{pro.id}}"><i
-                                                class="fas fa-pen-square"></i></a>
+                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i class="fas fa-pen-square"></i></a>
                                         <a class="text-nowrap btn btn-danger"
                                             href="/dashboard/removeProduct/{{pro.id}}"><i
                                                 class="fas fa-trash-alt"></i></a>
+
+                                        <a class="text-nowrap btn btn-success "
+                                            href="#">Sold <i class="fas fa-check"></i></a>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +175,8 @@
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class="">
-                                    <img src="{{ pro.picture.url }}" alt="" style="aspect-ratio: 1/1.1; object-fit: cover;" />
+                                    <img src="{{ pro.picture.url }}" alt=""
+                                        style="aspect-ratio: 1/1.1; object-fit: cover;" />
 
                                 </div>
                                 <div class="m-3">
@@ -206,21 +212,24 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        
+
         <div class="modal-content">
-             <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur" ></span>
-        <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur" ></span>
-        <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur" ></span>
-        <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 " > <img src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png" alt=""></span> 
+            <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur"></span>
+            <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur"></span>
+            <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur"></span>
+            <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 "> <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png"
+                    alt=""></span>
             <div class=" pt-4  pb-2">
-                   
+
                 <h5 class="modal-title text-center m-auto fs-2 " id="exampleModalLabel ">Edit Profile</h5>
-            
-                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal" aria-label="Close">
+
+                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" >
+            <form method="POST">
                 <input type="hidden" name="tp" value="profile">
                 <div class="modal-body">
                     {% csrf_token %}
