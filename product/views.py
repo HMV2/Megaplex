@@ -58,10 +58,10 @@ def product_details(request,product_id):
                 to_user = User.objects.get(id=request.POST.get('to_user'))
             Chat_Message.send_message(from_user, to_user, body)
             messages.success(request,"Message Sent Successfully!")
-            return render(request, 'product/details.html',context)
+            redirect('/product/details/'+str(product_id))
         elif formType == "message" and request.POST.get('body')=="":
             messages.error(request,"Please insert message to send!")
-            return render(request, 'product/details.html',context)
+            redirect('/product/details/'+str(product_id))
 
         elif formType=="comment" and request.POST.get('comment')!="":
             comment = request.POST.get('comment')
