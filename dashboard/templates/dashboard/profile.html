@@ -27,6 +27,7 @@
             {% else %}
             <h4><span class="badge bg-danger">Unverified <i class="fa fa-badge-cross"></i></span></h4>
             {% endif %}
+            <p>{{profile.plan}}</p>
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
             <a href="/dashboard/follower_list/{{profile.id}}" class="text-danger">{{profile.followers.all.count}}
                 followers</a>
@@ -132,7 +133,7 @@
                                         {% endif %}
                                         <a class="btn btn-danger position-absolute w-100 text-white buyNow-btn"
                                             href="/product/details/{{pro.id}}">
-                                            View More
+                                            Perview my product
                                         </a>
                                     </div>
                                 </div>
