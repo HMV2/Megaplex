@@ -5,6 +5,7 @@ from django.contrib import messages, auth
 from .models import Profile
 from django.contrib import messages
 from django.contrib.auth.models import User
+from directChat.views import get_unread
 
 
 def login(request):
@@ -26,10 +27,10 @@ def login(request):
 
         else:
             messages.add_message(request, messages.ERROR, "Invalid Username and Password!")
-            return render(request, 'account/login.html',{'room_name':"broadcast"})
+            return render(request, 'account/login.html',{'room_name':"broadcast",'get_unread':get_unread(request)})
 
     else:
-        return render(request, 'account/login.html',{'room_name':"broadcast",})
+        return render(request, 'account/login.html',{'room_name':"broadcast",'get_unread':get_unread(request)})
 
 
 
@@ -46,11 +47,12 @@ def register(request):
             return redirect('/')
         else:
             messages.add_message(request, messages.ERROR,"User Registration Failed!")
-            return render(request, 'account/register.html', {'form':form,'room_name':"broadcast"})
+            return render(request, 'account/register.html', {'form':form,'room_name':"broadcast",'get_unread':get_unread(request)})
         
     context={
         'room_name':"broadcast",
-        'form':form
+        'form':form,
+        'get_unread':get_unread(request)
     }
     return render(request, "account/register.html", context)
 

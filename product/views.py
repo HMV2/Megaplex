@@ -11,6 +11,7 @@ from django.contrib import messages
 from .templatetags import extras
 from django.http import JsonResponse
 import random
+from directChat.views import get_unread
 
 
 def product_details(request,product_id):
@@ -42,7 +43,8 @@ def product_details(request,product_id):
         'comments':comments,
         'count':comment_count,
         'reply':repDict,
-        'recommended_products':recommended_products
+        'recommended_products':recommended_products,
+        'get_unread':get_unread(request)
     }
     if request.method == 'POST':
         formType = request.POST.get('formType')
@@ -150,7 +152,8 @@ def filter_page(request):
         'min_price1':min_pri,
         'max_price1':max_pri,
         'search_item': search_item,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -219,7 +222,8 @@ def searchProduct(request, item):
         'min_price1':min_pri,
         'max_price1':max_pri,
         'search_item': search_item,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -286,7 +290,8 @@ def searchUserProduct(request, user):
         'min_tag':min_tag,
         'min_price1':min_pri,
         'max_price1':max_pri,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -376,7 +381,8 @@ def explorepage(request):
         'electro_id':electro_id,
         'cloth_id':cloth_id,
         'auto_id':auto_id,
-        'sports_id':sports_id
+        'sports_id':sports_id,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/explore.html',context)
            

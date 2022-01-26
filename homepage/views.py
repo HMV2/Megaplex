@@ -8,6 +8,7 @@ from product.models import Product
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from directChat.views import get_unread
 
 def index_page(request):
     products = Product.objects.all()[:10]
@@ -24,7 +25,8 @@ def index_page(request):
     context={
         'room_name':"broadcast",
         'products':products,
-        'collection':pro_list
+        'collection':pro_list,
+        'get_unread':get_unread(request)
     }
     if request.method == 'POST':
         type = request.POST.get('type')
@@ -60,7 +62,8 @@ def category(request):
     context={
         'room_name':"broadcast",
         'products':category,
-        'category':category
+        'category':category,
+        'get_unread':get_unread(request)
     }
     return render(request, 'homepage/category.html', context)
 

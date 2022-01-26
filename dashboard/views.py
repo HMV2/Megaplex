@@ -1,3 +1,4 @@
+from re import M
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -11,6 +12,7 @@ from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from directChat.views import get_unread
 
 # Create your views here.
 
@@ -33,7 +35,8 @@ def profile(request):
         'active_products':active_products,
         'inactive_products':inactive_products,
         'form':form,
-        'pform':pform
+        'pform':pform,
+        'get_unread':get_unread(request)
     }
     if request.method == "POST":
         tp = request.POST.get("tp")
@@ -54,7 +57,7 @@ def profile(request):
                 return redirect('/dashboard/profile')
             else:
                 messages.error(request,"Something went wrong!")
-                return render(request, 'dashboard/profile.html', {'form':form})
+                return render(request, 'dashboard/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     return render(request, 'dashboard/profile.html',context)
 
@@ -62,18 +65,18 @@ def profile(request):
 def change_password(request):
     """Function for changing user's password!"""
     if request.method == "POST":
-        pform = PasswordChangeForm(data=request.POST, user = request.user)
+        form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('/accounts/profile')
         else:
             messages.add_message(request, messages.ERROR,"Something Went Wrong!")
-            return render(request, 'accounts/profile.html', {'form':form})
+            return render(request, 'accounts/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form':form, 'room_name':"broadcast",}
+        context = {'form':form, 'room_name':"broadcast",'get_unread':get_unread(request)}
         return render(request, 'accounts/change_password.html', context)
 
 
@@ -98,7 +101,7 @@ def User_Profile(request,profile_id):
         'profile':profile,
         'is_following': is_following,
         'profile_active':'is-active',
-        'form':form
+        'get_unread':get_unread(request)
         }
     return render (request,'dashboard/profile.html',context)
 
@@ -226,7 +229,8 @@ def addProduct(request):
     form = ProductForm()
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/addProduct.html',context)
 
@@ -244,7 +248,8 @@ def editProduct(request, product_id):
             messages.success(request,"Failed to update product!")
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/editProduct.html',context)
 
