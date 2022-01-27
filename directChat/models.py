@@ -34,7 +34,6 @@ class Chat_Message(models.Model):
 
 	def get_messages(user):
 		messages = Chat_Message.objects.filter(user=user).values('recipient').annotate(last=Max('date')).order_by('-last')
-		print(messages)
 		users = []
 		for message in messages:
 			users.append({
@@ -52,5 +51,4 @@ class Chat_Message(models.Model):
 		# for i in messages:
 		# 	if not i.is_read:
 		# 		count += 1
-		print(count)
 		return count

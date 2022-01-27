@@ -2,7 +2,7 @@ from re import M
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from account.forms import ProfileForm
+from account.forms import PartialProfileForm as ProfileForm
 from account.models import Profile
 from product.models import Product
 from django.http import JsonResponse
@@ -14,12 +14,14 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
 
+
 # Create your views here.
 
 @login_required
 def profile(request):
     user = Profile.objects.get(user=request.user)
     form = ProfileForm(instance=user)
+    
     pform = PasswordChangeForm(user=request.user)
     try:
         active_products = Product.objects.filter(seller=request.user, is_active=True)
@@ -42,7 +44,8 @@ def profile(request):
         tp = request.POST.get("tp")
         if tp == "profile":
             form = ProfileForm(request.POST, request.FILES, instance = user)
-            if form.is_valid():
+            # PartialFooForm = modelform_factory(Profile, form=form,fields))
+            if form.is_valid:
                 form.save()
                 messages.success(request,"Successfully updated the profile!")
                 return redirect('/dashboard/profile')

@@ -20,8 +20,8 @@
     <div class="profile container-sm row m-auto fixed">
         <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg-white ">
 
-            <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  "
-                    src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            <span class="m-auto w-50"><img class="rounded-circle w-100 h-100  " src="{{profile.profile_pic.url}}"
+                    alt="" /></span>
             {% if user.profile.verified %}
             <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
             {% else %}
@@ -146,13 +146,14 @@
                                     <hr class="dropdown-divider" />
                                     <div class="d-flex gap-2 justify-content-between">
                                         <a class="text-nowrap btn btn-primary"
-                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i class="fas fa-pen-square"></i></a>
+                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i
+                                                class="fas fa-pen-square"></i></a>
                                         <a class="text-nowrap btn btn-danger"
                                             href="/dashboard/removeProduct/{{pro.id}}"><i
                                                 class="fas fa-trash-alt"></i></a>
 
-                                        <a class="text-nowrap btn btn-success "
-                                            href="#">Sold <i class="fas fa-check"></i></a>
+                                        <a class="text-nowrap btn btn-success " href="#">Sold <i
+                                                class="fas fa-check"></i></a>
 
 
                                     </div>
@@ -161,13 +162,12 @@
                         </div>
                         {% endfor %}
                         {% else %}
-                        You have no inactive products
+                        You have no active products
                         {% endif %}
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                    Tab 2 content
 
                     {% if inactive_products != None %}
                     <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
@@ -198,7 +198,6 @@
 
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                    Tab 3 content
 
                 </div>
 
@@ -229,7 +228,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="tp" value="profile">
                 <div class="modal-body">
                     {% csrf_token %}
@@ -246,7 +245,7 @@
                             {{ form.phone | as_crispy_field }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ form.plan | as_crispy_field }}
+                            {{ form.active | as_crispy_field }}
                         </div>
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">
@@ -259,7 +258,7 @@
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">
                         <div class="form-group col-md-12 me-1">
-                            {{ form.cover_pic | as_crispy_field }}
+                            {{ form.profile_pic | as_crispy_field }}
                         </div>
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">

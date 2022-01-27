@@ -38,3 +38,9 @@ class ProfileForm(ModelForm):
         model = Profile
         fields = "__all__"
         exclude = ['user', 'email', 'username']
+
+
+class PartialProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("firstname", "lastname","phone", "active","district","city","profile_pic","desc")
