@@ -24,7 +24,7 @@
                                 <div class="d-flex">
                                     <div class="me-2">
                                         <label for="exampleInputEmail1" class="form-label">Sender @</label>
-                                        <input placeholder="$" name="Sender1" class="form-control">
+                                        <input placeholder="$" name="Sender1" class="form-control" value="{{ request.user.profile.username }}">
                                     </div>
                                     <div>
                                         <label for="exampleInputEmail1" class="form-label">Receiver</label>
