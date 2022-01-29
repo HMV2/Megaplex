@@ -1,0 +1,157 @@
+{% extends 'layout.html' %} {% load static %}
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/wallet.css' %}" />
+
+{% endblock css_files %}
+{% block main_content %}
+
+<div class="container">
+
+
+    <div class="row m-5">
+        <div class="col-8">
+            <h1 class="M-logo">Megaplex wallet</h1>
+            <hr>
+            <div class="d-flex">
+                <div>
+                    <form class="row shadow p-4 border-15 d-flex justify-content-between" method="POST">
+                        {% csrf_token %}
+                        <div class="col-lg-8">
+                            <p class="text-danger">Sent money to another wallet</p>
+
+                            <div class="mb-3">
+                                <div class="d-flex">
+                                    <div class="me-2">
+                                        <label for="exampleInputEmail1" class="form-label">Sender @</label>
+                                        <input placeholder="$" name="Sender1" class="form-control" value="{{ request.user.profile.username }}">
+                                    </div>
+                                    <div>
+                                        <label for="exampleInputEmail1" class="form-label">Receiver</label>
+                                        <input placeholder="@" name="Receiver1" class="form-control ">
+                                    </div>
+                                </div>
+                                <div id="emailHelp" class="form-text">
+                                    Secure payment gateway between client
+                                </div>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Amount in ($)</label>
+                                <input class="form-control w-75" placeholder="$" name="amount1"
+                                    aria-describedby="emailHelp">
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Check Transfer</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <img src="{% static 'images/plane.png' %}" alt="" id="houseimg">
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <div class='card'>
+                <div class='top-block'>
+                    <div class='card-chip'>
+                        <i class="fa fs-1 fa-wallet"></i>
+                    </div>
+                    <span class='card-name'> Wallet pro </span>
+                </div>
+                <div class='card-number'>
+                    <h1 class="display-1" style="line-height: 0px">$ {{ request.user.profile.balance }}</h1>
+                </div>
+                <div class='bottom-block'>
+                    <div class='balance'>
+                        <div>Holder</div>
+                        <div class='card-balance'>
+                            <label for="">{{ request.user.profile.lastname }}
+                                {{ request.user.profile.firstname }}</label>
+                        </div>
+                    </div>
+                    <div class='card-icon'><span class='circle-left'><i class="icon-circle icon-3x "></i></span>
+                        <i class="icon-circle icon-3x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="input-group ms-4 outline-primary">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="text" class="form-control" placeholder="Amount" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="ms-2">
+                    <button type="button" class="btn btn-outline-primary">Request</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="m-5">
+
+        <h3 class="text-dark display-6 mt-lg-2">Transaction History</h3>
+        <div class=" shadow">
+            <div class="card-header py-3 d-flex">
+                <p class="text-danger m-0 fw-bold">Secure money transfer log history</p>
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive table" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>TXN_ID</th>
+                                <th>Sender's Name</th>
+                                <th>Receiver's Name</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for txn in txnh  %}
+                            {% if txn.sender ==  request.user.username %}
+                            <tr>
+
+                                <td>{{txn.txn_id}}</td>
+                                <td>{{txn.sender}}</td>
+                                <td>{{txn.receiver}}</td>
+                                <td>${{txn.amount}}</td>
+                                <td><span class="badge rounded-pill bg-success">Success</span></td>
+
+
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                            <ul class="pagination">
+                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
+                                            aria-hidden="true">«</span></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                                            aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
