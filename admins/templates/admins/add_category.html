@@ -1,0 +1,126 @@
+{% extends 'admin_layout.html' %} {% load static %} {% block title %}
+<title>Send Notificaton</title>
+{% endblock title %} {% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/homepage.css' %}" />
+<link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+
+<style>
+    table td {
+word-wrap:break-word;
+white-space: normal;
+}
+
+    table th{
+word-wrap:break-word;
+white-space: normal;
+}
+</style>
+
+{% endblock css_files %} {% block main_content %}
+
+
+<section class="col-lg-10  col-11 my-5 m-auto shadow-5-soft p-3  ">
+    <h1 class="text-center">Add Category</h1>
+
+
+    <!-- Button trigger modal -->
+    <div class="d-flex  w-100 ">
+        <span type="button" class=" ms-auto my-2 text-success  " data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+            <i class="fas fa-plus"></i> Category
+        </span>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class=" border-0 d-flex justify-content-end ">
+
+                    <button type="button" class="btn-close me-1 mt-1" data-mdb-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class=" m-auto  p-5 ">
+                        <h1 class="text-center">Add category</h1>
+                        <form>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="form1Example1" class="form-control" />
+                                <label class="form-label" for="form1Example1">category</label>
+                            </div>
+
+
+
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+         <!-- Section: Table -->
+    <section class="mb-5  m-auto">
+        <div class=" ">
+            <table class="
+                    table table-borderless table-hover
+                    
+                   
+                
+                    ">
+                <thead class="overflow-hidden m-auto">
+                    <tr class="row  row-cols-4 w-100">
+                        <th class="col-lg-3 col-2 col-md-4 ">Category</th>
+                        <th class="col-lg-5 col-sm-4 col-md-5 ">SubCategories</th>
+                        <th class="col-lg-2   d-none d-lg-flex ">No of products</th>
+                      
+                        <th class="col-lg-2  ">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="m-auto">
+                    <tr class="text-white row  row-cols-4 ">
+                        <td class="col-lg-3 col-2 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <img src="https://cdn.dribbble.com/users/1279240/screenshots/6858359/shot_pablo_vargas_dribbble_4x.png?compress=1&resize=400x300" alt=""
+                                    style="width: 45px; height: 45px" class="rounded-circle d-none d-lg-flex" />
+                                <div class=" ms-lg-1 ">
+                                    <p class="fw-bold mb-1 text-dark">Clothing</p>
+                                 
+                                </div>
+                            </div>
+                        </td>
+                        <td class=" col-lg-5 col-sm-4 col-md-5 text-wrap " style="white-space:normal;">
+                            
+                            <p class="w-100  text-black-50 p-0   mb-0" style="white-space:normal;">shoes,pant,shirt,electronic,shoes,pant,shirt,electronic,shoes,pant,shirt,electronic,shoes,pant,shirt,electronic</p>
+                           
+                        </td>
+                        <td class="col-lg-2 d-none d-lg-inline">
+                            <span class="badge badge-success rounded-pill  ">200</span>
+                        </td>
+                      
+                        <td class="col-lg-2 col-2   ">
+                            <button type="button" class="btn btn-danger btn-sm btn-rounded">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm btn-rounded mt-1 mt-md-0">
+                               <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- Section: Table -->
+</section>
+
+
+
+{% endblock main_content %}

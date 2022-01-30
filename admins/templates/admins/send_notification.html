@@ -1,0 +1,31 @@
+{% extends 'admin_layout.html' %} {% load static %} {% block title %}
+<title>Send Notificaton</title>
+{% endblock title %} {% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/homepage.css' %}" />
+<link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+
+{% endblock css_files %} {% block main_content %}
+
+
+<section class="col-lg-5 col-sm-8 col-10 my-5 m-auto shadow-5-soft p-5 ">
+    <h1 class="text-center">Send Notification</h1>
+    <form>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form1Example1" class="form-control" style="height: 200px;" />
+    <label class="form-label" for="form1Example1">Message</label>
+  </div>
+
+ 
+  
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block">Send</button>
+</form>
+</section>
+
+
+
+{% endblock main_content %}

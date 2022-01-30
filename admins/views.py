@@ -43,3 +43,17 @@ def dashboard(request):
         
     }
     return render(request, 'admins/dashboard.html',context)
+
+
+
+def send_notification(request):
+    return render(request,'admins/send_notification.html')
+
+def add_category(request):
+    return render(request,'admins/add_category.html')
+
+
+def add_subcategory(request):
+    return render(request,'admins/add_subcategory.html')
+
+
