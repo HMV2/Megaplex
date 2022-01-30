@@ -1,12 +1,13 @@
 from math import prod
 import profile
 from re import U
+from unicodedata import category
 from django.shortcuts import render
 from django.template import context
 from django.contrib.auth.models import User
 from numpy import product
 from account.models import Profile
-from product.models import Product
+from product.models import Product,Category
 
 # Create your views here.
 def dashboard(request):
@@ -50,7 +51,8 @@ def send_notification(request):
     return render(request,'admins/send_notification.html')
 
 def add_category(request):
-    return render(request,'admins/add_category.html')
+    category = Category.objects.all()
+    return render(request,'admins/add_category.html',{'category':category})
 
 
 def add_subcategory(request):

@@ -1,4 +1,6 @@
-{% extends 'admin_layout.html' %} {% load static %} {% block title %}
+{% extends 'admin_layout.html' %} {% load static %} 
+{% load extras %}
+{% block title %}
 <title>Send Notificaton</title>
 {% endblock title %} {% block css_files %}
 
@@ -22,7 +24,7 @@ white-space: normal;
 
 
 <section class="col-lg-10  col-11 my-5 m-auto shadow-5-soft p-3  ">
-    <h1 class="text-center">Add Category</h1>
+    <h1 class="text-center">Category</h1>
 
 
     <!-- Button trigger modal -->
@@ -84,24 +86,32 @@ white-space: normal;
                     </tr>
                 </thead>
                 <tbody class="m-auto">
+                  {% for c in category %}
                     <tr class="text-white row  row-cols-4 ">
                         <td class="col-lg-3 col-2 col-md-4">
                             <div class="d-flex align-items-center">
                                 <img src="https://cdn.dribbble.com/users/1279240/screenshots/6858359/shot_pablo_vargas_dribbble_4x.png?compress=1&resize=400x300" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle d-none d-lg-flex" />
                                 <div class=" ms-lg-1 ">
-                                    <p class="fw-bold mb-1 text-dark">Clothing</p>
+                                    <p class="fw-bold mb-1 text-dark">{{c.name}}</p>
                                  
                                 </div>
                             </div>
                         </td>
                         <td class=" col-lg-5 col-sm-4 col-md-5 text-wrap " style="white-space:normal;">
                             
-                            <p class="w-100  text-black-50 p-0   mb-0" style="white-space:normal;">shoes,pant,shirt,electronic,shoes,pant,shirt,electronic,shoes,pant,shirt,electronic,shoes,pant,shirt,electronic</p>
+                            <p class="w-100  text-black-50 p-0   mb-0" style="white-space:normal;">
+                              {% for c in c.id|categories %}
+
+                              {{c.name}},
+
+                              {% endfor %}
+                            
+                            </p>
                            
                         </td>
                         <td class="col-lg-2 d-none d-lg-inline">
-                            <span class="badge badge-success rounded-pill  ">200</span>
+                            <span class="badge badge-success rounded-pill  ">{{c.id|Product_count}}</span>
                         </td>
                       
                         <td class="col-lg-2 col-2   ">
@@ -113,6 +123,8 @@ white-space: normal;
                             </button>
                         </td>
                     </tr>
+                  
+                  {% endfor %}
                    
                 </tbody>
             </table>
