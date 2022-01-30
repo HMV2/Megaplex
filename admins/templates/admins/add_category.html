@@ -78,17 +78,17 @@ white-space: normal;
                     ">
                 <thead class="overflow-hidden m-auto">
                     <tr class="row  row-cols-4 w-100">
-                        <th class="col-lg-3 col-2 col-md-4 ">Category</th>
-                        <th class="col-lg-5 col-sm-4 col-md-5 ">SubCategories</th>
+                        <th class="col-lg-3 col-4 col-md-4 ">Category</th>
+                        <th class="col-lg-5 col-5 col-sm-4 col-md-5 ">SubCategories</th>
                         <th class="col-lg-2   d-none d-lg-flex ">No of products</th>
                       
-                        <th class="col-lg-2  ">Actions</th>
+                        <th class="col-lg-2 col-3 ">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="m-auto">
                   {% for c in category %}
                     <tr class="text-white row  row-cols-4 ">
-                        <td class="col-lg-3 col-2 col-md-4">
+                        <td class="col-lg-3 col-4 col-md-4">
                             <div class="d-flex align-items-center">
                                 <img src="https://cdn.dribbble.com/users/1279240/screenshots/6858359/shot_pablo_vargas_dribbble_4x.png?compress=1&resize=400x300" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle d-none d-lg-flex" />
@@ -98,7 +98,7 @@ white-space: normal;
                                 </div>
                             </div>
                         </td>
-                        <td class=" col-lg-5 col-sm-4 col-md-5 text-wrap " style="white-space:normal;">
+                        <td class=" col-lg-5 col-sm-4 col-md-5 col-5 text-wrap " style="white-space:normal;">
                             
                             <p class="w-100  text-black-50 p-0   mb-0" style="white-space:normal;">
                               {% for c in c.id|categories %}
