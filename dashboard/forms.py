@@ -1,6 +1,7 @@
 from product.models import Product
 from django.forms import ModelForm
 from django import forms
+from account.models import transaction
 
 class ProductForm(ModelForm):
     """Form for creating Product"""
@@ -23,3 +24,8 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = "__all__"
+
+class txnForm(ModelForm):
+    class Meta:
+        model = transaction
+        fields = '__all__'

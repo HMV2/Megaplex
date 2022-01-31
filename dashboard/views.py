@@ -1,19 +1,29 @@
 from re import M
 from django.contrib.auth.forms import PasswordChangeForm
+from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from account.forms import PartialProfileForm as ProfileForm
 from account.models import Profile
+=======
+from account.forms import ProfileForm
+from account.models import Profile, transaction
+>>>>>>> master
 from product.models import Product
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+<<<<<<< HEAD
 from directChat.views import get_unread
 
+=======
+import random
+>>>>>>> master
 
 # Create your views here.
 
@@ -269,6 +279,44 @@ def wishlist(request):
     products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
+<<<<<<< HEAD
 
 def wallet(request):
     return render(request,'dashboard/wallet.html')
+=======
+def txn_id():
+    return str(random.randint(111, 999))
+
+def wallet(request):
+    txn_history = transaction.objects.all()
+    if request.method == "POST":
+        sender = request.POST['Sender1']
+        receiver = request.POST['Receiver1']
+        amount = int(request.POST['amount1'])
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "select balance from account_profile where username = '%s'" % (sender))
+            sender_balance = int(cursor.fetchall()[0][0])
+
+        if int(sender_balance) >= int(amount):
+            sender_new_balance = int(sender_balance) - int(amount)
+            with connection.cursor() as cursor:
+                update_sender_balance = "update account_profile set balance = %d where username = '%s'" % (sender_new_balance, sender)
+                cursor.execute(update_sender_balance)
+                cursor.execute(
+                    "select balance from account_profile where username = '%s'" % (receiver))
+                receiver_balance = cursor.fetchall()[0][0]
+            receiver_new_balance = int(receiver_balance) + int(amount)
+            with connection.cursor() as cursor:
+                update_receiver_balance = "update account_profile set balance = %d where username = '%s'" % (
+                    receiver_new_balance, receiver)
+                cursor.execute(update_receiver_balance)
+
+            txn = transaction(sender=sender,receiver=receiver,amount=amount)
+            txn.save()
+            
+            messages.success(request, 'Successfully Transferred!')
+        else:
+            return HttpResponse("Failed")
+    return render(request,'dashboard/wallet.html',{'txnh':txn_history})
+>>>>>>> master
