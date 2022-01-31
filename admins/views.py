@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from numpy import product
 from account.models import Profile
 from product.models import Product,Category
-from .forms import NotificationForm
+from .forms import NotificationForm,CategoryForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -60,7 +60,7 @@ def send_notification(request):
             messages.success(request,"Successfully Scheduled Notification!")
             return redirect('/admins/dashboard')
         else:
-            messages.success(request,"Failed to Scheduled Notification!")
+            messages.error(request,"Failed to Scheduled Notification!")
 
 
     context = {'form':notform}
@@ -68,7 +68,25 @@ def send_notification(request):
 
 def add_category(request):
     category = Category.objects.all()
-    return render(request,'admins/add_category.html',{'category':category})
+    add_form = CategoryForm()
+
+    if request.method == "POST":
+        type = request.POST.get('type')
+        if type=="add":
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Successfully Added Category")
+                return redirect('/admins/add_category')
+            else:
+                messages.error(request,"Failed to Added Category!")
+
+
+    context = {
+        'category':category,
+        "add_form" : add_form
+    }
+    return render(request,'admins/add_category.html', context)
 
 
 def add_subcategory(request):
