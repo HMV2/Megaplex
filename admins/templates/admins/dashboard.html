@@ -152,18 +152,11 @@
                     <tr class="text-white">
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="/{{user.profile.profile_pic}}" alt=""
+                                <img src="{{user.profile.profile_pic.url}}" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle" />
                                 <div class="ms-3">
                                     <p class="fw-bold mb-1 text-black">{{user.profile.firstname}} {{user.profile.lastname}}</p>
                                     <p class="text-muted mb-0">{{user.email}}</p>
-                                <img src="{{user.profile.profile_pic.url}}" alt="User" style="width: 45px; height: 45px"
-                                    class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mb-1 text-black">{{user.profile.firstname}}
-                                        {{user.profile.lastname}}</p>
-                                    <p class="text-muted mb-0">{{user.profile.email}}</p>
-                                </div>
                             </div>
                         </td>
                         <td>

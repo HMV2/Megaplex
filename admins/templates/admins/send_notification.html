@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %} {% load static %} {% block title %}
+{% extends 'admin_layout.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %}
 <title>Send Notificaton</title>
 {% endblock title %} {% block css_files %}
 
@@ -11,19 +11,20 @@
 
 <section class="col-lg-5 col-sm-8 col-10 my-5 m-auto shadow-5-soft p-5 ">
     <h1 class="text-center">Send Notification</h1>
-    <form>
   <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="text" id="form1Example1" class="form-control" style="height: 200px;" />
-    <label class="form-label" for="form1Example1">Message</label>
-  </div>
+  <form class="form-outline mb-4" method="POST">
+    {% csrf_token %}
+    {{ form.message | as_crispy_field }}
+    {{ form.broadcast_on | as_crispy_field }}
+    <button type="submit" class="btn btn-primary btn-block">Send</button>
+  </form>
 
  
   
 
   <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block">Send</button>
-</form>
+  
+
 </section>
 
 

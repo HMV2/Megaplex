@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 from numpy import product
 from account.models import Profile
 from product.models import Product,Category
+from .forms import NotificationForm
+from django.contrib import messages
+from django.shortcuts import redirect
+
 
 # Create your views here.
 def dashboard(request):
@@ -48,7 +52,19 @@ def dashboard(request):
 
 
 def send_notification(request):
-    return render(request,'admins/send_notification.html')
+    notform = NotificationForm()
+    if request.method == "POST":
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            messages.success(request,"Successfully Scheduled Notification!")
+            return redirect('/admins/dashboard')
+        else:
+            messages.success(request,"Failed to Scheduled Notification!")
+
+
+    context = {'form':notform}
+    return render(request,'admins/send_notification.html',context)
 
 def add_category(request):
     category = Category.objects.all()
