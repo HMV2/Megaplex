@@ -75,7 +75,7 @@ def add_category(request):
     if request.method == "POST":
         type = request.POST.get('type')
         if type=="add":
-            form = CategoryForm(request.POST)
+            form = CategoryForm(request.POST,request.FILES)
             if form.is_valid():
                 form.save()
                 messages.success(request, "Successfully Added Category")

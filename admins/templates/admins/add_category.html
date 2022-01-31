@@ -46,7 +46,7 @@ white-space: normal;
                 <div class="modal-body">
                     <div class=" m-auto  p-5 ">
                         <h1 class="text-center">Add category</h1>
-                        <form method = "POST">
+                        <form method = "POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="type" value="add">
                             <!-- Email input -->
