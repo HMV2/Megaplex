@@ -3,13 +3,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-from account.forms import PartialProfileForm as ProfileForm
-from account.models import Profile
-=======
+from directChat.views import get_unread
 from account.forms import ProfileForm
 from account.models import Profile, transaction
->>>>>>> master
 from product.models import Product
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -18,12 +14,7 @@ from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-<<<<<<< HEAD
-from directChat.views import get_unread
-
-=======
 import random
->>>>>>> master
 
 # Create your views here.
 
@@ -279,11 +270,6 @@ def wishlist(request):
     products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
-<<<<<<< HEAD
-
-def wallet(request):
-    return render(request,'dashboard/wallet.html')
-=======
 def txn_id():
     return str(random.randint(111, 999))
 
@@ -318,5 +304,9 @@ def wallet(request):
             messages.success(request, 'Successfully Transferred!')
         else:
             return HttpResponse("Failed")
-    return render(request,'dashboard/wallet.html',{'txnh':txn_history})
->>>>>>> master
+    context={
+        'room_name':"broadcast",
+        'get_unread':get_unread(request),
+        'txnh':txn_history
+    }
+    return render(request,'dashboard/wallet.html',context)
