@@ -8,4 +8,6 @@ urlpatterns = [
     path('send_notification/',views.send_notification,name='send_notification'),
     path('add_category/',views.add_category,name='add_category'),
     path('add_subcategory/',views.add_subcategory,name='add_subcategory'),
+
+    path('<int:category_id>/edit_category',views.edit_category,name='edit_category'),
 ]
