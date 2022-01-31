@@ -26,16 +26,13 @@ class Profile(models.Model): #Model to create profile for users
     cover_pic = models.FileField(upload_to='covers', default='cover.jpg', blank=True, null=True)
     verified = models.BooleanField(default=False)
     desc = models.TextField(max_length=10000, blank=True, null=True)
-<<<<<<< HEAD
     product_sold = models.IntegerField(default=0, blank=True, null=True)
     active = models.BooleanField(default=True, blank=True, null=True)
-=======
     balance = models.DecimalField(
         default=0,
         max_digits=12,
         decimal_places=2
     )
->>>>>>> master
 
 
     def __str__(self):
