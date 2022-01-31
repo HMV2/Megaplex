@@ -305,4 +305,9 @@ def wallet(request):
             messages.success(request, 'Successfully Transferred!')
         else:
             return HttpResponse("Failed")
-    return render(request,'dashboard/wallet.html',{'txnh':txn_history})
+    context = {
+        'txnh':txn_history,
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
+    }
+    return render(request,'dashboard/wallet.html',context)
