@@ -17,7 +17,7 @@ edit_btn.forEach((item)=>{
 
         console.log(item_image)
 
-        category_id.setAttribute('value',item_id)
+        category_id.setAttribute('value',Number(item_id))
         category_name.setAttribute('value',item_name)
         category_image.setAttribute('value',item_image)
         category_bg_img.setAttribute('src',item_image)
