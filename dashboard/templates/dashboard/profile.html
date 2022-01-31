@@ -12,24 +12,22 @@
     <div class="cover position-relative">
         <img src="{{user.profile.cover_pic.url}}" alt="" class="cover-img" />
         <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
-            <a class="btn border border-2 rounded-pill text-white" data-toggle="modal" data-target="#exampleModal">
-                edit cover page
-            </a>
-            <a data-toggle="modal" data-target="#exampleModal" class="btn border border-2 rounded-pill text-white">edit
-                profile</a>
+            <button type="button" class="btn btn-light text-success" data-mdb-ripple-color="dark">Available ✅</button>
+            <!-- <button type="button" class="btn btn-light text-black" data-mdb-ripple-color="dark">Offline</button> -->
         </div>
     </div>
 
     <div class="profile container-sm row m-auto fixed">
         <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg-white ">
 
-            <span class="m-auto bg-dark w-50"><img class="img-circle w-100 h-100  "
-                    src="{% static 'images/animated-art-3.jpg' %}" alt="" /></span>
+            <span class="m-auto w-50"><img class="rounded-circle w-100 h-100  " src="{{profile.profile_pic.url}}" style="object-fit: cover; aspect-ratio: 1/1;"
+                    alt="" /></span>
             {% if user.profile.verified %}
             <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
             {% else %}
             <h4><span class="badge bg-danger">Unverified <i class="fa fa-badge-cross"></i></span></h4>
             {% endif %}
+            <p>{{profile.plan}}</p>
             <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
             <a href="/dashboard/follower_list/{{profile.id}}" class="text-danger">{{profile.followers.all.count}}
                 followers</a>
@@ -74,11 +72,11 @@
                 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
-                            aria-controls="ex1-tabs-1" aria-selected="true">Active</a>
+                            aria-controls="ex1-tabs-1" aria-selected="true">Active Product</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                            aria-controls="ex1-tabs-2" aria-selected="false">Inactive</a>
+                            aria-controls="ex1-tabs-2" aria-selected="false">Sold Product</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
@@ -113,25 +111,13 @@
                                             style="aspect-ratio: 1/1.1; object-fit: cover;" /></a>
 
                                     <div class="card-head position-absolute w-100 h-100 top-0">
-                                        {% if request.user in pro.product_likes.all %}
-
-                                        <form action="/product/{{pro.id}}/like" method="POST">
-                                            {% csrf_token %}
-
-                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger" data-new="{{pro.id}}" ><i
-                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
-                                        </form>
-                                        {% else %}
-                                        <form action="/product/{{pro.id}}/like" method="POST">
-                                            {% csrf_token %}
-
-                                            <button type=" submit" class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute" data-new="{{pro.id}}"><i
-                                                    class="fas fa-heart my-2 mx-2" data-new="{{pro.id}}"></i></button>
-                                        </form>
-                                        {% endif %}
-                                        <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph"
+                                        
+                                        <button  class="badge d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger"
+                                                >In Stock: {{pro.quantity}}</button>
+                                        
+                                        <a class="btn btn-danger position-absolute w-100 text-white buyNow-btn"
                                             href="/product/details/{{pro.id}}">
-                                            View More
+                                            Perview my product
                                         </a>
                                     </div>
                                 </div>
@@ -143,26 +129,30 @@
                                             {{pro.price}}</strong>
                                     </div>
                                     <hr class="dropdown-divider" />
-                                    <div class="d-flex gap-2 align-items-center">
+                                    <div class="d-flex gap-2 justify-content-between">
                                         <a class="text-nowrap btn btn-primary"
-                                            href="/dashboard/editProduct/{{pro.id}}"><i
+                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i
                                                 class="fas fa-pen-square"></i></a>
                                         <a class="text-nowrap btn btn-danger"
                                             href="/dashboard/removeProduct/{{pro.id}}"><i
                                                 class="fas fa-trash-alt"></i></a>
+
+                                        <a class="text-nowrap btn btn-success " href="#">Sold <i
+                                                class="fas fa-check"></i></a>
+
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
                         {% else %}
-                        You have no inactive products
+                        You have no active products
                         {% endif %}
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                    Tab 2 content
 
                     {% if inactive_products != None %}
                     <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
@@ -170,7 +160,8 @@
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
                                 <div class="">
-                                    <img src="{{ pro.picture.url }}" alt="" style="aspect-ratio: 1/1.1; object-fit: cover;" />
+                                    <img src="{{ pro.picture.url }}" alt=""
+                                        style="aspect-ratio: 1/1.1; object-fit: cover;" />
 
                                 </div>
                                 <div class="m-3">
@@ -192,7 +183,6 @@
 
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                    Tab 3 content
 
                 </div>
 
@@ -206,21 +196,24 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        
+
         <div class="modal-content">
-             <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur" ></span>
-        <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur" ></span>
-        <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur" ></span>
-        <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 " > <img src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png" alt=""></span> 
+            <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur"></span>
+            <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur"></span>
+            <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur"></span>
+            <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 "> <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png"
+                    alt=""></span>
             <div class=" pt-4  pb-2">
-                   
+
                 <h5 class="modal-title text-center m-auto fs-2 " id="exampleModalLabel ">Edit Profile</h5>
-            
-                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal" aria-label="Close">
+
+                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" >
+            <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="tp" value="profile">
                 <div class="modal-body">
                     {% csrf_token %}
@@ -237,7 +230,7 @@
                             {{ form.phone | as_crispy_field }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ form.plan | as_crispy_field }}
+                            {{ form.active | as_crispy_field }}
                         </div>
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">
@@ -250,7 +243,7 @@
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">
                         <div class="form-group col-md-12 me-1">
-                            {{ form.cover_pic | as_crispy_field }}
+                            {{ form.profile_pic | as_crispy_field }}
                         </div>
                     </div>
                     <div class="form-row mt-1" style="display:flex; justify-content:space-around">

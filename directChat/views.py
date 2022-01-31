@@ -27,6 +27,7 @@ def Inbox(request):
         'directs': directs,
         'messages': messages,
         'active_direct': active_direct,
+        'get_unread':get_unread(request)
     }
 
     template = loader.get_template('directChat/direct.html')
@@ -35,17 +36,24 @@ def Inbox(request):
 
 
 def get_name(username):
-    user =  User.objects.get(id=username)
+    try:
+        user =  User.objects.get(id=username)
+    except:
+        user = User.objects.get(username=username)
     full_name = user.first_name + " "+ user.last_name
     return full_name
 
 @login_required
 def Directs(request, username):
+    user = request.user.id
     current_user = Chat_Message.objects.all()
-    user = request.user
     messages = Chat_Message.get_messages(user=user)
     active_direct = username
-    directs = Chat_Message.objects.filter(user=user, recipient=username)
+    try:
+        directs = Chat_Message.objects.filter(user=user, recipient=username)
+    except:
+        directs = Chat_Message.objects.filter(user=user, recipient=user)
+
     directs.update(is_read=True)
 
     for message in messages:
@@ -58,7 +66,8 @@ def Directs(request, username):
             'messages': messages,
             'active_direct': active_direct,
             'current_user': current_user,
-            'user_full':name
+            'user_full':name,
+            'get_unread':get_unread(request)
         }
 
     template = loader.get_template('directChat/direct.html')
@@ -82,3 +91,12 @@ def SendDirect(request):
         return redirect(reverse('directs', kwargs={ 'username':to_user_username}))
     else:
         HttpResponseBadRequest()
+
+
+def get_unread(request):
+    count = 0
+    if request.user.is_authenticated:
+        count = Chat_Message.get_unread(request.user)
+    return count
+
+    

@@ -112,7 +112,15 @@
                     <div class=" card-img-top position-relative">
                         <img src="{{pro.picture.url}}" alt="" class="card-image" />
                         <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
+                            <form action="/product/{{pro.id}}/like" method="POST">
+                                {% csrf_token %}
+
+                                <button type=" submit"
+                                    class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute"
+                                    data-new="{{pro.id}}"><i class="fas fa-heart my-2 mx-2"
+                                        data-new="{{pro.id}}"></i></button>
+                            </form>
+
                             <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph btn-danger"
                                             href="/product/details/{{pro.id}}">
                                             View More
@@ -248,4 +256,6 @@
 </section>
 
 {% endblock main_content %}
-{% block js_files %}{% endblock js_files %}
+{% block js_files %}
+<script src="{% static 'javascript/product_like.js' %}"></script>
+{% endblock js_files %}

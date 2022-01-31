@@ -61,13 +61,16 @@
                         <a class="{% if active_direct == message.user.username %}is-active{% endif %}"
                           href="{% url 'directs' message.user.id %}">
                           <div class="d-flex flex-row">
-                            <div class="pt-1 d-flex  justify-content-around">
-                              <p class="fw-bold mb-0">{{message.user.first_name}} {{message.user.last_name}}</p>
-                              {% if message.unread %}
-                              <p style="font-weight: bold; color: red;">
-                                <span class="material-icons">mark_chat_unread</span> {{ message.unread }}
+                            <div class="pt-1 d-flex">
+                              <p class="fw-bold mb-0">{{message.user.first_name}} {{message.user.last_name}}
                               </p>
-                              {% endif %}
+                              
+                              {% if message.unread > 0 %}
+                                <p class="badge bg-danger ms-2">{{message.unread}}</p>
+                                {% endif %}
+                              
+                              
+
                             </div>
                           </div>
                         </a>
@@ -91,22 +94,23 @@
 
                     {% if direct.sender.username == user.username %}
 
-                    <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                    <div class="d-flex flex-row justify-content-start mb-4 pt-1">
+                      <img src="{{user.profile.profile_pic.url}}" class="rounded-circle"
+                        alt="avatar 1" style="width: 45px; height: 100%;">
                       <div>
                         <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-danger">{{direct.body}}</p>
                         <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
                       </div>
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                        alt="avatar 1" style="width: 45px; height: 100%;">
+                      
                     </div>
 
                     {% else  %}
-                    <div class="d-flex flex-row justify-content-start">
-                      <img src="https://cdn-icons-png.flaticon.com/512/185/185852.png" alt="avatar 1"
+                    <div class="d-flex flex-row justify-content-end">
+                      <img src="{{direct.sender.profile.profile_pic.url}}" alt="avatar 1" class="rounded-circle"
                         style="width: 45px; height: 100%;">
                       <div>
                         <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">
-                          {{direct.sender.username}}: {{direct.body}}</p>
+                        {{direct.body}}</p>
                         <p class="small ms-3 mb-3 rounded-3 text-muted">{{direct.date}}</p>
                       </div>
                     </div>

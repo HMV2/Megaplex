@@ -1,9 +1,15 @@
+from re import M
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+from account.forms import PartialProfileForm as ProfileForm
+from account.models import Profile
+=======
 from account.forms import ProfileForm
 from account.models import Profile, transaction
+>>>>>>> master
 from product.models import Product
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -12,7 +18,12 @@ from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+<<<<<<< HEAD
+from directChat.views import get_unread
+
+=======
 import random
+>>>>>>> master
 
 # Create your views here.
 
@@ -20,6 +31,7 @@ import random
 def profile(request):
     user = Profile.objects.get(user=request.user)
     form = ProfileForm(instance=user)
+    
     pform = PasswordChangeForm(user=request.user)
     try:
         active_products = Product.objects.filter(seller=request.user, is_active=True)
@@ -35,13 +47,15 @@ def profile(request):
         'active_products':active_products,
         'inactive_products':inactive_products,
         'form':form,
-        'pform':pform
+        'pform':pform,
+        'get_unread':get_unread(request)
     }
     if request.method == "POST":
         tp = request.POST.get("tp")
         if tp == "profile":
             form = ProfileForm(request.POST, request.FILES, instance = user)
-            if form.is_valid():
+            # PartialFooForm = modelform_factory(Profile, form=form,fields))
+            if form.is_valid:
                 form.save()
                 messages.success(request,"Successfully updated the profile!")
                 return redirect('/dashboard/profile')
@@ -56,7 +70,7 @@ def profile(request):
                 return redirect('/dashboard/profile')
             else:
                 messages.error(request,"Something went wrong!")
-                return render(request, 'dashboard/profile.html', {'form':form})
+                return render(request, 'dashboard/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     return render(request, 'dashboard/profile.html',context)
 
@@ -64,18 +78,18 @@ def profile(request):
 def change_password(request):
     """Function for changing user's password!"""
     if request.method == "POST":
-        pform = PasswordChangeForm(data=request.POST, user = request.user)
+        form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('/accounts/profile')
         else:
             messages.add_message(request, messages.ERROR,"Something Went Wrong!")
-            return render(request, 'accounts/profile.html', {'form':form})
+            return render(request, 'accounts/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form':form, 'room_name':"broadcast",}
+        context = {'form':form, 'room_name':"broadcast",'get_unread':get_unread(request)}
         return render(request, 'accounts/change_password.html', context)
 
 
@@ -100,7 +114,7 @@ def User_Profile(request,profile_id):
         'profile':profile,
         'is_following': is_following,
         'profile_active':'is-active',
-        'form':form
+        'get_unread':get_unread(request)
         }
     return render (request,'dashboard/profile.html',context)
 
@@ -228,7 +242,8 @@ def addProduct(request):
     form = ProductForm()
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/addProduct.html',context)
 
@@ -246,7 +261,8 @@ def editProduct(request, product_id):
             messages.success(request,"Failed to update product!")
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/editProduct.html',context)
 
@@ -263,6 +279,11 @@ def wishlist(request):
     products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
+<<<<<<< HEAD
+
+def wallet(request):
+    return render(request,'dashboard/wallet.html')
+=======
 def txn_id():
     return str(random.randint(111, 999))
 
@@ -298,3 +319,4 @@ def wallet(request):
         else:
             return HttpResponse("Failed")
     return render(request,'dashboard/wallet.html',{'txnh':txn_history})
+>>>>>>> master

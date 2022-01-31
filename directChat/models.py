@@ -1,3 +1,4 @@
+from itertools import count
 from django.db import models
 
 # Create your models here.
@@ -41,3 +42,13 @@ class Chat_Message(models.Model):
 				'unread': Chat_Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count()
 				})
 		return users
+
+	def get_unread(user):
+		messages =Chat_Message.objects.filter(user=user).values('recipient').annotate(last=Max('date')).order_by('-last')
+		count = 0
+		for message in messages:
+			count += Chat_Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count()
+		# for i in messages:
+		# 	if not i.is_read:
+		# 		count += 1
+		return count

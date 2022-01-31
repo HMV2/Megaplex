@@ -8,6 +8,7 @@ from product.models import Product
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
+from directChat.views import get_unread
 
 def index_page(request):
     products = Product.objects.all()[:10]
@@ -19,20 +20,13 @@ def index_page(request):
         for i in user_list:
             pro_list[ln] = [Product.objects.filter(seller__id = i)[:4]]
             ln +=1
-
-    if request.method == 'POST':
-        item = request.POST.get('item')
-        if item !="":
-            return redirect('/product/filter/'+item)
         
-    # collection = Product.objects.filter(seller__id = user_list[0])
-    # for i in range(1,len(user_list)):
-    #     data =  Product.objects.filter(seller__id = user_list[i])
-    #     collection |= data
+
     context={
         'room_name':"broadcast",
         'products':products,
-        'collection':pro_list
+        'collection':pro_list,
+        'get_unread':get_unread(request)
     }
     if request.method == 'POST':
         type = request.POST.get('type')
@@ -45,7 +39,8 @@ def index_page(request):
             subject = request.POST.get('subject')
             email = request.POST.get('email')
             desc = request.POST.get('desc') + "\n" + "Reply Email: "+email
-            test = send_mail(subject, desc, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+            test = send_mail(subject, desc, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+
             if test==1:
                 messages.success(request,"Message Sent Successfully! '\n' Please check your mailbox for reply ")
                 return redirect("/")
@@ -67,7 +62,8 @@ def category(request):
     context={
         'room_name':"broadcast",
         'products':category,
-        'category':category
+        'category':category,
+        'get_unread':get_unread(request)
     }
     return render(request, 'homepage/category.html', context)
 
