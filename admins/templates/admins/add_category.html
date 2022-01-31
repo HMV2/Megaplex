@@ -87,7 +87,7 @@ white-space: normal;
                     <tr class="text-white row  row-cols-4 ">
                         <td class="col-lg-3 col-4 col-md-4">
                             <div class="d-flex align-items-center">
-                                <img src="https://cdn.dribbble.com/users/1279240/screenshots/6858359/shot_pablo_vargas_dribbble_4x.png?compress=1&resize=400x300" alt=""
+                                <img src="{{c.picture.url}}" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle d-none d-lg-flex" />
                                 <div class=" ms-lg-1 ">
                                     <p class="fw-bold mb-1 text-dark">{{c.name}}</p>
@@ -115,13 +115,63 @@ white-space: normal;
                             <button type="button" class="btn btn-danger btn-sm btn-rounded">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            <button type="button" class="btn btn-success btn-sm btn-rounded mt-1 mt-md-0">
+                            <button type="button" class="btn btn-success btn-sm btn-rounded mt-1 mt-md-0  edit-btn" data-mdb-target="#modal1" data-mdb-toggle="modal" data-id ="{{c.id}}" data-name ="{{c.name}}" data-image ="{{c.picture.url}}">
                                <i class="fas fa-edit"></i>
                             </button>
                         </td>
                     </tr>
+
+
+         
                   
                   {% endfor %}
+
+                               <!-- Modal -->
+          <div class="modal fade edit-modal" tabindex="-1" id="modal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class=" border-0 d-flex justify-content-end ">
+
+                  <button type="button" class="btn-close me-1 mt-1" data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class=" m-auto  py-5 ">
+                    <h1 class="text-center">Edit category</h1>
+                    <form  method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                      <!-- Email input -->
+                      <input type="hidden" name="type" value="edit">
+                      <div>
+                          current-image: <img id="category_bg_img" src="https://cdn.dribbble.com/users/1279240/screenshots/6858359/shot_pablo_vargas_dribbble_4x.png?compress=1&resize=400x300" alt="" style="height: 200px; width: 200px; object-fit: cover;">
+                      </div>
+
+                      <input type="number" id="category_id" name="category_id" disabled>
+                    
+                    <div class="form-group mt-4 mb-4">
+                        <label for="category_image">File</label>
+                        <input type="file" class="form-control" id="category_image" name="category_image"
+                            aria-describedby="category_image">
+                    </div>
+
+                      <input type="text" name="category_id"  class="form-control" hidden>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="category_name" class="form-control" name="category_name" />
+                        <label class="form-label" for="category_name">category</label>
+                      </div>
+
+
+
+
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
                    
                 </tbody>
             </table>
@@ -133,3 +183,8 @@ white-space: normal;
 
 
 {% endblock main_content %}
+
+{% block js_files %}
+
+<script src="{% static 'javascript/modal.js' %}"></script>
+{% endblock js_files %}
