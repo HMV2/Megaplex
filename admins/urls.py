@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
@@ -9,5 +10,12 @@ urlpatterns = [
     path('add_category/',views.add_category,name='add_category'),
     path('add_subcategory/',views.add_subcategory,name='add_subcategory'),
 
-    path('<int:category_id>/edit_category',views.edit_category,name='edit_category'),
+    path('color/',views.color,name='color'),
+    path('brand/',views.brand,name='brand'),
+
+    path('error_page/',views.error_page)
+
+    
+
+    
 ]

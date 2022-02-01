@@ -1,0 +1,128 @@
+{% extends 'admin_layout.html' %} {% load static %}
+{% load extras %}
+{% load crispy_forms_tags %} {% block title %}
+<title>Brand</title>
+{% endblock title %} {% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/homepage.css' %}" />
+<link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+
+{% endblock css_files %} {% block main_content %}
+
+
+ <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class=" border-0 d-flex justify-content-end ">
+
+                    <button type="button" class="btn-close me-1 mt-1" data-mdb-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <div class=" ">
+                        <h1 class="text-center">Add Brand</h1>
+                        <form method="post">
+                            <!-- Email input -->
+
+                          
+
+
+
+
+                            {% csrf_token %}
+                          
+
+                          
+
+
+
+
+                           <input type="hidden" name="type" value="add">
+                      
+                                {{ add_form.name | as_crispy_field }}
+
+
+
+
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Add</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+<section class="mb-5  m-auto mx-2 mx-lg-5 shadow shadow-5-soft p-2">
+  <h1 class="text-center ">Brand</h1>
+
+  <div class="d-flex ">
+
+    <span type="button" class=" ms-auto my-2 text-success me-5 " data-mdb-toggle="modal"
+      data-mdb-target="#exampleModal">
+      <i class="fas fa-plus"></i> Brand
+    </span>
+  </div>
+  <div class=" ">
+    <table class="
+                    table table-borderless table-hover
+                    overflow-hidden
+                    
+                   
+                
+                    ">
+      <thead class="overflow-hidden m-auto">
+        <tr class="row  row-cols-3 w-100">
+          <th class="col-5 ">Name</th>
+          <th class="col-5 ">No of Product</th>
+
+
+          <th class="col-2 ">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="m-auto">
+        {% for b in brand %}
+        <tr class="text-white row  row-cols-3 ">
+          <td class="col-5">
+            <div class="d-flex align-items-center">
+
+              <div class=" ms-lg-1 ">
+                <p class="fw-bold mb-1 text-dark">{{b.name}}</p>
+
+              </div>
+            </div>
+          </td>
+
+          <td class="text-black-50 col-5">{{b.id|brand_count}}</td>
+        
+
+
+          <td class="col-2 ">
+            <button type="button" class="btn btn-danger btn-sm btn-rounded">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+
+          </td>
+        </tr>
+
+
+
+
+        {% endfor %}
+
+
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+{% endblock main_content %}

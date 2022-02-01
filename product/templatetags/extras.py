@@ -18,3 +18,19 @@ def categories( value):
 def Product_count( value):
     product_count = Product.objects.filter(category=value).count()
     return product_count
+
+
+@register.filter(name='SubCategory_count')
+def SubCategory_count(value):
+    product_count = Product.objects.filter(sub_category=value).count()
+    return product_count
+
+@register.filter(name='brand_count')
+def brand_count(value):
+    product_count = Product.objects.filter(brand=value).count()
+    return product_count
+
+@register.filter(name='color_count')
+def color_count(value):
+    product_count = Product.objects.filter(color=value).count()
+    return product_count

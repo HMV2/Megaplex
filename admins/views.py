@@ -7,10 +7,11 @@ from django.template import context
 from django.contrib.auth.models import User
 from numpy import product
 from account.models import Profile
-from product.models import Product,Category
-from .forms import NotificationForm,CategoryForm
+from product.models import Product,Category,Sub_Category,Brand,Color
+from .forms import NotificationForm,CategoryForm,BrandForm,ColorForm
 from django.contrib import messages
 from django.shortcuts import redirect
+from notification.models import BroadcastNotification
 import os
 
 
@@ -53,18 +54,19 @@ def dashboard(request):
 
 
 def send_notification(request):
+    notification = BroadcastNotification.objects.all()
     notform = NotificationForm()
     if request.method == "POST":
         form = NotificationForm(request.POST)
         if form.is_valid():
             form.save() 
             messages.success(request,"Successfully Scheduled Notification!")
-            return redirect('/admins/dashboard')
+            return redirect('/admins/send_notification')
         else:
             messages.error(request,"Failed to Scheduled Notification!")
 
 
-    context = {'form':notform}
+    context = {'form':notform,'notification':notification}
     return render(request,'admins/send_notification.html',context)
 
 def add_category(request):
@@ -84,7 +86,6 @@ def add_category(request):
                 messages.error(request,"Failed to Added Category!")
         elif type =="edit":
             category_id = request.POST['category_id']
-            print(category_id)
             category = Category.objects.get(id = category_id)
             if request.FILES.get('category_image'):
                 # if you are going to replace your image it will replace and remove the previous one
@@ -107,25 +108,48 @@ def add_category(request):
 
 
 def add_subcategory(request):
-    return render(request,'admins/add_subcategory.html')
+    sub_category = Sub_Category.objects.all()
+    return render(request,'admins/add_subcategory.html',{'sub_category':sub_category})
 
 
-def edit_category(request,category_id):
- 
-    category = Category.objects.get(id = category_id)
 
-    if request.method == 'POST':
-        if request.FILES.get('cateogry_image'):
-                # if you are going to replace your image it will replace and remove the previous one
-            os.remove(category.post_image.path)
-            category.description = request.POST['category_name']
-            category.picture= request.FILES['category_image']
-            category.save()
-            return redirect('/admins/add_category')
-        else:
-            category.name = request.POST['category_name']
-            category.save()       
-            return redirect('/admins/add_category')
-       
+def color(request):
+    color = Color.objects.all()
+    add_form = ColorForm()
+
+    if request.method == "POST":
+        type = request.POST.get('type')
+        if type=="add":
+            form = ColorForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Successfully Added Color")
+                return redirect('/admins/color')
+            else:
+                messages.error(request,"Failed to Added Color!")
+
+    return render(request,'admins/color.html',{'color':color,"add_form" : add_form})     
+
+
+def brand(request):
+    add_form = BrandForm()
+    brand = Brand.objects.all()
+
+    if request.method == "POST":
+        type = request.POST.get('type')
+        if type=="add":
+            form = BrandForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Successfully Added Brand")
+                return redirect('/admins/brand')
+            else:
+                messages.error(request,"Failed to Added Color!")
+    return render(request,'admins/brand.html',{'brand':brand,"add_form" : add_form})   
+
+
+
+def error_page(request):
+    return render(request,'admins/404.html')
         
 
