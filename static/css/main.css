@@ -29,6 +29,7 @@
   --shadow:rgba(0, 0, 0, 0.15);
   --text-black-50:rgba(0, 0, 0, 0.5);
   --text-color-50:rgba(0, 0, 0, 0.5);
+  --card-blackbg: white;
 
 
 
@@ -52,12 +53,15 @@ body {
   --btn-border: 0.7px solid white;
   --card-bg: rgba(16 18 27 / 40%) ;
   --shadow:rgba(31, 38, 135, 0.25);
-
+  --card-blackbg: black;
   --text-black-50:rgba(255, 255, 255, 0.5);
-  --text-color-50:rgb(165, 159, 159);
+  --text-color-50: white;
   
 }
 
+.bg_fix{
+  background-color: var(--card-blackbg) !important;
+}
 
 /* ===============responsive-text================ */
 .text-white{
