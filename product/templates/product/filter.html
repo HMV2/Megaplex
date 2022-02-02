@@ -62,12 +62,6 @@
                     <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
                   </div>
                 </div>
-                <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: {{pro.seller.first_name}}</span>
-                            <span class="text-nowrap r-paragraph">{{pro.date}}</span>
-                        </div>
-              </div>
 
               </div>
             </a>
@@ -125,13 +119,13 @@
 
         <div class="accordion-item">
           <h2 class="text-uppercase font-weight-bold mb-3" id="headingOne">
-            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button"
+            <button class="accordion-button text-uppercase font-weight-bold mb-3" type="button"
               data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="true"
               aria-controls="collapseOne">
               Categories
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
             data-mdb-parent="#accordionExample">
             
             <div class="accordion-body">
@@ -198,8 +192,6 @@
         <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
       </div>
       {% endfor %}
-
-
       <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
       <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Brands</h6>
       {% for bat in brand %}
