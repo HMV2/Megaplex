@@ -133,14 +133,17 @@ def filter_page(request):
     if sorting=="low":
         products = products.order_by('price')
 
-    paginator = Paginator(products,6)
-    page_num = request.GET.get('page')
-    product_list = paginator.get_page(page_num)
-   
+    pag = Paginator(products,6)
+    page_num = request.GET.get('page_num')
+    try:
+        page = pag.page(page_num)
+    except:
+        page = pag.page(1)
+        page_num = 1
     context = {
         'room_name':"broadcast",
         'category':categories,
-        'products':product_list,
+        'products':page,
         'all_count':all_count,
         'found_count':found_count,
         'brand':brands,

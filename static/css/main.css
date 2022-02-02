@@ -143,13 +143,14 @@ img {
 }
 
 .country-card .country-name {
-
+  position: absolute;
+  left: 30px;
+  bottom: 70px;
   font-size: 30px;
   color: #FFF;
   text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   font-weight: bold;
   transition: all linear 0.25s;
-  
 }
 
 .country-card .profile-icons {
@@ -173,24 +174,13 @@ img {
   margin: 5px;
 }
 
-/* .country-card:hover img {
+.country-card:hover img {
   filter: grayscale(100%);
-  
-} */
-
-.country-card:hover .country-name {
-  transform: translateY(-5px);
- 
- 
- 
 }
 
-.country-card:hover .country-bg{
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.692), rgba(0, 0, 0, 0.342), rgba(0, 0, 0, 0.041), rgba(255, 254, 254, 0), rgba(255, 255, 255, 0));
-
- 
-  
-
+.country-card:hover .country-name {
+  bottom: 80px;
+  ;
 }
 
 .country-card:hover .desc {
