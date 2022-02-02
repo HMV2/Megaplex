@@ -11,19 +11,14 @@
             </div>
             <div class="row">
 
-                <!-- <div class="col-md-3" onclick="location.href='#'">
-                    <div class="country-card"><img src="{{i.picture.url}}"
-                                                   class="img img-responsive">
-                        <div class="country-name">name</div>
-                    </div>
-                </div> -->
+               
 
                 {% for i in category %}
                 <div class="col-md-3" onclick="location.href='#'">
                     <a href="/product/filter/?category={{i.id}}" class="unlink">
                     <div class="country-card position-relative"><img src="{{i.picture.url}}"
-                                                   class="img img-responsive" style="aspect-ratio: 1/0.5; object-fit: fill; object-position: center;">
-                        <div class="w-100 h-100 position-absolute top-0  d-flex   align-items-center country-bg"><span class="country-name ms-3">{{i.name}}</span></div>
+                                                   class="img img-responsive" style="aspect-ratio: 1/1; object-fit: cover; object-position: center;">
+                        <div class="w-100 h-100 position-absolute top-0  d-flex align-items-center country-bg"><span class="country-name ms-3">{{i.name}}</span></div>
                     </div>
                 </a>
                 </div>
