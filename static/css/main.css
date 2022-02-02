@@ -28,6 +28,7 @@
   --card-bg: rgb(255 255 255 / 31%);
   --shadow:rgba(0, 0, 0, 0.15);
   --text-black-50:rgba(0, 0, 0, 0.5);
+  --text-color-50:rgba(0, 0, 0, 0.5);
 
 
 
@@ -53,12 +54,17 @@ body {
   --shadow:rgba(31, 38, 135, 0.25);
 
   --text-black-50:rgba(255, 255, 255, 0.5);
+  --text-color-50:rgb(165, 159, 159);
+  
 }
 
 
 /* ===============responsive-text================ */
 .text-white{
   color: var(--theme-color);
+}
+.text-color-50{
+  color: var(--text-color-50) !important;
 }
 .text-black-50{
   color: var(--text-black-50) !important;
