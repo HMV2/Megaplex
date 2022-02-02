@@ -1,16 +1,23 @@
+from re import M
 from django.contrib.auth.forms import PasswordChangeForm
+from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from account.forms import ProfileForm
+from account.forms import PartialProfileForm as ProfileForm
 from account.models import Profile
+from account.forms import ProfileForm
+from account.models import Profile, transaction
 from product.models import Product
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from directChat.views import get_unread
+
+import random
 
 # Create your views here.
 
@@ -18,6 +25,7 @@ from django.contrib.auth import update_session_auth_hash
 def profile(request):
     user = Profile.objects.get(user=request.user)
     form = ProfileForm(instance=user)
+    
     pform = PasswordChangeForm(user=request.user)
     try:
         active_products = Product.objects.filter(seller=request.user, is_active=True)
@@ -33,13 +41,15 @@ def profile(request):
         'active_products':active_products,
         'inactive_products':inactive_products,
         'form':form,
-        'pform':pform
+        'pform':pform,
+        'get_unread':get_unread(request)
     }
     if request.method == "POST":
         tp = request.POST.get("tp")
         if tp == "profile":
             form = ProfileForm(request.POST, request.FILES, instance = user)
-            if form.is_valid():
+            # PartialFooForm = modelform_factory(Profile, form=form,fields))
+            if form.is_valid:
                 form.save()
                 messages.success(request,"Successfully updated the profile!")
                 return redirect('/dashboard/profile')
@@ -54,7 +64,7 @@ def profile(request):
                 return redirect('/dashboard/profile')
             else:
                 messages.error(request,"Something went wrong!")
-                return render(request, 'dashboard/profile.html', {'form':form})
+                return render(request, 'dashboard/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     return render(request, 'dashboard/profile.html',context)
 
@@ -62,18 +72,18 @@ def profile(request):
 def change_password(request):
     """Function for changing user's password!"""
     if request.method == "POST":
-        pform = PasswordChangeForm(data=request.POST, user = request.user)
+        form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('/accounts/profile')
         else:
             messages.add_message(request, messages.ERROR,"Something Went Wrong!")
-            return render(request, 'accounts/profile.html', {'form':form})
+            return render(request, 'accounts/profile.html', {'form':form,'get_unread':get_unread(request)})
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form':form, 'room_name':"broadcast",}
+        context = {'form':form, 'room_name':"broadcast",'get_unread':get_unread(request)}
         return render(request, 'accounts/change_password.html', context)
 
 
@@ -98,7 +108,7 @@ def User_Profile(request,profile_id):
         'profile':profile,
         'is_following': is_following,
         'profile_active':'is-active',
-        'form':form
+        'get_unread':get_unread(request)
         }
     return render (request,'dashboard/profile.html',context)
 
@@ -226,7 +236,8 @@ def addProduct(request):
     form = ProductForm()
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/addProduct.html',context)
 
@@ -244,7 +255,8 @@ def editProduct(request, product_id):
             messages.success(request,"Failed to update product!")
     context = {
         'form':form,
-        'room_name':"broadcast"
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
     }
     return render(request, 'dashboard/editProduct.html',context)
 
@@ -261,3 +273,41 @@ def wishlist(request):
     products = Product.objects.filter(product_likes = request.user)
     return render(request,'dashboard/wishlist.html',{"products":products,'room_name':"broadcast", })
 
+
+def wallet(request):
+    txn_history = transaction.objects.all()
+    if request.method == "POST":
+        sender = request.POST['Sender1']
+        receiver = request.POST['Receiver1']
+        amount = int(request.POST['amount1'])
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "select balance from account_profile where username = '%s'" % (sender))
+            sender_balance = int(cursor.fetchall()[0][0])
+
+        if int(sender_balance) >= int(amount):
+            sender_new_balance = int(sender_balance) - int(amount)
+            with connection.cursor() as cursor:
+                update_sender_balance = "update account_profile set balance = %d where username = '%s'" % (sender_new_balance, sender)
+                cursor.execute(update_sender_balance)
+                cursor.execute(
+                    "select balance from account_profile where username = '%s'" % (receiver))
+                receiver_balance = cursor.fetchall()[0][0]
+            receiver_new_balance = int(receiver_balance) + int(amount)
+            with connection.cursor() as cursor:
+                update_receiver_balance = "update account_profile set balance = %d where username = '%s'" % (
+                    receiver_new_balance, receiver)
+                cursor.execute(update_receiver_balance)
+
+            txn = transaction(sender=sender,receiver=receiver,amount=amount)
+            txn.save()
+            
+            messages.success(request, 'Successfully Transferred!')
+        else:
+            return HttpResponse("Failed")
+    context = {
+        'txnh':txn_history,
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
+    }
+    return render(request,'dashboard/wallet.html',context)

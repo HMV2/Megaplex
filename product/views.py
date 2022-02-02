@@ -11,6 +11,7 @@ from django.contrib import messages
 from .templatetags import extras
 from django.http import JsonResponse
 import random
+from directChat.views import get_unread
 
 
 def product_details(request,product_id):
@@ -42,7 +43,8 @@ def product_details(request,product_id):
         'comments':comments,
         'count':comment_count,
         'reply':repDict,
-        'recommended_products':recommended_products
+        'recommended_products':recommended_products,
+        'get_unread':get_unread(request)
     }
     if request.method == 'POST':
         formType = request.POST.get('formType')
@@ -56,10 +58,10 @@ def product_details(request,product_id):
                 to_user = User.objects.get(id=request.POST.get('to_user'))
             Chat_Message.send_message(from_user, to_user, body)
             messages.success(request,"Message Sent Successfully!")
-            return render(request, 'product/details.html',context)
+            redirect('/product/details/'+str(product_id))
         elif formType == "message" and request.POST.get('body')=="":
             messages.error(request,"Please insert message to send!")
-            return render(request, 'product/details.html',context)
+            redirect('/product/details/'+str(product_id))
 
         elif formType=="comment" and request.POST.get('comment')!="":
             comment = request.POST.get('comment')
@@ -147,7 +149,8 @@ def filter_page(request):
         'min_price1':min_pri,
         'max_price1':max_pri,
         'search_item': search_item,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -216,7 +219,8 @@ def searchProduct(request, item):
         'min_price1':min_pri,
         'max_price1':max_pri,
         'search_item': search_item,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -283,7 +287,8 @@ def searchUserProduct(request, user):
         'min_tag':min_tag,
         'min_price1':min_pri,
         'max_price1':max_pri,
-        'page_num': page_num
+        'page_num': page_num,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/filter.html',context)
 
@@ -373,7 +378,8 @@ def explorepage(request):
         'electro_id':electro_id,
         'cloth_id':cloth_id,
         'auto_id':auto_id,
-        'sports_id':sports_id
+        'sports_id':sports_id,
+        'get_unread':get_unread(request)
     }
     return render(request,'product/explore.html',context)
            
