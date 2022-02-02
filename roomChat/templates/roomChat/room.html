@@ -6,7 +6,7 @@
 {% block main_content %}
 {{ request.user.username|json_script:"user_id" }}
 <h1 class="text-center mt-4">{{room_name1}} Chat Room </h1>
-<div class="col-md-9 col-lg-7 col-xl-8 shadow-5-soft my-5 m-auto px-4 py-5">
+<div class="col-md-9 col-lg-7 col-xl-8 shadow-5-soft my-5 m-auto px-4 py-5 bg-white">
 
     <div class="pt-3 pe-3 overflow-auto d-flex flex-column" style="position: relative; height: 400px">
 
