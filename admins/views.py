@@ -33,7 +33,8 @@ def dashboard(request):
     profiles = Profile.objects.all()
     top_sellers = profiles.order_by('-product_sold')
     top_products = product.order_by('-view_count')[:5]
-
+    active_product_count = product.filter(is_active=True).count()
+    inactive_product_count = product.filter(is_active=False).count()
 
 
 
@@ -46,7 +47,9 @@ def dashboard(request):
         'users_count':user_count,
         'view_count':view_count,
         'top_seller':top_sellers,
-        'top_products':top_products
+        'top_products':top_products,
+        'active_product_count':active_product_count,
+        'inactive_product_count':inactive_product_count
         
     }
     return render(request, 'admins/dashboard.html',context)
@@ -130,3 +133,31 @@ def edit_category(request,category_id):
        
         
 
+def deactive(request, id):
+    user = User.objects.get(id=id)
+    user.is_active = False
+    user.save()
+    messages.success(request, "Successfully Deactivated User Account")
+    return redirect('/admins/dashboard')
+
+def active(request, id):
+    user = User.objects.get(id=id)
+    user.is_active = True
+    user.save()
+    messages.success(request, "Successfully Activated User Account")
+    return redirect('/admins/dashboard')
+
+
+def unverify(request, id):
+    user = Profile.objects.get(user=id)
+    user.verified = False
+    user.save()
+    messages.success(request, "Successfully Unverified User Account")
+    return redirect('/admins/dashboard')
+
+def verify(request, id):
+    user = Profile.objects.get(user=id)
+    user.verified = True
+    user.save()
+    messages.success(request, "Successfully Verified User Account")
+    return redirect('/admins/dashboard')

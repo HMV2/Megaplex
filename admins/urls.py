@@ -10,4 +10,8 @@ urlpatterns = [
     path('add_subcategory/',views.add_subcategory,name='add_subcategory'),
 
     path('<int:category_id>/edit_category',views.edit_category,name='edit_category'),
+    path('activate/<int:id>', views.active),
+    path('deactivate/<int:id>', views.deactive),
+    path('verify/<int:id>', views.verify),
+    path('unverify/<int:id>', views.unverify),
 ]
