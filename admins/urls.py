@@ -14,4 +14,5 @@ urlpatterns = [
     path('deactivate/<int:id>', views.deactive),
     path('verify/<int:id>', views.verify),
     path('unverify/<int:id>', views.unverify),
+    path('logout', views.logout_user)
 ]

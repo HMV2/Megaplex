@@ -12,6 +12,7 @@ from .forms import NotificationForm,CategoryForm
 from django.contrib import messages
 from django.shortcuts import redirect
 import os
+from django.contrib.auth import logout
 
 # test
 
@@ -161,3 +162,7 @@ def verify(request, id):
     user.save()
     messages.success(request, "Successfully Verified User Account")
     return redirect('/admins/dashboard')
+
+def logout_user(request):
+    logout(request)
+    return redirect('/account/login')
