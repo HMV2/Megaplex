@@ -17,7 +17,6 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
 
-import random
 
 # Create your views here.
 
@@ -311,3 +310,26 @@ def wallet(request):
         'get_unread':get_unread(request)
     }
     return render(request,'dashboard/wallet.html',context)
+
+
+def mark_sold(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.quantity = 0
+    product.is_active = False
+    product.save()
+    messages.success(request, 'Successfully marked as sold!')
+    return redirect('/dashboard/profile/')
+
+
+def set_online(request, id):
+    profile = Profile.objects.get(user = id)
+    profile.active = True
+    profile.save()
+    return redirect('/dashboard/profile/')
+
+def set_offline(request, id):
+    profile = Profile.objects.get(user = id)
+    profile.active = False
+    profile.save()
+    return redirect('/dashboard/profile/')
+
