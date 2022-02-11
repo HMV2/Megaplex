@@ -1,0 +1,368 @@
+{% extends 'layout.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %}
+<title>{{profile.first_name}}'s Profile</title>
+{% endblock title %} {% block css_files %}
+
+<link rel="stylesheet" href="{% static '/css/main.css' %}" />
+<link rel="stylesheet" href="{% static '/css/homepage.css' %}" />
+<link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+
+{% endblock css_files %} {% block main_content %}
+
+<div class="profile-page position-relative">
+    <div class="cover position-relative">
+        <img src="{{profile.cover_pic.url}}" alt="" class="cover-img" />
+        <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
+            <button type="button" class="btn btn-light text-success" data-mdb-ripple-color="dark">Available ✅</button>
+            <!-- <button type="button" class="btn btn-light text-black" data-mdb-ripple-color="dark">Offline</button> -->
+        </div>
+    </div>
+
+    <div class="profile container-sm row m-auto fixed">
+        <div class="profile-info d-flex flex-column text-center col-lg-3 border-15 border p-3 bg_fix ">
+
+            <span class="m-auto w-50"><img class="rounded-circle w-100 h-100  " src="{{profile.profile_pic.url}}" style="object-fit: cover; aspect-ratio: 1/1;"
+                    alt="" /></span>
+            {% if profile.verified %}
+            <h4><span class="badge bg-success">Verified <i class="fa fa-badge-check"></i></span></h4>
+            {% else %}
+            <h4><span class="badge bg-danger">Unverified <i class="fa fa-badge-cross"></i></span></h4>
+            {% endif %}
+            <p>{{profile.plan}}</p>
+            <h4 class="pt-4 theme-color">{{profile.firstname}} {{profile.lastname}}</h4>
+            <a href="/dashboard/follower_list/{{profile.id}}" class="text-danger">{{profile.followers.all.count}}
+                followers</a>
+
+            <div class=" mt-3">
+                {% if request.user == profile.user %}
+                <a data-toggle="modal" data-target="#exampleModal" class="text-decoration-none"><button
+                        class="btn btn-outline-primary btn-rounded text-center m-auto  d-flex  justify-content-center">edit
+                        profile</button></a>
+
+                {% else %}
+                {% if is_following %}
+                <form action="/dashboard/unfollow_user/{{profile.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Unfollow">
+
+                </form>
+
+                {% else %}
+                <form action="/dashboard/follow_user/{{profile.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="follow">
+                </form>
+
+                {% endif %}
+                {% endif %}
+
+
+            </div>
+
+            <p class="text-center mt-4 inactive-color">
+                {{user.profile.desc}} </p>
+            <a data-toggle="modal" data-target="#exampleModal2" class="text-decoration-underline">Change password</a>
+            <span class="f-1 mt-4">Member Since: {{user.date_joined}}</span>
+
+
+        </div>
+
+        <!-- Tabs navs -->
+        <div class="col m-4">
+            <div class="d-flex justify-content-between">
+                <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active text-black-50" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                            aria-controls="ex1-tabs-1" aria-selected="true">Active Product</a>
+                    </li>
+                    {% if request.user == profile.user %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link text-black-50" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+                            aria-controls="ex1-tabs-2" aria-selected="false">Sold Product</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link text-black-50" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+                            aria-controls="ex1-tabs-3" aria-selected="false">Activity</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul>
+                    {% if request.user == profile.user %}
+                    <li>
+                        <a href="/dashboard/addProduct"><button class="btn btn-outline-danger">Add New
+                                product</button></a>
+                    </li>
+                    {% else %}
+                    {% endif %}
+                </ul>
+            </div>
+
+
+            <!-- Tabs navs -->
+
+
+            <!-- Tabs navs -->
+
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content">
+                {% if inactive_products != None %}
+
+                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                        {% for pro in active_products %}
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class=" position-relative">
+                                    <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
+                                            style="aspect-ratio: 1/1.1; object-fit: cover;" /></a>
+
+                                    <div class="card-head position-absolute w-100 h-100 top-0">
+                                        
+                                        <button  class="badge d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger"
+                                                >In Stock: {{pro.quantity}}</button>
+                                        
+                                        <a class="btn btn-danger position-absolute w-100 text-white buyNow-btn"
+                                            href="/product/details/{{pro.id}}">
+                                            Perview my product
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                            {{pro.price}}</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 justify-content-between">
+                                        {% if request.user == profile.id %}
+                                        <a class="text-nowrap btn btn-primary"
+                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i
+                                                class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"
+                                            href="/dashboard/removeProduct/{{pro.id}}"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                        {% endif %}
+
+                                        <a class="text-nowrap btn btn-success " href="#">Sold <i
+                                                class="fas fa-check"></i></a>
+                                        
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        You have no active products
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+
+                    {% if inactive_products != None %}
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3">
+                        {% for pro in inactive_products %}
+                        <div class=" col">
+                            <div class="card border overflow-hidden border-15 mb-3">
+                                <div class="">
+                                    <img src="{{ pro.picture.url }}" alt=""
+                                        style="aspect-ratio: 1/1.1; object-fit: cover;" />
+
+                                </div>
+                                <div class="m-3">
+                                    <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                                        <strong class="text-nowrap r-paragraph text-danger">NPR.
+                                            {{pro.price}}</strong>
+                                    </div>
+                                    <hr class="dropdown-divider" />
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        You have no inactive products
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+
+                </div>
+
+            </div>
+        </div>
+        <!-- Tabs content -->
+
+    </div>
+
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur"></span>
+            <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur"></span>
+            <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur"></span>
+            <span class=" position-absolute rounded-circle top-0  start-0 w-25 h-25 "> <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png"
+                    alt=""></span>
+            <div class=" pt-4  pb-2">
+              
+
+                <h5 class="modal-title text-center m-auto fs-2 " id="exampleModalLabel ">Edit Profile</h5>
+
+                <button type="button" class="close fs-2 position-absolute end-0 top-0 me-3 mt-4" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="tp" value="profile">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.firstname | as_crispy_field }}
+                        </div>
+                        <div class="form-group  col-md-6">
+                            {{ form.lastname | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.phone | as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.active | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-6 me-1">
+                            {{ form.district | as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.city | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-12 me-1">
+                            {{ form.profile_pic | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row mt-1" style="display:flex; justify-content:space-around">
+                        <div class="form-group col-md-12 me-1">
+                            {{ form.desc | as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <input type="hidden" name="tp" value="password">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% crispy pform %}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal2">Close</button>
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade bg-black bg-opacity-10" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-white position-relative " style="backdrop-filter: blur(50px);">
+            <span class="w-50 h-25 bg-primary position-absolute rounded-circle top-0  start-0 blur"
+                style="z-index: -1;"></span>
+            <span class="w-25 h-25 bg-warning position-absolute rounded-circle top-0  end-0 blur"
+                style="z-index: -1;"></span>
+            <span class="w-50 h-25 bg-danger position-absolute rounded-circle top-0  start-50 blur"
+                style="z-index: -1;"></span>
+            <span class=" position-absolute rounded-circle top-0  start-0  "
+                style="z-index: -1; width: 90px; height: 90px; "> <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/business-man-holding-cup-3118508-2606150@0.png"
+                    alt=""></span>
+
+            <div class=" pt-3 ">
+                <h3 class=" text-white text-center mt-2" id="exampleModalLabel">Edit Profile</h3>
+                <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-2" data-mdb-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <form>
+                    <div class="d-flex justify-content-lg-between gap-1 gap-md-2 ">
+                        <!-- Email input -->
+                        <div class="form-outline mb-3 w-50">
+                            <input type="email" id="form1Example1" class="form-control" />
+                            <label class="form-label" for="form1Example1">FirstName</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="form-outline mb-3 w-50">
+                            <input type="password" id="form1Example2" class="form-control" />
+                            <label class="form-label" for="form1Example2">LastName</label>
+                        </div>
+                    </div>
+                    <div class="form-outline mb-3 w-50">
+                        <input type="password" id="form1Example3" class="form-control" />
+                        <label class="form-label" for="form1Example3">Username</label>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <input type="file">
+                    </div>
+
+                    <div class="form-outline mb-2 w-50">
+                        <input type="text " id="form1Example4" class="form-control " style="height: 100px;" />
+                        <label class="form-label" for="form1Example4">descriptions</label>
+                    </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit"
+                class="btn bg-white btn-outline-primary rounded-pill mb-4 btn-block w-50 m-auto theme-bg">Sign
+                in</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+{% endblock main_content %} {% block js_files %}
+<script src="{% static 'javascript/profile.js' %}"></script>
+<script src="{% static 'javascript/product_like.js' %}"></script>
+{% endblock js_files %}

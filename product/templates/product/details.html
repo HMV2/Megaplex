@@ -372,7 +372,9 @@
                             <img class="img-fluid rounded-circle w-25" src="{{product.seller.profile.profile_pic.url}}"
                                 alt="">
                             <div class="d-flex flex-column text-center">
-                                <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
+                                <a href="/dashboard/profile/{{product.seller.profile.id}}">
+                                    <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
+                                </a>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> Kathmandu</h6>
                                 <input type="hidden" name="to_user" id="to_user" value="{{product.seller}}">
                                 <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">
