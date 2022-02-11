@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 import os
 from django.contrib.auth import logout
+from notification.models import BroadcastNotification
 
 # test
 
@@ -60,17 +61,18 @@ def dashboard(request):
 
 def send_notification(request):
     notform = NotificationForm()
+    nots = BroadcastNotification.objects.all()
     if request.method == "POST":
         form = NotificationForm(request.POST)
         if form.is_valid():
             form.save() 
             messages.success(request,"Successfully Scheduled Notification!")
-            return redirect('/admins/dashboard')
+            return redirect('/admins/send_notification')
         else:
             messages.error(request,"Failed to Scheduled Notification!")
 
 
-    context = {'form':notform}
+    context = {'form':notform, 'nots':nots}
     return render(request,'admins/send_notification.html',context)
 
 def add_category(request):
