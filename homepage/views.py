@@ -60,9 +60,9 @@ def logout_view(request):
 def category(request):
     category = Category.objects.all()
     context={
-        'room_name':"broadcast",
         'products':category,
         'category':category,
+        'room_name':"broadcast",
         'get_unread':get_unread(request)
     }
     return render(request, 'homepage/category.html', context)
@@ -95,4 +95,8 @@ def games(request):
     return render(request,'homepage/games.html',{'room_name':"broadcast"})
 
 def about(request):
-    return render(request,'homepage/about_us.html')
+    context={
+        'room_name':"broadcast",
+        'get_unread':get_unread(request)
+    }
+    return render(request,'homepage/about_us.html', context)
