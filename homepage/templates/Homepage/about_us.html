@@ -1,0 +1,202 @@
+{% extends 'layout.html' %}
+{% load static %} {% block title %}
+<title>About us</title>
+{% endblock title %}
+
+
+{% block main_content %}
+<section class="mb-8">
+    <style>
+        .page-header {
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: 50%;
+        }
+
+        .oblique {
+            transform: skewX(-10deg);
+            overflow: hidden;
+            width: 60%;
+            right: -10rem;
+            border-bottom-left-radius: 0.75rem;
+        }
+
+        .img-oblique {
+            transform: skewX(10deg);
+        }
+
+        .img-settings {
+            image-rendering: pixelated;
+            filter: brightness(110%) contrast(110%) saturate(100%);
+        }
+
+        .fw-900 {
+            font-weight: 900;
+        }
+    </style>
+    <div class="page-header" style="min-height: 75vh;">
+        <div class="oblique position-absolute top-0 h-100 d-md-block d-none gradient-custom-10">
+            <div data-builder-edit="background" data-builder-name="background1"
+                class="img-oblique position-absolute fixed-top ms-auto h-100 img-settings"
+                style="z-index: 0; background-size: cover; background-position: 50% 50%; background-image: url(&quot;https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5NjI0M3wwfDF8c2VhcmNofDN8fGxhcHRvcHxlbnwwfHx8fDE2NDQ1NDc1OTc&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080&quot;); margin-left: -4.1rem !important; background-color: transparent;"
+                aria-controls="#picker-editor"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7 d-flex justify-content-center flex-column">
+                    <h2 class="lh-1 ls-tight fw-900 mb-1" style="font-size: 3.75rem;" data-builder-edit="text"
+                        data-builder-name="text1" contenteditable="true">About us.</h2>
+                    <h2 class="lh-1 ls-tight fw-900 text-primary mb-4" style="font-size: 3.75rem;"
+                        data-builder-edit="text" data-builder-name="text2" contenteditable="true">Find everything...
+                    </h2>
+                    <p class="mt-1 pe-lg-5 me-lg-5 lead fw-normal text-muted" data-builder-edit="text"
+                        data-builder-name="text3" contenteditable="true">The time is now for it to be okay to be great.
+                        People in this world shun people for being nice.</p>
+                    <div class="buttons"> <a href="#!" type="button" class="btn btn-primary btn-lg mt-4 me-2"
+                            data-builder-edit="button" data-builder-name="button1" aria-controls="#picker-editor"
+                            draggable="false" style="min-width: auto;">Get Started <i
+                                class="fas fa-angle-double-right p-1 ps-2"></i></a> <a href="#!" type="button"
+                            class="btn btn-link btn-lg mt-4" data-builder-edit="button" data-builder-name="button2"
+                            aria-controls="#picker-editor" draggable="false" style="min-width: auto;"></a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section draggable="false" class="container pt-5" data-v-271253ee="">
+    <section class="builder mb-8">
+        <style>
+            .fw-900 {
+                font-weight: 900;
+            }
+
+            @media (min-width: 768px) {
+                .border-md-start {
+                    border-left: 1px solid #e0e0e0 !important;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .border-md-end {
+                    border-right: 1px solid #e0e0e0 !important;
+                }
+            }
+        </style>
+        <div class="row text-center">
+            <div class="col-12">
+                <h2 class="fs-2 fw-900" data-builder-edit="text" data-builder-name="text1" contenteditable="true">What
+                    we have designed?</h2>
+                <p class="lead fw-normal text-muted mb-5" data-builder-edit="text" data-builder-name="text2"
+                    contenteditable="true">Megaplex, a Largest eCommerce platform in the planet 'Mars'</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <h2 class="fs-1 text-primary fw-900" data-builder-edit="text" data-builder-name="text3"
+                                    contenteditable="true">100%</h2>
+                                <p class="lead fw-normal text-muted mb-0" data-builder-edit="text"
+                                    data-builder-name="text4" contenteditable="true">Up &amp; Running</p>
+                            </div>
+                            <div class="col-md-4 border-md-start border-md-end mb-4 mb-md-0">
+                                <h2 class="fs-1 text-primary fw-900" data-builder-edit="text" data-builder-name="text5"
+                                    contenteditable="true">24/7</h2>
+                                <p class="lead fw-normal text-muted mb-0" data-builder-edit="text"
+                                    data-builder-name="text6" contenteditable="true">Support</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h2 class="fs-1 text-primary fw-900" data-builder-edit="text" data-builder-name="text7"
+                                    contenteditable="true">100+</h2>
+                                <p class="lead fw-normal text-muted mb-0" data-builder-edit="text"
+                                    data-builder-name="text8" contenteditable="true">Products</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<section draggable="false" class="container pt-5" data-v-271253ee="">
+    <h2 class="ls-tight mb-5" style="font-weight: 900; font-size: 4.5rem;" data-builder-edit="text" data-builder-name="text2" contenteditable="true">Explore our team members.</h2>
+    <section class="">
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4 mb-md-0 w-50"> <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
+                    class="w-100 rounded-5 shadow-4" alt="" data-builder-edit="image" data-builder-name="image1"
+                    aria-controls="#picker-editor" draggable="false" style="object-fit: cover; aspect-ratio: 1/0.44;"> </div>
+            <div class="col-md-6 mb-4 mb-md-0">
+                <p class="text-primary text-uppercase fw-bold" data-builder-edit="text" data-builder-name="text1"
+                    contenteditable="true">Frontend Designer</p>
+                <h2 class="fw-bold mb-4" data-builder-edit="text" data-builder-name="text2" contenteditable="true">Nischal Bade</h2>
+                <p class="text-muted mb-4" data-builder-edit="text" data-builder-name="text3" contenteditable="true">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quod impedit odio animi, accusantium
+                    quo consequuntur vero voluptatibus eum commodi officiis provident assumenda earum culpa dicta quia
+                    recusandae eius nemo!</p><a type="button" class="btn   btn-primary btn-rounded"
+                    data-builder-edit="button" data-builder-name="button1" aria-controls="#picker-editor"
+                    draggable="false">Contact us</a>
+            </div>
+        </div>
+        <div class="row mb-3 mt-5">
+            
+            <div class="col-md-6 mb-4 mb-md-0 text-lg-end">
+                <p class="text-primary text-uppercase fw-bold" data-builder-edit="text" data-builder-name="text1"
+                    contenteditable="true">Backend Developer</p>
+                <h2 class="fw-bold mb-4" data-builder-edit="text" data-builder-name="text2" contenteditable="true">Chirag Simkhada</h2>
+                <p class="text-muted mb-4" data-builder-edit="text" data-builder-name="text3" contenteditable="true">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quod impedit odio animi, accusantium
+                    quo consequuntur vero voluptatibus eum commodi officiis provident assumenda earum culpa dicta quia
+                    recusandae eius nemo!</p><a type="button" class="btn   btn-primary btn-rounded"
+                    data-builder-edit="button" data-builder-name="button1" aria-controls="#picker-editor"
+                    draggable="false">Contact us</a>
+            </div>
+            <div class="col-md-6 mb-4 mb-md-0 "> <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
+                    class="w-100 rounded-5 shadow-4" alt="" data-builder-edit="image" data-builder-name="image1"
+                    aria-controls="#picker-editor" draggable="false" style="object-fit: cover; aspect-ratio: 1/0.44;"> </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4 mb-md-0 w-50"> <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
+                    class="w-100 rounded-5 shadow-4" alt="" data-builder-edit="image" data-builder-name="image1"
+                    aria-controls="#picker-editor" draggable="false" style="object-fit: cover; aspect-ratio: 1/0.44;"> </div>
+            <div class="col-md-6 mb-4 mb-md-0">
+                <p class="text-primary text-uppercase fw-bold" data-builder-edit="text" data-builder-name="text1"
+                    contenteditable="true">Frontend Designer</p>
+                <h2 class="fw-bold mb-4" data-builder-edit="text" data-builder-name="text2" contenteditable="true">Nischal Bade</h2>
+                <p class="text-muted mb-4" data-builder-edit="text" data-builder-name="text3" contenteditable="true">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quod impedit odio animi, accusantium
+                    quo consequuntur vero voluptatibus eum commodi officiis provident assumenda earum culpa dicta quia
+                    recusandae eius nemo!</p><a type="button" class="btn   btn-primary btn-rounded"
+                    data-builder-edit="button" data-builder-name="button1" aria-controls="#picker-editor"
+                    draggable="false">Contact us</a>
+            </div>
+        </div>
+        <div class="row mb-3 mt-5">
+            
+            <div class="col-md-6 mb-4 mb-md-0 text-lg-end">
+                <p class="text-primary text-uppercase fw-bold" data-builder-edit="text" data-builder-name="text1"
+                    contenteditable="true">Backend Developer</p>
+                <h2 class="fw-bold mb-4" data-builder-edit="text" data-builder-name="text2" contenteditable="true">Chirag Simkhada</h2>
+                <p class="text-muted mb-4" data-builder-edit="text" data-builder-name="text3" contenteditable="true">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quod impedit odio animi, accusantium
+                    quo consequuntur vero voluptatibus eum commodi officiis provident assumenda earum culpa dicta quia
+                    recusandae eius nemo!</p><a type="button" class="btn   btn-primary btn-rounded"
+                    data-builder-edit="button" data-builder-name="button1" aria-controls="#picker-editor"
+                    draggable="false">Contact us</a>
+            </div>
+            <div class="col-md-6 mb-4 mb-md-0 "> <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
+                    class="w-100 rounded-5 shadow-4" alt="" data-builder-edit="image" data-builder-name="image1"
+                    aria-controls="#picker-editor" draggable="false" style="object-fit: cover; aspect-ratio: 1/0.44;"> </div>
+        </div>
+        
+    </section>
+</section>
+
+{% endblock main_content %}

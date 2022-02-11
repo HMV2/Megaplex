@@ -93,3 +93,6 @@ def fun2(request):
 
 def games(request):
     return render(request,'homepage/games.html',{'room_name':"broadcast"})
+
+def about(request):
+    return render(request,'homepage/about_us.html')
