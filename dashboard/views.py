@@ -320,6 +320,14 @@ def mark_sold(request, product_id):
     messages.success(request, 'Successfully marked as sold!')
     return redirect('/dashboard/profile/')
 
+def mark_unsold(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.quantity = 1
+    product.is_active = True
+    product.save()
+    messages.success(request, 'Successfully marked as unsold!')
+    return redirect('/dashboard/profile/')
+
 
 def set_online(request, id):
     profile = Profile.objects.get(user = id)

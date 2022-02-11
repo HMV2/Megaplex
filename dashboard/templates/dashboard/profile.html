@@ -162,10 +162,21 @@
                         {% for pro in inactive_products %}
                         <div class=" col">
                             <div class="card border overflow-hidden border-15 mb-3">
-                                <div class="">
-                                    <img src="{{ pro.picture.url }}" alt=""
-                                        style="aspect-ratio: 1/1.1; object-fit: cover;" />
+                                <div class=" position-relative">
+                                    <a href="/product/details/{{pro.id}}"><img src="{{ pro.picture.url }}" alt=""
+                                            style="aspect-ratio: 1/1.1; object-fit: cover;" /></a>
 
+                                    <div class="card-head position-absolute w-100 h-100 top-0">
+
+                                        <button
+                                            class="badge d-flex justify-content-center align-items-center bg-white end-0 me-2 mt-2  position-absolute text-danger">In
+                                            Stock: {{pro.quantity}}</button>
+
+                                        <a class="btn btn-danger position-absolute w-100 text-white buyNow-btn"
+                                            href="/product/details/{{pro.id}}">
+                                            Perview my product
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="m-3">
                                     <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
@@ -175,6 +186,19 @@
                                             {{pro.price}}</strong>
                                     </div>
                                     <hr class="dropdown-divider" />
+                                    <div class="d-flex gap-2 justify-content-between">
+                                        <a class="text-nowrap btn btn-primary"
+                                            href="/dashboard/editProduct/{{pro.id}}">Edit <i
+                                                class="fas fa-pen-square"></i></a>
+                                        <a class="text-nowrap btn btn-danger"
+                                            href="/dashboard/removeProduct/{{pro.id}}"><i
+                                                class="fas fa-trash-alt"></i></a>
+
+                                        <a class="text-nowrap btn btn-success "
+                                            href="/dashboard/mark_unsold/{{pro.id}}">Unsold <i class="fas fa-check"></i></a>
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

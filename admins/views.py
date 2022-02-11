@@ -6,9 +6,10 @@ from django.shortcuts import render
 from django.template import context
 from django.contrib.auth.models import User
 from numpy import product
+
 from account.models import Profile
-from product.models import Product,Category
-from .forms import NotificationForm,CategoryForm
+from product.models import Product,Category,Sub_Category
+from .forms import NotificationForm,CategoryForm, SubcategoryForm
 from django.contrib import messages
 from django.shortcuts import redirect
 import os
@@ -112,7 +113,42 @@ def add_category(request):
 
 
 def add_subcategory(request):
-    return render(request,'admins/add_subcategory.html')
+    category = Sub_Category.objects.all()
+    print(category)
+    
+    add_form = SubcategoryForm()
+
+    if request.method == "POST":
+        type = request.POST.get('type')
+        if type=="add":
+            form = SubcategoryForm(request.POST,request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Successfully Added Subcategory")
+                return redirect('/admins/add_subcategory')
+            else:
+                messages.error(request,"Failed to Added Subcategory!")
+        elif type =="edit":
+            category_id = request.POST['category_id']
+            category = Sub_Category.objects.get(id = category_id)
+            if request.FILES.get('category_image'):
+                # if you are going to replace your image it will replace and remove the previous one
+                os.remove(category.picture.path)
+                category.name = request.POST['category_name']
+                category.picture= request.FILES['category_image']
+                category.save()
+                return redirect('/admins/add_subcategory')
+            else:
+                category.name = request.POST['category_name']
+                category.save()       
+                return redirect('/admins/add_subcategory')
+
+
+    context = {
+        'category':category,
+        "add_form" : add_form
+    }
+    return render(request,'admins/add_subcategory.html', context)
 
 
 def edit_category(request,category_id):
@@ -166,3 +202,16 @@ def verify(request, id):
 def logout_user(request):
     logout(request)
     return redirect('/account/login')
+
+def deleteSub(request, id):
+    sub = Sub_Category.objects.get(id=id)
+    sub.delete()
+    messages.success(request, "Successfully Deleted Sub Category")
+    return redirect('/admins/add_subcategory')
+
+def deleteCat(request, id):
+    sub = Category.objects.get(id=id)
+    sub.delete()
+    messages.success(request, "Successfully Deleted Category")
+    return redirect('/admins/add_category')
+
