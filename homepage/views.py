@@ -11,7 +11,7 @@ from django.contrib import messages
 from directChat.views import get_unread
 
 def index_page(request):
-    products = Product.objects.all()[:10]
+    products = Product.objects.filter(is_active=True)[:10]
     user_list = getUserCount()
     pro_list = ""
     if len(user_list)>0:
