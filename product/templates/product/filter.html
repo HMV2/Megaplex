@@ -13,12 +13,12 @@
             {% endif %}
             <div class="d-flex">
               {% if search_item %}
-            <p><span class="badge bg-light text-black">{{search_item}}</span></p>
-            {% endif %}
-            {% if min_tag %}
-            <p><span class="badge bg-light text-black">Minimum Price: {{min_price1}}</span></p>
-            <p><span class="badge bg-light text-black">Maximum Price: {{max_price1}}</span></p>
-            {% endif %}
+              <p><span class="badge bg-light text-black">{{search_item}}</span></p>
+              {% endif %}
+              {% if min_tag %}
+              <p><span class="badge bg-light text-black">Minimum Price: {{min_price1}}</span></p>
+              <p><span class="badge bg-light text-black">Maximum Price: {{max_price1}}</span></p>
+              {% endif %}
             </div>
           </li>
 
@@ -37,38 +37,40 @@
             </ul>
           </li>
           <li>
-              <form method="POST" class="d-flex">
-                {% csrf_token %}
-                <input type="hidden" name="form_type" value="search">
-                <input type="search" id="form1" class="form-control" name="key" placeholder="Search..." aria-label="Search"/>
-                <button type="Submit" class="btn btn-md btn-primary">Search</button>
-              </form>
+            <form method="POST" class="d-flex">
+              {% csrf_token %}
+              <input type="hidden" name="form_type" value="search">
+              <input type="search" id="form1" class="form-control" name="key" placeholder="Search..."
+                aria-label="Search" />
+              <button type="Submit" class="btn btn-md btn-primary">Search</button>
+            </form>
           </li>
         </div>
         <div class="row">
           {% for pro in products %}
           <div class="col-6 col-md-6 col-lg-4 mb-3">
             <a href="/product/details/{{pro.id}}" class="unlink">
-            <div class="card border overflow-hidden border-15 mb-3">
-              <div class="">
-                <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
+              <div class="card border overflow-hidden border-15 mb-3">
+                <div class="">
+                  <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
 
-              </div>
-              <div class="m-3">
-                <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
-                <div class="d-flex justify-content-between">
-                  <span class="text-nowrap r-paragraph ms-1"><i class="fas fa-eye"></i> <strong>{{pro.view_count}}</strong></span>
-                  <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
                 </div>
-                <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: {{pro.seller.first_name}}</span>
-                            <span class="text-nowrap r-paragraph">{{pro.date}}</span>
-                        </div>
-              </div>
+                <div class="m-3">
+                  <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+                  <div class="d-flex justify-content-between">
+                    <span class="text-nowrap r-paragraph ms-1"><i class="fas fa-eye"></i>
+                      <strong>{{pro.view_count}}</strong></span>
+                    <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
+                  </div>
+                  <hr class="dropdown-divider">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-nowrap r-paragraph">Seller: {{pro.seller.first_name}}</span>
+                    <span class="text-nowrap r-paragraph">{{pro.date}}</span>
+                  </div>
+                </div>
 
-            </div>
-          </a>
+              </div>
+            </a>
           </div>
           {% endfor %}
         </div>
@@ -81,25 +83,26 @@
             {% endif %}
           </div>
           <div>
-            <nav aria-label="...">
-              <ul class="pagination">
-                <li class="page-item disabled">
-                  <a class="page-link">Previous</a>
+             <nav aria-label="...">
+        <ul class="pagination">
+                            {% if products.has_previous %}
+                <li class="page-item ">
+                  <a class="page-link" href="?page_num={{products.previous_page_number}}">Previous</a>
                 </li>
-                {% if products.has_previous %}
-                <li class="page-item"><a class="page-link" href="?products.previous_page_number">{{products.prevoius_page_number}}</a></li>
+                <li class="page-item ">
+                  <a class="page-link" href="?page_num={{products.previous_page_number}}">{{products.previous_page_number}}</a>
+                </li>
+                {% comment %} <li class="page-item"><a class="page-link" href="?page_num={{products.previous_page_number}}">{{products.prevoius_page_number}}</a></li> {% endcomment %}
                 {% endif %}
                 <li class="page-item active" aria-current="page">
                   <a class="page-link" href="#">{{products.number}} <span class="visually-hidden">(current)</span></a>
                 </li>
                 {% if products.has_next %}
-                <li class="page-item"><a class="page-link" href="?products.next_page_number">{{products.next_page_number}}</a></li>
+                <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">{{products.next_page_number}}</a></li>
+                <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">Next</a></li>
                 {% endif %}
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
+        </ul>
+      </nav>
           </div>
         </div>
       </div>
@@ -140,11 +143,13 @@
         <div class="price-filter-control d-flex flex-column">
           <div>
             <label for="price-min-control"> Min Price </label>
-            <input type="number" class="form-control mb-2 me-2" id="price-min-control" name="minPrice" value="{{min_price1}}"> <br>
+            <input type="number" class="form-control mb-2 me-2" id="price-min-control" name="minPrice"
+              value="{{min_price1}}"> <br>
           </div>
           <div>
             <label for="price-max-control"> Max Price </label>
-            <input type="number" class="form-control mb-2" id="price-min-control" name="maxPrice" value="{{max_price1}}">
+            <input type="number" class="form-control mb-2" id="price-min-control" name="maxPrice"
+              value="{{max_price1}}">
           </div>
           <button type="Submit" class="btn btn-lg btn-primary w-100 mb-4">Update Results</button>
         </div>

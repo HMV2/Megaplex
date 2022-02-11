@@ -27,7 +27,8 @@
                                 <div class="d-flex">
                                     <div class="me-2">
                                         <label for="exampleInputEmail1" class="form-label">Sender @</label>
-                                        <input placeholder="$" name="Sender1" class="form-control" value="{{ request.user.profile.username }}">
+                                        <input placeholder="$" name="Sender1" class="form-control"
+                                            value="{{ request.user.profile.username }}">
                                     </div>
                                     <div>
                                         <label for="exampleInputEmail1" class="form-label">Receiver</label>
@@ -117,7 +118,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             {% for txn in txnh  %}
                             {% if txn.sender ==  request.user.username %}
                             <tr class="  text-danger fw-bold">
@@ -126,41 +127,60 @@
                                 <td>{{txn.sender}}</td>
                                 <td>{{txn.receiver}}</td>
                                 <td>${{txn.amount}}</td>
-                                <td><span class="badge   fs-6 fw-bold rounded-pill bg-danger w-75 d-inline-block ">  Sent <i class="fas fa-arrow-up"></i></span></td>
+                                <td><span class="badge   fs-6 fw-bold rounded-pill bg-danger w-75 d-inline-block "> Sent
+                                        <i class="fas fa-arrow-up"></i></span></td>
 
 
                             </tr>
                             {% else %}
 
-                             <tr class="text-success fw-bold">
+                            <tr class="text-success fw-bold">
 
                                 <td>{{txn.txn_id}}</td>
                                 <td>{{txn.sender}}</td>
                                 <td>{{txn.receiver}}</td>
                                 <td>${{txn.amount}}</td>
-                                <td><span class="badge   fs-6 fw-bold rounded-pill bg-success w-75 d-inline-block">Received <i class="fas fa-arrow-down"></i></span></td>
+                                <td><span
+                                        class="badge   fs-6 fw-bold rounded-pill bg-success w-75 d-inline-block">Received
+                                        <i class="fas fa-arrow-down"></i></span></td>
 
 
                             </tr>
 
                             {% endif %}
                             {% endfor %}
-                            
+
                         </tbody>
 
                     </table>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                        <nav aria-label="...">
                             <ul class="pagination">
-                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span
-                                            aria-hidden="true">«</span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                            aria-hidden="true">»</span></a></li>
+                                
+                                {% if txnh.has_previous %}
+                                <li class="page-item ">
+                                    <a class="page-link" href="?page_num={{txnh.previous_page_number}}">Previous</a>
+                                </li>
+                                <li class="page-item ">
+                                    <a class="page-link"
+                                        href="?page_num={{txnh.previous_page_number}}">{{txnh.previous_page_number}}</a>
+                                </li>
+                       
+                                {% endif %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">{{txnh.number}} <span
+                                            class="visually-hidden">(current)</span></a>
+                                </li>
+                                {% if txnh.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?page_num={{txnh.next_page_number}}">{{txnh.next_page_number}}</a>
+                                </li>
+                                <li class="page-item"><a class="page-link"
+                                        href="?page_num={{txnh.next_page_number}}">Next</a></li>
+                                {% endif %}
+                             
                             </ul>
                         </nav>
                     </div>

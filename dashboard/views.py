@@ -16,7 +16,7 @@ from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -304,11 +304,25 @@ def wallet(request):
             messages.success(request, 'Successfully Transferred!')
         else:
             return HttpResponse("Failed")
+
+    pag = Paginator(txn_history,5)
+
+    page_num = request.GET.get('page_num')
+    try:
+        page = pag.page(page_num)
+    except:
+        page = pag.page(1)
+        page_num = 1
+    print(page_num)
+
+
     context = {
-        'txnh':txn_history,
+        'page_num': page_num,
+        'txnh':page,
         'room_name':"broadcast",
         'get_unread':get_unread(request)
     }
+    
     return render(request,'dashboard/wallet.html',context)
 
 
