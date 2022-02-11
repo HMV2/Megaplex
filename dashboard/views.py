@@ -215,7 +215,7 @@ def togglefollowing(request,following_id):
 
         return JsonResponse({"is_remove":is_remove})
     context={
-        'profile':user,
+        'profile':profile,
         'room_name':"broadcast"
     }
     return render(request, 'dashboard/profile.html',context)

@@ -46,3 +46,4 @@ class transaction(models.Model):
     sender = models.CharField(max_length=50)
     receiver = models.CharField(max_length=50)
     amount = models.DecimalField(default=0,max_digits=12,decimal_places=2)
+

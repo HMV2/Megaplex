@@ -408,7 +408,7 @@
                             <label for="description">$  </label><input name="amountInput" type="number" id="amount" value="" placeholder="">
 
                         </div> -->
-                        <div id="smart-button-container" class="shadow">
+                        <!-- <div id="smart-button-container" class="shadow">
                             <div>
                                 <p class="text-danger fw-bold">Pay in Advance</p>
                                 <div style="text-align: center"><input class="form-control p-3"
@@ -430,7 +430,79 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
+                        {% if product.seller.profile.user == request.user %}
+
+                        {% else %}
+                        <form class="row shadow p-4 border-15 d-flex justify-content-between mt-3" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="formType" value="wallet">
+                            <div class="col-lg-11 m-auto">
+                                <p class="text-danger">Sent money to buy item</p>
+
+                                <div class="mb-3">
+                                    <div class="d-flex flex-column  w-100">
+                                        
+
+                                        <div class="col-auto d-flex flex-column ">
+                                            <label for="exampleInputEmail1" class="form-label mt-2 text-start">Sender </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">@</div>
+                                                </div>
+                                                <input placeholder="$" name="Sender1" readonly class="form-control"
+                                                value="{{ request.user.profile.username }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-auto d-flex flex-column ">
+                                            <label for="exampleInputEmail1" class="form-label mt-2 text-start">Receiver </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">@</div>
+                                                </div>
+                                                <input type="text" class="form-control" id="inlineFormInputGroup" name="Receiver1"
+                                                value="{{product.seller.profile.username}}"
+                                                    readonly>
+                                            </div>
+                                        </div>
+
+                                       
+                                    </div>
+                                    <div id="emailHelp" class="form-text">
+                                        Secure payment gateway between client
+                                    </div>
+                                </div>
+
+<!-- 
+                                <div class="mb-3  text-center">
+                                    <label for="exampleInputEmail1" class="form-label">Amount in ($)</label>
+                                    <input class="form-control w-75 m-auto" placeholder="$" value="{{product.price}}"
+                                        name="amount1" aria-describedby="emailHelp">
+                                </div> -->
+
+                                
+                                        <div class="col-auto d-flex flex-column ">
+                                            <label for="exampleInputEmail1" class="form-label  text-start">Amount in $ </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">$</div>
+                                                </div>
+                                                <input class="form-control w-75 m-auto" placeholder="Enter Amount" value=""
+                                        name="amount1" aria-describedby="emailHelp">
+                                            </div>
+                                        </div>
+
+                                <button class="btn btn-primary w-100" type="submit"> Send <i class="fad fa-paper-plane"></i></button>
+                            </div>
+                            <!-- <div class="col-lg-4 ">
+                            <img src="{% static 'images/plane.png' %}" alt="" id="houseimg">
+                        </div> -->
+
+                        </form>
+                        {% endif %}
+
+
                     </div>
                 </div>
             </div>
