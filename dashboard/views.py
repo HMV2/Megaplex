@@ -12,7 +12,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
-from .forms import ProductForm
+from .forms import ProductForm, txnForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
@@ -274,7 +274,7 @@ def wishlist(request):
 
 
 def wallet(request):
-    txn_history = transaction.objects.all()
+    txn_history = transaction.objects.all()[::-1]
     if request.method == "POST":
         sender = request.POST['Sender1']
         receiver = request.POST['Receiver1']
@@ -315,8 +315,10 @@ def wallet(request):
         page_num = 1
     print(page_num)
 
-
+    
+    tnx_form = txnForm()
     context = {
+        'form':tnx_form,
         'page_num': page_num,
         'txnh':page,
         'room_name':"broadcast",
