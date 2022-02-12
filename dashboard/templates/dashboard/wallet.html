@@ -1,10 +1,15 @@
-{% extends 'layout.html' %} {% load static %}
+{% extends 'layout.html' %} {% load static %} {% load crispy_forms_tags %}
 {% block title %}
 <title> Megaplex Wallet </title>
 {% endblock title %}
 {% block css_files %}
 
 <link rel="stylesheet" href="{% static '/css/wallet.css' %}" />
+<style>
+    #div_id_receiver{
+        margin-right: 0.5rem !important
+    }
+</style>
 
 {% endblock css_files %}
 {% block main_content %}
@@ -28,11 +33,11 @@
                                     <div class="me-2">
                                         <label for="exampleInputEmail1" class="form-label">Sender @</label>
                                         <input placeholder="$" name="Sender1" class="form-control"
-                                            value="{{ request.user.profile.username }}">
+                                            value="{{ request.user }}">
                                     </div>
                                     <div>
-                                        <label for="exampleInputEmail1" class="form-label">Receiver</label>
-                                        <input placeholder="@" name="Receiver1" class="form-control ">
+                                        {% comment %} <input placeholder="@" name="Receiver1" class="form-control "> {% endcomment %}
+                                        {{ form.receiver | as_crispy_field }}
                                     </div>
                                 </div>
                                 <div id="emailHelp" class="form-text">
@@ -120,7 +125,7 @@
                         <tbody>
 
                             {% for txn in txnh  %}
-                            {% if txn.sender ==  request.user.username %}
+                            {% if txn.sender ==  request.user %}
                             <tr class="  text-danger fw-bold">
 
                                 <td>{{txn.txn_id}}</td>

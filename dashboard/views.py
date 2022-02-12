@@ -17,6 +17,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -277,7 +278,9 @@ def wallet(request):
     txn_history = transaction.objects.all()[::-1]
     if request.method == "POST":
         sender = request.POST['Sender1']
-        receiver = request.POST['Receiver1']
+        receive = request.POST['receiver']
+        receiver = Profile.objects.filter(user=receive).values_list('username', flat=True)
+        receiver = receiver[0]
         amount = int(request.POST['amount1'])
         with connection.cursor() as cursor:
             cursor.execute(
@@ -298,10 +301,14 @@ def wallet(request):
                     receiver_new_balance, receiver)
                 cursor.execute(update_receiver_balance)
 
-            txn = transaction(sender=sender,receiver=receiver,amount=amount)
+            sn = User.objects.get(username=sender)
+            rc = User.objects.get(id=receive)
+
+            txn = transaction(sender=sn,receiver=rc,amount=amount)
             txn.save()
             
             messages.success(request, 'Successfully Transferred!')
+            return redirect('/dashboard/wallet/')
         else:
             return HttpResponse("Failed")
 

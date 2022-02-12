@@ -1,3 +1,4 @@
+from curses.ascii import US
 import channels
 from django.core import validators
 from django.db import models
@@ -41,9 +42,12 @@ class Profile(models.Model): #Model to create profile for users
 def txn():
     return str(random.randint(1000000, 9999999))
 
+
+
 class transaction(models.Model):
     txn_id = models.IntegerField(default=txn)
-    sender = models.CharField(max_length=50)
-    receiver = models.CharField(max_length=50)
+    # sender = models.CharField(max_length=50)
+    sender = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="sender")
+    # receiver = models.CharField(max_length=50)
+    receiver = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="reciver")
     amount = models.DecimalField(default=0,max_digits=12,decimal_places=2)
-
