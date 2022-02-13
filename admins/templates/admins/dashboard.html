@@ -85,9 +85,9 @@
                     </div>
 
                     <div class="ms-4">
-                        <p class="text-muted mb-2">Average time</p>
+                        <p class="text-muted mb-2">Total Active Products</p>
                         <p class="mb-0">
-                            <span class="h5 me-2">00:04:20</span>
+                            <span class="h5 me-2">{{active_product_count}}</span>
                             <small class="text-danger text-sm"><i
                                     class="fas fa-arrow-down fa-sm me-1"></i>23,58%</small>
                         </p>
@@ -113,9 +113,9 @@
                     </div>
 
                     <div class="ms-4">
-                        <p class="text-muted mb-2">Bounce rate</p>
+                        <p class="text-muted mb-2">Total Sold Products</p>
                         <p class="mb-0">
-                            <span class="h5 me-2">32.35% </span>
+                            <span class="h5 me-2">{{inactive_product_count}}</span>
                             <small class="text-success text-sm"><i
                                     class="fas fa-arrow-down fa-sm me-1"></i>23,58%</small>
                         </p>
@@ -140,9 +140,9 @@
                     <tr>
                         <th>Name</th>
                         <th>Customer type</th>
-                        <th>Status</th>
+                        <th>Account</th>
                         <th>Last Access</th>
-                        <th>Actions</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 {% for user in  users %}
@@ -164,15 +164,27 @@
                             <p class="text-muted mb-0">City: {{user.profile.city}}</p>
                         </td>
                         <td>
-                            <span class="badge badge-success rounded-pill">{{user.is_active}}</span>
+                            {% if user.is_active %}
+                            <span class="badge badge-success rounded-pill"> <a href="/admins/deactivate/{{user.id}}" class="unlink">Active</a></span>
+                            {% else %}
+                            <span class="badge badge-danger rounded-pill"><a href="/admins/activate/{{user.id}}" class="unlink">Inactive</a></span>
+                            {% endif %}
+
                         </td>
                         <td class="text-black">{{user.last_login}}</td>
                         <td>
                             <div class="form-check form-switch">
+                                {% if user.profile.verified == True %}
                                 <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label class="form-check-label text-black" for="flexSwitchCheckDefault">Change the
-                                    status</label>
+                                    id="flexSwitchCheckDefault" checked onclick=unverify("{{user.id}}") />
+                                    <label class="form-check-label text-black" for="flexSwitchCheckDefault">Verified</label>
+                                
+                                {% else %}
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" onclick=verify("{{user.id}}") />
+                                    <label class="form-check-label text-black" for="flexSwitchCheckDefault">Unverified</label>
+                                {% endif %}
+                                
                             </div>
 
                         </td>
@@ -299,7 +311,14 @@
 </div>
 <!-- Main content -->
 
-
+<script>
+    function unverify(id){
+        location.href = '/admins/unverify/'+id
+    }
+    function verify(id){
+        location.href = '/admins/verify/'+id
+    }
+</script>
 
 
 {% endblock main_content %}

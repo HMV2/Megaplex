@@ -12,6 +12,9 @@ from .templatetags import extras
 from django.http import JsonResponse
 import random
 from directChat.views import get_unread
+from django.http import HttpResponse
+from django.db import connection
+from account.models import  transaction
 
 
 def product_details(request,product_id):
@@ -44,7 +47,10 @@ def product_details(request,product_id):
         'count':comment_count,
         'reply':repDict,
         'recommended_products':recommended_products,
-        'get_unread':get_unread(request)
+        'get_unread':get_unread(request),
+      
+        'room_name':"broadcast",
+        
     }
     if request.method == 'POST':
         formType = request.POST.get('formType')
@@ -84,6 +90,38 @@ def product_details(request,product_id):
         elif formType == "comment" and request.POST.get('comment')=="":
             messages.error(request,"Please insert comment to post!")
             return redirect('/product/details/'+str(product_id))
+
+        elif formType == "wallet" and request.POST.get('Receiver1')!="":
+            sender = request.POST['Sender1']
+            receiver = request.POST['Receiver1']
+            amount = int(request.POST['amount1'])
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "select balance from account_profile where username = '%s'" % (sender))
+                sender_balance = int(cursor.fetchall()[0][0])
+
+            if int(sender_balance) >= int(amount):
+                sender_new_balance = int(sender_balance) - int(amount)
+                with connection.cursor() as cursor:
+                    update_sender_balance = "update account_profile set balance = %d where username = '%s'" % (sender_new_balance, sender)
+                    cursor.execute(update_sender_balance)
+                    cursor.execute(
+                        "select balance from account_profile where username = '%s'" % (receiver))
+                    receiver_balance = cursor.fetchall()[0][0]
+                receiver_new_balance = int(receiver_balance) + int(amount)
+                with connection.cursor() as cursor:
+                    update_receiver_balance = "update account_profile set balance = %d where username = '%s'" % (
+                        receiver_new_balance, receiver)
+                    cursor.execute(update_receiver_balance)
+
+                txn = transaction(sender=sender,receiver=receiver,amount=amount)
+                txn.save()
+                
+                messages.success(request, 'Successfully Transferred!')
+            else:
+                return HttpResponse("Failed")
+            
+
 
     return render(request, 'product/details.html',context)
 

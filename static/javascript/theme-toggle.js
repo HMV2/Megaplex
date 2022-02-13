@@ -1,7 +1,7 @@
 // ========================toggle-theme======================
 let toggleTheme = document.querySelector("#theme-toggle");
 let Dark_mode = localStorage.getItem("Dark_mode");
-const darkModeToggle = document.querySelector("#Dark-mode-toggle");
+
 
 const enableDarkMode = () => {
   document.body.classList.add("Dark-mode");

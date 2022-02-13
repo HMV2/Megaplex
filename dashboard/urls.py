@@ -15,5 +15,10 @@ urlpatterns = [
     path('editProduct/<int:product_id>', views.editProduct, name="editProduct"),
     path('removeProduct/<int:product_id>', views.remove_product, name="removeProduct"),
     path('wishlist/',views.wishlist,name='wishlist'),
-    path('wallet/',views.wallet,name='wallet')
+    path('wallet/',views.wallet,name='wallet'),
+    path('mark_sold/<int:product_id>',views.mark_sold),
+    path('mark_unsold/<int:product_id>',views.mark_unsold),
+    path('set_online/<int:id>',views.set_online),
+    path('set_offline/<int:id>',views.set_offline),
+
 ]

@@ -12,12 +12,12 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
-from .forms import ProductForm
+from .forms import ProductForm, txnForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
-
-import random
+from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -216,7 +216,7 @@ def togglefollowing(request,following_id):
 
         return JsonResponse({"is_remove":is_remove})
     context={
-        'profile':user,
+        'profile':profile,
         'room_name':"broadcast"
     }
     return render(request, 'dashboard/profile.html',context)
@@ -275,10 +275,12 @@ def wishlist(request):
 
 
 def wallet(request):
-    txn_history = transaction.objects.all()
+    txn_history = transaction.objects.all()[::-1]
     if request.method == "POST":
         sender = request.POST['Sender1']
-        receiver = request.POST['Receiver1']
+        receive = request.POST['receiver']
+        receiver = Profile.objects.filter(user=receive).values_list('username', flat=True)
+        receiver = receiver[0]
         amount = int(request.POST['amount1'])
         with connection.cursor() as cursor:
             cursor.execute(
@@ -299,15 +301,66 @@ def wallet(request):
                     receiver_new_balance, receiver)
                 cursor.execute(update_receiver_balance)
 
-            txn = transaction(sender=sender,receiver=receiver,amount=amount)
+            sn = User.objects.get(username=sender)
+            rc = User.objects.get(id=receive)
+
+            txn = transaction(sender=sn,receiver=rc,amount=amount)
             txn.save()
             
             messages.success(request, 'Successfully Transferred!')
+            return redirect('/dashboard/wallet/')
         else:
             return HttpResponse("Failed")
+
+    pag = Paginator(txn_history,5)
+
+    page_num = request.GET.get('page_num')
+    try:
+        page = pag.page(page_num)
+    except:
+        page = pag.page(1)
+        page_num = 1
+    print(page_num)
+
+    
+    tnx_form = txnForm()
     context = {
-        'txnh':txn_history,
+        'form':tnx_form,
+        'page_num': page_num,
+        'txnh':page,
         'room_name':"broadcast",
         'get_unread':get_unread(request)
     }
+    
     return render(request,'dashboard/wallet.html',context)
+
+
+def mark_sold(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.quantity = 0
+    product.is_active = False
+    product.save()
+    messages.success(request, 'Successfully marked as sold!')
+    return redirect('/dashboard/profile/')
+
+def mark_unsold(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.quantity = 1
+    product.is_active = True
+    product.save()
+    messages.success(request, 'Successfully marked as unsold!')
+    return redirect('/dashboard/profile/')
+
+
+def set_online(request, id):
+    profile = Profile.objects.get(user = id)
+    profile.active = True
+    profile.save()
+    return redirect('/dashboard/profile/')
+
+def set_offline(request, id):
+    profile = Profile.objects.get(user = id)
+    profile.active = False
+    profile.save()
+    return redirect('/dashboard/profile/')
+
