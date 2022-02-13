@@ -52,7 +52,11 @@
             <a href="/product/details/{{pro.id}}" class="unlink">
               <div class="card border overflow-hidden border-15 mb-3">
                 <div class="">
+<<<<<<< HEAD
                   <img src="{{pro.picture.url}}" alt="{{pro.name}}" height="280px" />
+=======
+                  <img src="{{pro.picture.url}}" alt="{{pro.name}}" style="aspect-ratio: 1/1; object-fit: cover;" />
+>>>>>>> master
 
                 </div>
                 <div class="m-3">
@@ -66,6 +70,9 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <span class="text-nowrap r-paragraph">Seller: {{pro.seller.first_name}}</span>
                     <span class="text-nowrap r-paragraph">{{pro.date}}</span>
+                  </div>
+                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                    <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
                   </div>
                 </div>
 
@@ -101,6 +108,35 @@
                 <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">{{products.next_page_number}}</a></li>
                 <li class="page-item"><a class="page-link" href="?page_num={{products.next_page_number}}">Next</a></li>
                 {% endif %}
+            <nav aria-label="...">
+        <ul class="pagination">
+            {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+              </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for i in products.paginator.page_range %}
+            {% if i == products.number %}
+            <li class="page-item active"><a class="page-link">{{i}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+            </li>
+            {% endif %}
         </ul>
       </nav>
           </div>
@@ -109,7 +145,76 @@
     </div>
     <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
       <h3 class="mt-0 mb-3">Advance Filter</h3>
-      <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
+
+      <div class="accordion" id="accordionExample">
+
+        <div class="accordion-item">
+          <h2 class="text-uppercase font-weight-bold mb-3" id="headingOne">
+            <button class="accordion-button text-uppercase font-weight-bold mb-3" type="button"
+              data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">
+              Categories
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-mdb-parent="#accordionExample">
+            
+            <div class="accordion-body">
+              <div class="  pl-2">
+              <a class="custom-control-label" href="/product/filter">All Categories</a>
+            </div>
+              {% for cat in category %}
+              <div class="mt-2 mb-2 pl-2">
+                <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Brands
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              {% for bat in brand %}
+              <div class="mt-2 mb-2 ps-2">
+                <a class="custom-control-label" href="?brand={{bat.id}}">{{bat.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              colors
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              {% for col in colors %}
+              <div class="mt-2 mb-2 pl-2">
+                <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
       <div class="mt-2 mb-2 pl-2">
         <a class="custom-control-label" href="/product/filter">All Categories</a>
       </div>
@@ -118,8 +223,6 @@
         <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
       </div>
       {% endfor %}
-
-
       <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
       <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Brands</h6>
       {% for bat in brand %}
@@ -133,7 +236,7 @@
       <div class="mt-2 mb-2 pl-2">
         <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
       </div>
-      {% endfor %}
+      {% endfor %} -->
 
       <form method="POST">
         {% csrf_token %}
