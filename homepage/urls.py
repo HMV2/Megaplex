@@ -10,4 +10,5 @@ urlpatterns = [
     path('games/',views.games),
     path('category/', views.category, name='category'),
     path('logout/', views.logout_view),
+    path('about/', views.about),
 ]
