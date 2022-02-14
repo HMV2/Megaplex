@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top  " style="background-color: #fff;" >
     <div class="container">
         <a class="navbar-brand" href="/" style="width: 10%">
-            <img src="{% static 'images/logo1.PNG' %}" alt="" class="" width="98%" />
+            <img src="{% static 'images/logo1.PNG' %}" alt="" class="" style="width: min(140px,15vw);" />
         </a>
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample"
             aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
             <ul class="navbar-nav flex-row align-items-center">
                 <li class="nav-item me-3 me-lg-1">
                     <a class="nav-link d-sm-flex align-items-sm-center " href="/dashboard/profile">
-                        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 35px; width: 35px;" />
+                        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 30px; width: 30px;" />
                         <strong class="d-none d-sm-block ms-1">{{ user.username }}</strong>
                     </a>
                 </li>

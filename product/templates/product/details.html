@@ -158,7 +158,7 @@
                                         <h5 class="mt-2 text-decoration-underline">Recent Comments</h5>
                                         <h6 class="text-small">{{count}} comments</h6>
                                         {% for c in comments %}
-                                        <div class="col-md-12 col-lg-10 col-xl-8 w-100">
+                                        <div class="col-md-12 col-lg-10 col-xl-8 w-100 mb-2">
                                             <div class="card border-15 ">
                                                 <div class="card-body">
                                                     <div
@@ -269,7 +269,7 @@
                                         </div>
                                         <div>
                                             {% for c in reply|get_val:c.sno %}
-                                            <div class="card-body ms-5 ">
+                                            <div class="card-body ms-5 mb-2 ">
                                                 <div class="d-flex flex-start flex-column align-items-center mb-3">
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <div class="d-flex gap-2">
@@ -524,27 +524,50 @@
                         <img src="{{i.picture.url}}" alt="" class="card-image rounded-3" />
 
                         <div class="card-head position-absolute w-100 h-100 top-0">
-                            <span class="position-absolute love-icon "><i class="fas fa-heart"></i></span>
-                            <a class="btn position-absolute btn-primary rounded-pill buyNow-btn r-paragraph"
-                                href="/product/details/{{i.id}}" class="unlink">
-                                View
+                            <form action="/product/{{i.id}}/like" method="POST">
+                                
+                                {% csrf_token %}
+                                {% if request.user in i.product_likes.all %}
+
+                                <button type=" submit"
+                                    class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute text-danger"
+                                    data-new="{{i.id}}"><i class="fas fa-heart my-2 mx-2 "
+                                        data-new="{{i.id}}"></i></button>
+
+                                {% else %}
+
+                                <button type=" submit"
+                                    class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute"
+                                    data-new="{{i.id}}"><i class="fas fa-heart my-2 mx-2 "
+                                        data-new="{{i.id}}"></i>
+                                </button>
+
+                                {% endif %}
+                            </form>
+
+                            <a class="btn position-absolute w-100 text-white buyNow-btn start-0 bottom-0 r-paragraph btn-danger"
+                                href="/product/details/{{i.id}}">
+                                View More
                             </a>
                         </div>
                     </div>
-                    <div class="m-3">
-                        <strong class=" fs-5 text-centre">{{i.name}}</strong>
+                    <a href="/product/details/{{pro.id}}" class="unlink">
+                        <div class="m-3">
+                            <strong class="m-1 fs-5  d-flex justify-content-start">{{i.name}}</strong>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-nowrap r-paragraph ms-1 text-black-50"><i class="fas fa-eye"></i>
+                                    <strong>{{i.view_count}}</strong></span>
+                                <strong class="text-nowrap r-paragraph text-danger">NPR. {{i.price}}</strong>
+                            </div>
+                            <hr class="dropdown-divider">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-nowrap r-paragraph">Seller: {{i.seller.first_name}}</span>
+                                <span class="text-nowrap r-paragraph">{{i.date}}</span>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-                            <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
-                            <strong class="text-nowrap r-paragraph text-danger">NPR. {{i.price}}</strong>
-
+                            
                         </div>
-                        <hr class="dropdown-divider">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-nowrap r-paragraph">Seller: {{i.seller}}</span>
-                            <span class="text-nowrap r-paragraph">{{i.date}}</span>
-                        </div>
-                    </div>
+                    </a>
 
                 </div>
             </div>

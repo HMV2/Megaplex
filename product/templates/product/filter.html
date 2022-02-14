@@ -51,15 +51,48 @@
           <div class="col-6 col-md-6 col-lg-4 mb-3">
             <a href="/product/details/{{pro.id}}" class="unlink">
               <div class="card border overflow-hidden border-15 mb-3">
-                <div class="">
+                <div class="card-img-top position-relative">
                   <img src="{{pro.picture.url}}" alt="{{pro.name}}" style="aspect-ratio: 1/1; object-fit: cover;" />
+                  <div class="card-head position-absolute w-100 h-100 top-0">
+                    <form action="/product/{{pro.id}}/like" method="POST">
+
+                      {% csrf_token %}
+                      {% if request.user in pro.product_likes.all %}
+
+                      <button type=" submit"
+                        class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute text-danger"
+                        data-new="{{pro.id}}"><i class="fas fa-heart my-2 mx-2 " data-new="{{pro.id}}"></i></button>
+
+                      {% else %}
+
+                      <button type=" submit"
+                        class="product-like-btn border-0 rounded-circle d-flex justify-content-center align-items-center bg-white me-2 mt-2 end-0 position-absolute"
+                        data-new="{{pro.id}}"><i class="fas fa-heart my-2 mx-2 " data-new="{{pro.id}}"></i>
+                      </button>
+
+                      {% endif %}
+                    </form>
+
+                    <a class="btn position-absolute w-100 text-white buyNow-btn r-paragraph btn-danger"
+                      href="/product/details/{{pro.id}}">
+                      View More
+                    </a>
+                  </div>
 
                 </div>
                 <div class="m-3">
                   <strong class="m-1 fs-5 text-center">{{pro.name}}</strong>
+
                   <div class="d-flex justify-content-between">
-                    <span class="text-nowrap r-paragraph">⭐⭐⭐⭐⭐</span>
+                    <span class="text-nowrap r-paragraph ms-1 text-black-50"><i class="fas fa-eye"></i>
+                      <strong>{{pro.view_count}}</strong></span>
                     <strong class="text-nowrap r-paragraph text-danger">NPR. {{pro.price}}</strong>
+                  </div>
+
+                  <hr class="dropdown-divider">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-nowrap r-paragraph">Seller: {{pro.seller.first_name}}</span>
+                    <span class="text-nowrap r-paragraph">{{pro.date}}</span>
                   </div>
                 </div>
 
@@ -78,36 +111,36 @@
           </div>
           <div>
             <nav aria-label="...">
-        <ul class="pagination">
-            {% if products.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
-              </li>
-            {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            {% endif %}
+              <ul class="pagination">
+                {% if products.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                {% endif %}
 
-            {% for i in products.paginator.page_range %}
-            {% if i == products.number %}
-            <li class="page-item active"><a class="page-link">{{i}}</a></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
+                {% for i in products.paginator.page_range %}
+                {% if i == products.number %}
+                <li class="page-item active"><a class="page-link">{{i}}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
 
-            {% if products.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
-            </li>
-            {% endif %}
-        </ul>
-      </nav>
+                {% if products.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
@@ -127,11 +160,11 @@
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
             data-mdb-parent="#accordionExample">
-            
+
             <div class="accordion-body">
               <div class="  pl-2">
-              <a class="custom-control-label" href="/product/filter">All Categories</a>
-            </div>
+                <a class="custom-control-label" href="/product/filter">All Categories</a>
+              </div>
               {% for cat in category %}
               <div class="mt-2 mb-2 pl-2">
                 <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
@@ -144,8 +177,9 @@
 
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
-              data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button"
+              data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false"
+              aria-controls="collapseTwo">
               Brands
             </button>
           </h2>
@@ -164,8 +198,9 @@
 
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button" data-mdb-toggle="collapse"
-              data-mdb-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button"
+              data-mdb-toggle="collapse" data-mdb-target="#collapseThree" aria-expanded="false"
+              aria-controls="collapseThree">
               colors
             </button>
           </h2>
@@ -233,3 +268,7 @@
 </div>
 
 {% endblock main_content %}
+
+{% block js_files %}
+<script src="{% static 'javascript/product_like.js' %}"></script>
+{% endblock js_files %}
