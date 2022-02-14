@@ -93,7 +93,9 @@ def product_details(request,product_id):
 
         elif formType == "wallet" and request.POST.get('Receiver1')!="":
             sender = request.POST['Sender1']
+            sender = User.objects.get(username = sender)
             receiver = request.POST['Receiver1']
+            receiver = User.objects.get(username = receiver)
             amount = int(request.POST['amount1'])
             with connection.cursor() as cursor:
                 cursor.execute(
