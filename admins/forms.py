@@ -15,3 +15,8 @@ class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
+
+class SubcategoryForm(ModelForm):
+    class Meta:
+        model = Sub_Category
+        fields = "__all__"

@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: rgb(255, 255, 255)">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top  " style="background-color: #fff;" >
     <div class="container">
         <a class="navbar-brand" href="/" style="width: 10%">
             <img src="{% static 'images/logo1.PNG' %}" alt="" class="" width="98%" />
@@ -13,36 +13,36 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav flex-row d-none d-md-flex">
-                    <li class="nav-item me-3 me-lg-1 active">
-                        <a class="nav-link" href="/admins/dashboard">
+                    <li class="nav-item me-3 me-lg-1 active ">
+                        <a class="nav-link " href="/admins/dashboard">
                             <span><i class="fas fa-home fa-lg"></i></span>
                             Admins
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/product/explore">
+                        <a class="nav-link " href="/product/explore">
                             <span><i class="fas fa-globe fa-lg"></i></span>
                             Explore
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/category">
+                        <a class="nav-link " href="/category">
                             <span><i class="fas fa-heart-rate fa-lg"></i></span>
                             Category
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/room">
+                        <a class="nav-link " href="/room">
                             <span><i class="fas fa-comments-alt fa-lg"></i></span>
                             Join Room
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link" href="/dashboard/wishlist/">
+                        <a class="nav-link " href="/dashboard/wishlist/">
                             <span><i class="fas fa-heart fa-lg"></i></span>
                             <span class="badge rounded-pill badge-notification bg-danger "
                                 id="like-badge">{{ request.user.product_likes.all.count }}</span>
@@ -52,16 +52,16 @@
 
                 {% else %}
                 <li class="nav-item me-3 me-lg-1 active">
-                    <a class="nav-link" href="/admins/dashboard">
+                    <a class="nav-link " href="/">
                         <span><i class="fas fa-home fa-lg"></i></span>
-                        Admins
+                        Home
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/product/explore"><i class="fas fa-globe"></i> Explore</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdownMenuLink" role="button"
+                    <a class="nav-link dropdown-toggle " href="/category" id="navbarDropdownMenuLink" role="button"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-asterisk" aria-hidden="true"></i> Category
                     </a>
@@ -82,16 +82,16 @@
 
             </ul>
             {% if user.is_authenticated %}
-            <ul class="navbar-nav flex-row">
+            <ul class="navbar-nav flex-row align-items-center">
                 <li class="nav-item me-3 me-lg-1">
-                    <a class="nav-link d-sm-flex align-items-sm-center" href="/dashboard/profile">
-                        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle" height="24" loading="lazy" />
+                    <a class="nav-link d-sm-flex align-items-sm-center " href="/dashboard/profile">
+                        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 35px; width: 35px;" />
                         <strong class="d-none d-sm-block ms-1">{{ user.username }}</strong>
                     </a>
                 </li>
 
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link" role="button" aria-expanded="false" href="/chat">
+                    <a class="nav-link " role="button" aria-expanded="false" href="/chat">
                         <i class="fas fa-comments fa-lg"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">{{get_unread}}</span>
                     </a>
@@ -100,7 +100,7 @@
 
 
                 <div class="dropdown">
-                    <a class="nav-link notification " href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link notification  " href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
                     <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">{{get_unread}}</span>
@@ -115,7 +115,7 @@
                     </ul>
                 </div>
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link" role="button" aria-expanded="false" href="/dashboard/wallet">
+                    <a class="nav-link " role="button" aria-expanded="false" href="/dashboard/wallet">
                         <i class="fa fa-lg fa-wallet"></i>
                     </a>
 
@@ -123,7 +123,7 @@
 
                 </li>
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
+                    <a class="nav-link dropdown-toggle hidden-arrow " href="#" id="navbarDropdownMenuLink" role="button"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-chevron-circle-down fa-lg"></i>
                     </a>
@@ -148,10 +148,11 @@
             <a href="/account/login" class="btn rounded-pill sign-in" type="button"> Sign in</a>
             {% endif %}
 
+
         </div>
     </div>
 
-    <!-- <span class="position-absolute toggle-icon me-md-3">
-        <i class="fas fa-sun pointer-event" id="theme-toggle"></i>
-    </span> -->
+    <span type='button' class="position-absolute toggle-icon me-md-3">
+        <i class="fas fa-sun pointer-event  " id="theme-toggle"></i>
+    </span>
 </nav>

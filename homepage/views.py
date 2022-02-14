@@ -1,3 +1,4 @@
+from django import views
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
@@ -9,9 +10,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from directChat.views import get_unread
+from django.db import connection
 
 def index_page(request):
-    products = Product.objects.all()[:10]
+    products = Product.objects.filter( is_active=True ).order_by('-view_count')[:10]
     user_list = getUserCount()
     pro_list = ""
     if len(user_list)>0:

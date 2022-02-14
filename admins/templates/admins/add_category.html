@@ -113,9 +113,11 @@ white-space: normal;
                         </td>
                       
                         <td class="col-lg-2 col-2   ">
+                            <a href="/admins/deleteCat/{{c.id}}">
                             <button type="button" class="btn btn-danger btn-sm btn-rounded">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
+                        </a>
                             <button type="button" class="btn btn-success btn-sm btn-rounded mt-1 mt-md-0  edit-btn" data-mdb-target="#modal1" data-mdb-toggle="modal" data-id ="{{c.id}}" data-name ="{{c.name}}" data-image ="{{c.picture.url}}">
                                <i class="fas fa-edit"></i>
                             </button>
