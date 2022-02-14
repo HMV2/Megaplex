@@ -107,19 +107,30 @@ CELERY_TIMEZONE = 'Asia/Kathmandu'
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Megaplex',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Megaplex',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'det93p9ioa3lqq',
+        'USER': 'vfdktnyzgnletg',
+        'PASSWORD': 'b395b9d4477aa063e18d28a363e80e57cbb111dc764dbf8743297b0b487b9f33',
+        'HOST': 'ec2-54-157-15-228.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
 
 
 
