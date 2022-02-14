@@ -121,8 +121,6 @@ def product_details(request,product_id):
             else:
                 return HttpResponse("Failed")
             
-
-
     return render(request, 'product/details.html',context)
 
 def filter_page(request):

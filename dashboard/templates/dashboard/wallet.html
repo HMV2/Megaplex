@@ -32,11 +32,12 @@
                                 <div class="d-flex">
                                     <div class="me-2">
                                         <label for="exampleInputEmail1" class="form-label">Sender @</label>
-                                        <input placeholder="$" name="Sender1" class="form-control" value="{{ request.user.profile.username }}">
+                                        <input placeholder="$" name="Sender1" class="form-control"
+                                            value="{{ request.user }}" readonly>
                                     </div>
                                     <div>
-                                        <label for="exampleInputEmail1" class="form-label">Receiver</label>
-                                        <input placeholder="@" name="Receiver1" class="form-control ">
+                                        {% comment %} <input placeholder="@" name="Receiver1" class="form-control "> {% endcomment %}
+                                        {{ form.receiver | as_crispy_field }}
                                     </div>
                                 </div>
                                 <div id="emailHelp" class="form-text">

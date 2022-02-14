@@ -30,7 +30,7 @@ class Profile(models.Model): #Model to create profile for users
     product_sold = models.IntegerField(default=0, blank=True, null=True)
     active = models.BooleanField(default=True, blank=True, null=True)
     balance = models.DecimalField(
-        default=0,
+        default=50,
         max_digits=12,
         decimal_places=2
     )
@@ -47,7 +47,7 @@ def txn():
 class transaction(models.Model):
     txn_id = models.IntegerField(default=txn)
     # sender = models.CharField(max_length=50)
-    sender_id = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="sender")
+    sender = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="sender")
     # receiver = models.CharField(max_length=50)
     receiver = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="reciver")
     amount = models.DecimalField(default=0,max_digits=12,decimal_places=2)
