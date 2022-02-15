@@ -50,4 +50,4 @@ class transaction(models.Model):
     sender = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="sender")
     # receiver = models.CharField(max_length=50)
     receiver = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="reciver")
-    amount = models.DecimalField(default=0,max_digits=12,decimal_places=2)
+    amount = models.DecimalField(default=0,max_digits=11,decimal_places=2)
