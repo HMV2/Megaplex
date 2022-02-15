@@ -164,7 +164,7 @@ def filter_page(request):
         elif form_type == 'search':
             item = request.POST.get('key')
             search_item = item
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -231,7 +231,7 @@ def searchProduct(request, item):
         elif form_type == 'search':
             item = request.POST.get('key')
             search_item = item
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -300,7 +300,7 @@ def searchUserProduct(request, user):
             min_tag = True
         elif form_type == 'search':
             item = request.POST.get('key')
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
