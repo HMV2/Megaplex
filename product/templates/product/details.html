@@ -377,9 +377,15 @@
                                 </a>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> Kathmandu</h6>
                                 <input type="hidden" name="to_user" id="to_user" value="{{product.seller}}">
+                                {% if product.seller.profile.is_active %}
                                 <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">
                                     🟢 AVAILABLE NOW
                                 </button>
+                                {% else %}
+                                <button type="button" class="btn btn-outline-danger" data-mdb-ripple-color="dark">
+                                    🟠 Offline
+                                </button>
+                                {% endif %}
 
                             </div>
                         </div>
