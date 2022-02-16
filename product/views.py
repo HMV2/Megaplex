@@ -403,10 +403,10 @@ def explorepage(request):
     electro_id = Category.objects.get(name="Electronics")
     cloth = Product.objects.filter(category__name="Clothing").order_by("-view_count")[:10]
     cloth_id = Category.objects.get(name="Clothing")
-    auto = Product.objects.filter(category__name="Automobiles").order_by("-view_count")[:10]
-    auto_id = Category.objects.get(name="Automobiles")
-    sports = Product.objects.filter(category__name="Sports").order_by("-view_count")[:10]
-    sports_id = Category.objects.get(name="Sports")
+    auto = Product.objects.filter(category__name="	Services").order_by("-view_count")[:10]
+    auto_id = Category.objects.get(name="	Services")
+    sports = Product.objects.filter(category__name="Games").order_by("-view_count")[:10]
+    sports_id = Category.objects.get(name="Games")
     context={
         'room_name':"broadcast",
         'electro':electro,
