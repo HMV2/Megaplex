@@ -16,6 +16,7 @@ from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
 
@@ -315,13 +316,13 @@ def wishlist(request):
 
 
 def wallet(request):
-    txn_history = transaction.objects.all()[::-1]
+    txn_history = transaction.objects.filter(Q(sender=request.user) | Q(receiver = request.user))[::-1]
     if request.method == "POST":
         sender = request.POST['Sender1']
         receive = request.POST['receiver']
         receiver = Profile.objects.filter(user=receive).values_list('username', flat=True)
         receiver = receiver[0]
-        print(receiver)
+
         amount = int(request.POST['amount1'])
         with connection.cursor() as cursor:
             cursor.execute(
