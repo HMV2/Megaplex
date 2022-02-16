@@ -173,7 +173,6 @@ img {
   background-position: center;
   overflow: hidden;
   position: relative;
-  margin: 10px auto;
   cursor: pointer;
   border-radius: 10px;
 }
