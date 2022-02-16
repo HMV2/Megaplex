@@ -23,7 +23,7 @@ class ProductForm(ModelForm):
     )
     class Meta:
         model = Product
-        fields = "__all__"
+        exclude = ['is_active','view_count','product_likes']
 
 class txnForm(ModelForm):
     class Meta:

@@ -42,11 +42,11 @@ class Color(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    picture = models.ImageField(upload_to = 'product_images', blank=True, default="def.jpeg", null=True)
+    picture = models.ImageField(upload_to = 'product_images', default="def.jpeg")
     price = models.FloatField()
-    image1 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
-    image2 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
-    image3 = models.ImageField(upload_to = 'product_images', null=True, blank=True)
+    image1 = models.ImageField(upload_to = 'product_images')
+    image2 = models.ImageField(upload_to = 'product_images')
+    image3 = models.ImageField(upload_to = 'product_images')
     date = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(Sub_Category, on_delete = models.CASCADE) 
