@@ -4,8 +4,6 @@ from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from account.forms import PartialProfileForm as ProfileForm
-from account.models import Profile
-from account.forms import ProfileForm
 from account.models import Profile, transaction
 from product.models import Product
 from django.http import HttpResponse, JsonResponse
