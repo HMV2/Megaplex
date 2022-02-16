@@ -10,11 +10,11 @@
 
 <div class="profile-page position-relative">
     <div class="cover position-relative">
-        <img src="{{user.profile.cover_pic.url}}" alt="" class="cover-img" />
+        <img src="https://wallpapercave.com/wp/wp6941067.jpg" alt="" class="cover-img" />
         <div class="edit-profile-cover d-flex position-absolute theme-color gap-2">
             {% if user.profile.active %}
             <button type="button" class="btn btn-light text-success" data-mdb-ripple-color="dark"><a class="unlink"
-                    href="/dashboard/set_offline/{{user.id}}">Available ✅</a></button>
+                    href="/dashboard/set_offline/{{user.id}}">Available 🟢</a></button>
             {% else %}
             <button type="button" class="btn btn-light text-danger" data-mdb-ripple-color="dark"> <a class="unlink"
                     href="/dashboard/set_online/{{user.id}}"> Offline ❌ </a> </button>
