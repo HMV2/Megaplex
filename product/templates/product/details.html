@@ -369,8 +369,8 @@
                 <div class="col-md-10 mx-auto col-lg-4 mt-md-0">
                     <div class="p-md-3 rounded-5 border">
                         <div class="d-flex justify-content-around  mt-3 mb-3 ">
-                            <img class="img-fluid rounded-circle w-25" src="{{product.seller.profile.profile_pic.url}}"
-                                alt="">
+                            <img class="img-fluid rounded-circle" src="{{product.seller.profile.profile_pic.url}}"
+                                alt="" style="object-fit: cover; height: 100px; width: 100px;">
                             <div class="d-flex flex-column text-center">
                                 <a href="/dashboard/profile/{{product.seller.profile.id}}">
                                     <h5 class="fw-bold">{{product.seller.first_name}} {{product.seller.last_name}}</h5>
