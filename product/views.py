@@ -93,7 +93,9 @@ def product_details(request,product_id):
 
         elif formType == "wallet" and request.POST.get('Receiver1')!="":
             sender = request.POST['Sender1']
+            sender = User.objects.get(username = sender)
             receiver = request.POST['Receiver1']
+            receiver = User.objects.get(username = receiver)
             amount = int(request.POST['amount1'])
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -162,7 +164,7 @@ def filter_page(request):
         elif form_type == 'search':
             item = request.POST.get('key')
             search_item = item
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -229,7 +231,7 @@ def searchProduct(request, item):
         elif form_type == 'search':
             item = request.POST.get('key')
             search_item = item
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -298,7 +300,7 @@ def searchUserProduct(request, user):
             min_tag = True
         elif form_type == 'search':
             item = request.POST.get('key')
-            products = products.filter(name__contains=item)
+            products = products.filter(name__contains=item.capitalize())
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -401,10 +403,10 @@ def explorepage(request):
     electro_id = Category.objects.get(name="Electronics")
     cloth = Product.objects.filter(category__name="Clothing").order_by("-view_count")[:10]
     cloth_id = Category.objects.get(name="Clothing")
-    auto = Product.objects.filter(category__name="Automobiles").order_by("-view_count")[:10]
-    auto_id = Category.objects.get(name="Automobiles")
-    sports = Product.objects.filter(category__name="Sports").order_by("-view_count")[:10]
-    sports_id = Category.objects.get(name="Sports")
+    auto = Product.objects.filter(category__name="	Services").order_by("-view_count")[:10]
+    auto_id = Category.objects.get(name="Services")
+    sports = Product.objects.filter(category__name="Games").order_by("-view_count")[:10]
+    sports_id = Category.objects.get(name="Games")
     context={
         'room_name':"broadcast",
         'electro':electro,

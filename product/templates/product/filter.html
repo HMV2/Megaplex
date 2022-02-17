@@ -46,7 +46,7 @@
             </form>
           </li>
         </div>
-        <div class="row">
+        <div class="row mt-3">
           {% for pro in products %}
           <div class="col-6 col-md-6 col-lg-4 mb-3">
             <a href="/product/details/{{pro.id}}" class="unlink">
@@ -152,13 +152,13 @@
 
         <div class="accordion-item">
           <h2 class="text-uppercase font-weight-bold mb-3" id="headingOne">
-            <button class="accordion-button text-uppercase font-weight-bold mb-3" type="button"
-              data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="true"
+            <button class="accordion-button collapsed text-uppercase font-weight-bold mb-3" type="button"
+              data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="false"
               aria-controls="collapseOne">
               Categories
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
             data-mdb-parent="#accordionExample">
 
             <div class="accordion-body">
@@ -167,7 +167,7 @@
               </div>
               {% for cat in category %}
               <div class="mt-2 mb-2 pl-2">
-                <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
+                <a class="custom-control-label" href="?category={{cat.id}}" >{{cat.name}}</a>
               </div>
               {% endfor %}
             </div>
@@ -218,29 +218,6 @@
       </div>
 
 
-      <!-- <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
-      <div class="mt-2 mb-2 pl-2">
-        <a class="custom-control-label" href="/product/filter">All Categories</a>
-      </div>
-      {% for cat in category %}
-      <div class="mt-2 mb-2 pl-2">
-        <a class="custom-control-label" href="?category={{cat.id}}">{{cat.name}}</a>
-      </div>
-      {% endfor %}
-      <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
-      <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Brands</h6>
-      {% for bat in brand %}
-      <div class="mt-2 mb-2 pl-2">
-        <a class="custom-control-label" href="?brand={{bat.id}}">{{bat.name}}</a>
-      </div>
-      {% endfor %}
-      <div class="divider mt-3 mb-3 border-bottom border-secondary"></div>
-      <h6 class="text-uppercase mt-3 mb-3 font-weight-bold">Colors</h6>
-      {% for col in colors %}
-      <div class="mt-2 mb-2 pl-2">
-        <a class="custom-control-label" href="?color={{col.id}}">{{col.name}}</a>
-      </div>
-      {% endfor %} -->
 
       <form method="POST">
         {% csrf_token %}

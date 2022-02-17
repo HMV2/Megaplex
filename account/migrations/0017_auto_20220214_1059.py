@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='transaction',
-            name='sender',
-        ),
         migrations.AddField(
             model_name='transaction',
             name='sender_id',

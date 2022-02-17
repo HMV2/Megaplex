@@ -4,8 +4,6 @@ from django.db import connection
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from account.forms import PartialProfileForm as ProfileForm
-from account.models import Profile
-from account.forms import ProfileForm
 from account.models import Profile, transaction
 from product.models import Product
 from django.http import HttpResponse, JsonResponse
@@ -18,6 +16,7 @@ from django.contrib.auth import update_session_auth_hash
 from directChat.views import get_unread
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
 
@@ -92,6 +91,42 @@ def User_Profile(request,profile_id):
     profile = Profile.objects.get(id = profile_id)
     user = profile.user
     followers = profile.followers.all()
+
+    user = Profile.objects.get(user=profile.user)
+    form = ProfileForm(instance=user)
+    
+    pform = PasswordChangeForm(user=profile.user)
+    try:
+        active_products = Product.objects.filter(seller=profile.user, is_active=True)
+    except:
+        active_products = None
+    try:
+        inactive_products = Product.objects.filter(seller=profile.user, is_active=False)
+    except:
+        inactive_products = None
+    
+    if request.method == "POST":
+        tp = request.POST.get("tp")
+        if tp == "profile":
+            form = ProfileForm(request.POST, request.FILES, instance = user)
+            # PartialFooForm = modelform_factory(Profile, form=form,fields))
+            if form.is_valid:
+                form.save()
+                messages.success(request,"Successfully updated the profile!")
+                return redirect('/dashboard/profile')
+            else:
+                messages.error(request,"Failed to update profile!")
+        elif tp =="password":
+            pform = PasswordChangeForm(data=request.POST, user = profile.user)
+            if pform.is_valid():
+                pform.save()
+                update_session_auth_hash(request, pform.user)
+                messages.success(request,"Successfully updated the password!")
+                return redirect('/dashboard/profile')
+            else:
+                messages.error(request,"Something went wrong!")
+                return render(request, 'dashboard/userprofile.html', {'form':form,'get_unread':get_unread(request)})
+
     if len(followers) == 0:
             is_following = False
 
@@ -101,6 +136,8 @@ def User_Profile(request,profile_id):
             break  
         else:
             is_following = False 
+    
+    
 
     context = {
         'room_name':"broadcast",
@@ -108,9 +145,13 @@ def User_Profile(request,profile_id):
         'profile':profile,
         'is_following': is_following,
         'profile_active':'is-active',
-        'get_unread':get_unread(request)
+        'get_unread':get_unread(request),
+        'active_products':active_products,
+        'inactive_products':inactive_products,
+        'form':form,
+        'pform':pform,
         }
-    return render (request,'dashboard/profile.html',context)
+    return render (request,'dashboard/userprofile.html',context)
 
 
 #when user click  to follow other user  the user will be added as follower for other user and 
@@ -275,12 +316,13 @@ def wishlist(request):
 
 
 def wallet(request):
-    txn_history = transaction.objects.all()[::-1]
+    txn_history = transaction.objects.filter(Q(sender=request.user) | Q(receiver = request.user))[::-1]
     if request.method == "POST":
         sender = request.POST['Sender1']
         receive = request.POST['receiver']
         receiver = Profile.objects.filter(user=receive).values_list('username', flat=True)
         receiver = receiver[0]
+
         amount = int(request.POST['amount1'])
         with connection.cursor() as cursor:
             cursor.execute(

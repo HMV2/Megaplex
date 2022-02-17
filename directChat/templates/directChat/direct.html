@@ -94,25 +94,25 @@
 
                     {% if direct.sender.username == user.username %}
 
-                    <div class="d-flex flex-row justify-content-end">
-                      <img src="{{direct.sender.profile.profile_pic.url}}" alt="avatar 1" class="rounded-circle"
-                        style="width: 45px; height: 100%;">
+                    <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                      <img src="{{user.profile.profile_pic.url}}" class="rounded-circle me-2"
+                        alt="avatar 1" style="object-fit: cover; height: 45px; width: 45px;">
                       <div>
-                        <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">
-                        {{direct.body}}</p>
-                        <p class="small ms-3 mb-3 rounded-3 text-muted">{{direct.date}}</p>
+                        <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-secondary">{{direct.body}}</p>
+                        <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
                       </div>
+                      
                     </div>
 
                     {% else  %}
-                    <div class="d-flex flex-row justify-content-start mb-4 pt-1">
-                      <img src="{{user.profile.profile_pic.url}}" class="rounded-circle"
-                        alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div class="d-flex flex-row justify-content-start">
+                      <img src="{{direct.sender.profile.profile_pic.url}}" alt="avatar 1" class="rounded-circle"
+                      style="object-fit: cover; height: 45px; width: 45px;">
                       <div>
-                        <p class="small p-2 ms-3 mt-1 mb-1 text-white rounded-3 bg-danger">{{direct.body}}</p>
-                        <p class="small ms-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{direct.date}}</p>
+                        <p class="small p-2 ms-3 mb-1 rounded-3 bg-danger text-white">
+                        {{direct.body}}</p>
+                        <p class="small ms-3 mb-3 rounded-3 text-muted">{{direct.date}}</p>
                       </div>
-                      
                     </div>
                     {% endif %}
 

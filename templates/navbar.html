@@ -11,7 +11,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                 <ul class="navbar-nav flex-row d-none d-md-flex">
                     <li class="nav-item me-3 me-lg-1 active ">
                         <a class="nav-link " href="/admins/dashboard">
@@ -45,7 +45,7 @@
                         <a class="nav-link " href="/dashboard/wishlist/">
                             <span><i class="fas fa-heart fa-lg"></i></span>
                             <span class="badge rounded-pill badge-notification bg-danger "
-                                id="like-badge">{{ request.user.product_likes.all.count }}</span>
+                                id="like-badge">{{ request.request.user.product_likes.all.count }}</span>
                         </a>
                     </li>
                 </ul>
@@ -84,12 +84,12 @@
                 {% endif %}
 
             </ul>
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
             <ul class="navbar-nav flex-row align-items-center">
                 <li class="nav-item me-3 me-lg-1">
                     <a class="nav-link d-sm-flex align-items-sm-center " href="/dashboard/profile">
-                        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 30px; width: 30px;" />
-                        <strong class="d-none d-sm-block ms-1">{{ user.username }}</strong>
+                        <img src="{{request.user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 30px; width: 30px;" />
+                        <strong class="d-none d-sm-block ms-1">{{ request.user.username }}</strong>
                     </a>
                 </li>
 
@@ -106,7 +106,7 @@
                     <a class="nav-link notification  " href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">{{get_unread}}</span>
+                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
                 </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         {% for i in notifications %}

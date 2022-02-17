@@ -126,20 +126,20 @@
 
                             {% for txn in txnh  %}
                             {% if txn.sender ==  request.user %}
-                            <tr class="  text-danger fw-bold">
+                            <tr class="  fw-bold">
 
                                 <td>{{txn.txn_id}}</td>
                                 <td>{{txn.sender}}</td>
                                 <td>{{txn.receiver}}</td>
                                 <td>${{txn.amount}}</td>
-                                <td><span class="badge   fs-6 fw-bold rounded-pill bg-danger w-75 d-inline-block "> Sent
+                                <td><span class="badge   fs-6 fw-bold rounded-pill bg-danger w-75 d-inline-block"> Sent
                                         <i class="fas fa-arrow-up"></i></span></td>
 
 
                             </tr>
                             {% else %}
 
-                            <tr class="text-success fw-bold">
+                            <tr class=" fw-bold">
 
                                 <td>{{txn.txn_id}}</td>
                                 <td>{{txn.sender}}</td>
