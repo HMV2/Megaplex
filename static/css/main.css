@@ -175,6 +175,7 @@ img {
   position: relative;
   cursor: pointer;
   border-radius: 10px;
+  
 }
 
 .country-card img {
@@ -212,23 +213,18 @@ img {
   margin: 5px;
 }
 
-/* .country-card:hover img {
+.country-card:hover .country-img {
   filter: grayscale(100%);
   
-} */
+}
 
 .country-card:hover .country-name {
   transform: translateY(-5px);
- 
- 
- 
 }
 
 .country-card:hover .country-bg{
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.692), rgba(0, 0, 0, 0.342), rgba(0, 0, 0, 0.041), rgba(255, 254, 254, 0), rgba(255, 255, 255, 0));
-
- 
-  
+  transition: all 0.2s ease;  
 
 }
 

@@ -35,7 +35,7 @@
                                         <input placeholder="$" name="Sender1" class="form-control"
                                             value="{{ request.user }}" readonly>
                                     </div>
-                                    <div>
+                                    <div class="mt-2">
                                         {% comment %} <input placeholder="@" name="Receiver1" class="form-control "> {% endcomment %}
                                         {{ form.receiver | as_crispy_field }}
                                     </div>
