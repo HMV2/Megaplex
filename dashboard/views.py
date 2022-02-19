@@ -17,6 +17,7 @@ from directChat.views import get_unread
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.db.models import Q
+from notification.models import BroadcastNotification
 
 # Create your views here.
 
@@ -406,3 +407,13 @@ def set_offline(request, id):
     profile.save()
     return redirect('/dashboard/profile/')
 
+
+
+def user_notification(request):
+   
+    nots = BroadcastNotification.objects.all()
+  
+
+
+    context = { 'nots':nots}
+    return render(request,'dashboard/notification.html',context)

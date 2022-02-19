@@ -20,5 +20,6 @@ urlpatterns = [
     path('mark_unsold/<int:product_id>',views.mark_unsold),
     path('set_online/<int:id>',views.set_online),
     path('set_offline/<int:id>',views.set_offline),
+    path('notification',views.user_notification)
 
 ]

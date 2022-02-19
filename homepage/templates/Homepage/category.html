@@ -13,10 +13,10 @@
 
                 {% for i in category %}
                 
-                <div class="card col-md-3 ">
+                <div class="card col-md-3 ms-4">
 
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img src="{{i.picture.url}}" class="img-fluid" />
+                      <img src="{{i.picture.url}}" class="img-fluid" width="100px" height="100px"/>
                       <a href="/product/filter/?category={{i.id}}">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
                       </a>
