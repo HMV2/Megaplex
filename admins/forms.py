@@ -5,7 +5,7 @@ from product.models import Category, Sub_Category
 class NotificationForm(ModelForm):
     class Meta:
         model = BroadcastNotification
-        fields = ['message','broadcast_on']
+        fields = ['message','broadcast_on','title']
         widgets = {
             'broadcast_on': DateTimeInput(attrs={'type': 'datetime-local'}),
         }
