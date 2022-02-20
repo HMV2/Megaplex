@@ -106,14 +106,17 @@
                     <a class="nav-link notification  " href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
+                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">{{notifications.all.count}}</span>
                 </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         {% for i in notifications %}
                         <li>
                             <a class="dropdown-item" href="#">{{i.message}}</a>
                         </li>
+
                         {% endfor %}
+                        <hr>
+                        <li class="text-center mb-2 fw-bold fs-6"><a href="/dashboard/notification" >view more</a></li>
                         
                     </ul>
                 </div>

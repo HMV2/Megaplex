@@ -27,7 +27,7 @@
         <h1 class="text-center mt-5 text-primary">News & Announcements</h1>
         <div class="row row-cols-1 row-cols-xl-3 gy-3  ">
             {% for i in nots %}
-            
+            {% if i.sent %}
 
             <div class="col   ">
                 <div class="notify shadow-4-soft p-4">
@@ -49,7 +49,8 @@
                 </div>
         
             </div>
-            
+		
+            {% endif %}
 
             {% endfor %}
             
