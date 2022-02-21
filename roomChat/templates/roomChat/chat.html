@@ -5,8 +5,10 @@
 
 {% block main_content %}
 <div
-    class="m-auto d-flex flex-column container col-lg-4 py-5 my-5 px-lg-5 shadow-5-soft position-relative overflow-hidden card">
-    <span class="mt-5 text-black">What chat room would you like to enter?</span>
+    class="m-auto d-flex flex-column container col-xl-4 col-lg-7 pb-5 my-5 px-lg-5 col-10 col-sm-8  shadow-5-soft position-relative overflow-hidden card">
+    <img src="{% static 'images/chatbg.png' %}" class="m-auto " alt="no image found" style="width: 200px; height:200px; object-fit: contain;">
+    <span class=" text-black">What chat room would you like to enter?</span>
+    
 
     <select id="room-name-input" class="my-2">
         <option value="General">General</option>
