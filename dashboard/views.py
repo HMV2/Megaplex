@@ -415,5 +415,5 @@ def user_notification(request):
   
 
 
-    context = { 'nots':nots}
+    context = { 'nots':nots, 'get_unread':get_unread(request)}
     return render(request,'dashboard/notification.html',context)

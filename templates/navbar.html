@@ -106,9 +106,9 @@
                     <a class="nav-link notification  " href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">{{notifications.all.count}}</span>
+                    <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
                 </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" id="notifications-dropdown">
                         {% for i in notifications %}
                         <li>
                             <a class="dropdown-item" href="#">{{i.message}}</a>
