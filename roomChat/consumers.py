@@ -33,7 +33,7 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'username':self.scope['user'].username.title(),
+                'username':self.scope['user'].username,
                 'profile':self.scope['user'].profile.profile_pic.url,
                 'message': message
             }
