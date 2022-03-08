@@ -1,9 +1,5 @@
-from django import views
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
 from product.models import Category
 from product.models import Product
 from django.core.mail import send_mail
@@ -33,7 +29,7 @@ def index_page(request):
     if request.method == 'POST':
         type = request.POST.get('type')
         if type=='search':
-            item = request.POST.get('item')
+            item = request.POST.get('item').capitalize()
             if item !="":
                 return redirect('/product/filter/'+item) 
 
@@ -41,15 +37,10 @@ def index_page(request):
             subject = request.POST.get('subject')
             email = request.POST.get('email')
             desc = request.POST.get('desc') + "\n" + "Reply Email: "+email
-            test = send_mail(subject, desc, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+            send_mail(subject, desc, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
 
-            if test==1:
-                messages.success(request,"Message Sent Successfully! '\n' Please check your mailbox for reply ")
-                return redirect("/")
-
-            else:
-                messages.error(request,"Failed to send message")
-                return redirect("/")
+            messages.success(request,"Your Message has been sent \n You will soon hear from us!")
+            return redirect("/")
 
     return render(request, 'homepage/homepage.html',context)
 

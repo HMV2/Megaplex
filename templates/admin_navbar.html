@@ -1,10 +1,16 @@
+{% load static %}
 <div class="p-3 text-center bg-white  position-sticky top-0">
     <div class="container border-bottom">
       <div class="row">
         <div class="col-md-4 d-flex justify-content-center justify-content-md-start mb-3 mb-md-0">
-          <a href="#!" class="ms-md-2">
+          <div>
+            <a class="navbar-brand" href="/" style="width: 10%">
+            <img src="{% static 'images/logo1.PNG' %}" alt="" class="" style="width: min(160px,15vw);" />
+        </a>
+          </div>
+          <div>
             <h2><a class="text-danger" href="/admins/dashboard">Superuser</a></h2>
-          </a>
+        </div>
         </div>
 
         <div class="col-md-7">

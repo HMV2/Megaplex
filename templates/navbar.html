@@ -13,13 +13,14 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 {% if request.user.is_authenticated %}
                 <ul class="navbar-nav flex-row d-none d-md-flex">
+                    {% if request.user.is_staff %}
                     <li class="nav-item me-3 me-lg-1 active ">
                         <a class="nav-link " href="/admins/dashboard">
                             <span><i class="fas fa-home fa-lg"></i></span>
                             Admins
                         </a>
                     </li>
-
+                    {% endif %}
                     <li class="nav-item me-3 me-lg-1">
                         <a class="nav-link " href="/product/explore">
                             <span><i class="fas fa-globe fa-lg"></i></span>
@@ -61,8 +62,8 @@
                     <a class="nav-link" href="/product/explore"><i class="fas fa-globe"></i> Explore</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle " href="/category" id="navbarDropdownMenuLink" role="button"
-                        data-mdb-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle " href="/category" id="navbarDropdownMenuLink"
+                        >
                         <i class="fa fa-align-left" aria-hidden="true"></i> Category
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

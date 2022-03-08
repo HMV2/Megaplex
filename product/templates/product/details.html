@@ -388,7 +388,7 @@
                                 </a>
                                 <h6><i class="fa fa-map-marker" aria-hidden="true"></i> {{product.seller.profile.city}}</h6>
                                 <input type="hidden" name="to_user" id="to_user" value="{{product.seller}}">
-                                {% if product.seller.profile.is_active %}
+                                {% if product.seller.profile.active %}
                                 <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">
                                     🟢 AVAILABLE NOW
                                 </button>
@@ -507,8 +507,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">$</div>
                                                 </div>
-                                                <input class="form-control w-75 m-auto" placeholder="Enter Amount" value=""
-                                        name="amount1" aria-describedby="emailHelp">
+                                                <input class="form-control w-75 m-auto" placeholder="{{product.price}}" value=""
+                                        name="amount1" aria-describedby="emailHelp" max="{{product.price}}" min="0">
                                             </div>
                                         </div>
 

@@ -34,7 +34,7 @@ def dashboard(request):
     product = Product.objects.all()
     view_count = 0
     profiles = Profile.objects.all()
-    top_sellers = profiles.order_by('-product_sold')
+    top_sellers = profiles.order_by('-product_sold')[:5]
     top_products = product.order_by('-view_count')[:5]
     active_product_count = product.filter(is_active=True).count()
     inactive_product_count = product.filter(is_active=False).count()

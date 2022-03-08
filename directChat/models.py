@@ -48,7 +48,7 @@ class Chat_Message(models.Model):
 		count = 0
 		for message in messages:
 			count += Chat_Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count()
-		# for i in messages:
-		# 	if not i.is_read:
-		# 		count += 1
 		return count
+
+	def __str__(self) -> str:
+		return self.body

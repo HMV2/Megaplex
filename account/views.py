@@ -3,7 +3,6 @@ from django.shortcuts import redirect, render
 from .forms import ProfileForm, UserForm
 from django.contrib import messages, auth
 from .models import Profile
-from django.contrib import messages
 from django.contrib.auth.models import User
 from directChat.views import get_unread
 
@@ -23,7 +22,7 @@ def login(request):
 
             elif user.is_staff:
                 auth.login(request, user)
-                return redirect('/admin')
+                return redirect('/admins/dashboard')
 
         else:
             messages.add_message(request, messages.ERROR, "Invalid Username and Password!")

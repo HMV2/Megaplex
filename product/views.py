@@ -28,7 +28,6 @@ def product_details(request,product_id):
     possible_ids = list(recommendations.values_list('id', flat=True))  
     possible_ids = random.choices(possible_ids, k=no_of_random_items)
     recommended_products = recommendations.filter(pk__in=possible_ids)
-    
 
 
     product.view_count += 1
@@ -97,6 +96,9 @@ def product_details(request,product_id):
             receiver = request.POST['Receiver1']
             receiver = User.objects.get(username = receiver)
             amount = int(request.POST['amount1'])
+            if amount<0 or amount>product.price:
+                messages.error(request,"Invalid Amount")
+                return redirect('/product/details/'+str(product_id))
             with connection.cursor() as cursor:
                 cursor.execute(
                     "select balance from account_profile where username = '%s'" % (sender))
@@ -120,8 +122,10 @@ def product_details(request,product_id):
                 txn.save()
                 
                 messages.success(request, 'Successfully Transferred!')
+                
             else:
                 return HttpResponse("Failed")
+            return redirect('/product/details/'+str(product_id))
             
     return render(request, 'product/details.html',context)
 
@@ -162,9 +166,9 @@ def filter_page(request):
             products = products.filter(price__gte=min_pri,price__lte=max_pri)
             min_tag = True
         elif form_type == 'search':
-            item = request.POST.get('key')
+            item = request.POST.get('key').capitalize()
             search_item = item
-            products = products.filter(name__contains=item.capitalize())
+            products = products.filter(name__contains=item)
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -229,9 +233,9 @@ def searchProduct(request, item):
             products = products.filter(price__gte=min_pri,price__lte=max_pri)
             min_tag = True
         elif form_type == 'search':
-            item = request.POST.get('key')
+            item = request.POST.get('key').capitalize()
             search_item = item
-            products = products.filter(name__contains=item.capitalize())
+            products = products.filter(name__contains=item)
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -299,8 +303,8 @@ def searchUserProduct(request, user):
             products = products.filter(price__gte=min_pri,price__lte=max_pri)
             min_tag = True
         elif form_type == 'search':
-            item = request.POST.get('key')
-            products = products.filter(name__contains=item.capitalize())
+            item = request.POST.get('key').capitalize()
+            products = products.filter(name__contains=item)
     found_count = products.count()
     if sorting=="high":
         products = products.order_by('-price')
@@ -399,13 +403,13 @@ def like_toggle(request,comment_id):
 
 
 def explorepage(request):
-    electro = Product.objects.filter(category__name="Electronics").order_by("-view_count")[:10]
+    electro = Product.objects.filter(category__name="Electronics").order_by("-view_count")[:4]
     electro_id = Category.objects.get(name="Electronics")
-    cloth = Product.objects.filter(category__name="Clothing").order_by("-view_count")[:10]
+    cloth = Product.objects.filter(category__name="Clothing").order_by("-view_count")[:4]
     cloth_id = Category.objects.get(name="Clothing")
-    auto = Product.objects.filter(category__name="Real Estate").order_by("-view_count")[:10]
+    auto = Product.objects.filter(category__name="Real Estate").order_by("-view_count")[:4]
     auto_id = Category.objects.get(name="Real Estate")
-    sports = Product.objects.filter(category__name="Fashion").order_by("-view_count")[:10]
+    sports = Product.objects.filter(category__name="Fashion").order_by("-view_count")[:4]
     sports_id = Category.objects.get(name="Fashion")
     context={
         'room_name':"broadcast",
