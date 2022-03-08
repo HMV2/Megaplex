@@ -1,5 +1,9 @@
 {% extends 'layout.html' %} {% load static %} {% block title %}
+<<<<<<< HEAD
     <title>Categories</title>
+=======
+    <title>Category</title>
+>>>>>>> 5113c06912dfd3e693782a86b65eef016ad3703e
 {% endblock title %}
 
 
@@ -7,13 +11,14 @@
     <section id="featured-box">
         <div class="container-xl my-5">
             <div class="intro">
-                <h1 class="display-4 fw-semibold py-4 fw-bold text-black-50">Browse Catalog</h1>
+                <h1 class="display-4 fw-semibold py-4 fw-bold text-black">Browse Catalog</h1>
             </div>
             <div class="row row-cols-md-3  gx-5  gy-4 row-cols-2  row-cols-lg-4 ">
 
                 {% for i in category %}
-                
-                  <div class="card col-auto   ">
+                  
+                <div class="col">
+                  <div class="card    ">
  
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                       <img src="{{i.picture.url}}" class="img-fluid"  style="object-fit: cover; aspect-ratio:1/1"/>
@@ -27,6 +32,9 @@
                   
                     </div>
                   </div>
+
+                </div>
+
                 {% endfor %}
             </div>
         </div>

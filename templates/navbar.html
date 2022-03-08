@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg navbar-light sticky-top  " style="background-color: #fff;" >
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white   " style="backdrop-filter: blur(10px);"  >
     <div class="container">
         <a class="navbar-brand" href="/" style="width: 10%">
             <img src="{% static 'images/logo1.PNG' %}" alt="" class="" style="width: min(140px,15vw);" />
@@ -15,35 +15,35 @@
                 <ul class="navbar-nav flex-row d-none d-md-flex">
                     {% if request.user.is_staff %}
                     <li class="nav-item me-3 me-lg-1 active ">
-                        <a class="nav-link " href="/admins/dashboard">
+                        <a class="nav-link text-color-50" href="/admins/dashboard">
                             <span><i class="fas fa-home fa-lg"></i></span>
-                            Admins
+                            Home
                         </a>
                     </li>
                     {% endif %}
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link " href="/product/explore">
+                        <a class="nav-link text-color-50 " href="/product/explore">
                             <span><i class="fas fa-globe fa-lg"></i></span>
                             Explore
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link " href="/category">
+                        <a class="nav-link text-color-50 " href="/category">
                             <span><i class="fas fa-heart-rate fa-lg"></i></span>
                             Category
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link " href="/room">
+                        <a class="nav-link text-color-50" href="/room">
                             <span><i class="fas fa-comments-alt fa-lg"></i></span>
                             Join Room
                         </a>
                     </li>
 
                     <li class="nav-item me-3 me-lg-1">
-                        <a class="nav-link " href="/dashboard/wishlist/">
+                        <a class="nav-link text-color-50" href="/dashboard/wishlist/">
                             <span><i class="fas fa-heart fa-lg"></i></span>
                             <span class="badge rounded-pill badge-notification bg-danger "
                                 id="like-badge">{{ request.user.product_likes.all.count }}</span>
@@ -53,33 +53,38 @@
 
                 {% else %}
                 <li class="nav-item me-3 me-lg-1 active">
-                    <a class="nav-link " href="/">
+                    <a class="nav-link text-color-50 " href="/">
                         <span><i class="fas fa-home"></i></span>
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/product/explore"><i class="fas fa-globe"></i> Explore</a>
+                    <a class="nav-link text-color-50" href="/product/explore"><i class="fas fa-globe"></i> Explore</a>
                 </li>
                 <li class="nav-item dropdown">
+<<<<<<< HEAD
                     <a class="nav-link dropdown-toggle " href="/category" id="navbarDropdownMenuLink"
                         >
+=======
+                    <a class="nav-link dropdown-toggle text-color-50 " href="/category" id="navbarDropdownMenuLink" role="button"
+                        data-mdb-toggle="dropdown" aria-expanded="false">
+>>>>>>> 5113c06912dfd3e693782a86b65eef016ad3703e
                         <i class="fa fa-align-left" aria-hidden="true"></i> Category
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="#">Auto-Mobiles</a>
+                            <a class="dropdown-item text-color-50" href="#">Auto-Mobiles</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Fashion</a>
+                            <a class="dropdown-item text-color-50" href="#">Fashion</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Brand New</a>
+                            <a class="dropdown-item text-color-50" href="#">Brand New</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about"><i class="fas fa-podcast"></i> About us</a>
+                    <a class="nav-link text-color-50" href="/about"><i class="fas fa-podcast"></i> About us</a>
                 </li>
 
                 {% endif %}
@@ -88,14 +93,14 @@
             {% if request.user.is_authenticated %}
             <ul class="navbar-nav flex-row align-items-center">
                 <li class="nav-item me-3 me-lg-1">
-                    <a class="nav-link d-sm-flex align-items-sm-center " href="/dashboard/profile">
+                    <a class="nav-link d-sm-flex align-items-sm-center text-color-50 " href="/dashboard/profile">
                         <img src="{{request.user.profile.profile_pic.url}}" class="rounded-circle "    style="object-fit: cover; height: 30px; width: 30px;" />
                         <strong class="d-none d-sm-block ms-1">{{ request.user.username }}</strong>
                     </a>
                 </li>
 
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link " role="button" aria-expanded="false" href="/chat">
+                    <a class="nav-link text-color-50 " role="button" aria-expanded="false" href="/chat">
                         <i class="fas fa-comments fa-lg"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">{{get_unread}}</span>
                     </a>
@@ -104,7 +109,7 @@
 
 
                 <div class="dropdown">
-                    <a class="nav-link notification  " href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link notification text-color-50 " href="#" id="navbarDropdown" role="button"
                     data-mdb-toggle="dropdown" aria-expanded="true">
                     <i class="fas fa-bell fa-lg"></i>
                     <span class="badge rounded-pill badge-notification bg-danger" id="notification-badge">0</span>
@@ -122,7 +127,7 @@
                     </ul>
                 </div>
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link " role="button" aria-expanded="false" href="/dashboard/wallet">
+                    <a class="nav-link text-color-50" role="button" aria-expanded="false" href="/dashboard/wallet">
                         <i class="fa fa-lg fa-wallet"></i>
                     </a>
 
@@ -130,29 +135,29 @@
 
                 </li>
                 <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link dropdown-toggle hidden-arrow " href="#" id="navbarDropdownMenuLink" role="button"
+                    <a class="nav-link dropdown-toggle hidden-arrow text-color-50 " href="#" id="navbarDropdownMenuLink" role="button"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-chevron-circle-down fa-lg"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-end bg-white" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="/dashboard/profile" ><i class="fa fa-user me-2"></i>  My profile</a>
+                            <a class="dropdown-item text-color-50" href="/dashboard/profile" ><i class="fa fa-user me-2"></i>  My profile</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/about"> <i class="fa fa-podcast me-2"></i>  About us</a>
+                            <a class="dropdown-item text-color-50" href="/about"> <i class="fa fa-podcast me-2"></i>  About us</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item fw-bold text-danger" href="/logout">Logout</a>
+                            <a class="dropdown-item fw-bold text-danger text-color-50" href="/logout">Logout</a>
                         </li>
                     </ul>
                 </li>
             </ul>
 
             {% else %}
-            <a href="/account/login" class="btn rounded-pill sign-in" type="button"> Sign in</a>
+            <a href="/account/login" class="btn rounded-pill sign-in text-color-50" type="button"> Sign in</a>
             {% endif %}
 
 
